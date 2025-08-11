@@ -159,6 +159,14 @@
     return p ? decodeURIComponent(p) : '';
   }
 
+  // Hàm hỗ trợ parse số: bỏ dấu chấm/dấu phẩy, ký tự khác
+  function parseNumber(str){
+    if (!str && str !== 0) return 0;
+    // Loại bỏ mọi ký tự không phải số hoặc dấu trừ
+    const clean = String(str).replace(/[^\d\-]/g, '');
+    return parseInt(clean, 10) || 0;
+  }
+
   // Thông tin cơ bản
   document.getElementById('soPhieu').textContent = getParam('soPhieu');
   document.getElementById('ngayTao').textContent = getParam('ngayTao');
@@ -173,14 +181,16 @@
   rawParts.forEach(part => {
     const cols = part.split(',');
     if (cols.length >= 3) {
-      const priceStr = cols.pop().trim();
+      // Lấy 2 trường cuối: theo bạn, trường cuối là "Thành tiền" (đã = SoLuong * DonGia)
+      const priceStr = cols.pop().trim(); // thành tiền (đã tính sẵn)
       const qtyStr = cols.pop().trim();
       let name = cols.join(',').trim();
       name = name.replace(/^,|,$/g, "").trim();
 
-      const qty = parseInt(qtyStr) || 0;
-      const price = parseInt(priceStr) || 0;
-      const amount = qty * price;
+      const qty = parseInt(qtyStr.replace(/[^\d\-]/g,''), 10) || 0;
+      // *** SỬA: vì priceStr là 'Thành tiền' (đã = Soluong * Dongia),
+      // không nhân thêm với qty nữa — dùng trực tiếp thành tiền.
+      const amount = parseNumber(priceStr);
 
       if (name !== '' && qty > 0) {
         const tr = document.createElement('tr');
