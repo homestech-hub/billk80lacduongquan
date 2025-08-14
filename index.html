@@ -208,9 +208,9 @@
   document.getElementById('tongCong').textContent = formatCurrency(total);
 
   // QR VietQR
-  const bin = "970422"; // Mã ngân hàng Vietcombank
-  const stk = "1018171392"; // Số tài khoản
-  const ten = "TRAN VAN BAO"; // Tên chủ tài khoản
+  const bin = "970422"; // Mã ngân hàng MBbank
+  const stk = "388386686666"; // Số tài khoản
+  const ten = "NGUYEN DUY TOAN"; // Tên chủ tài khoản
   const noiDung = "Thanh toan hoa don " + getParam('soPhieu');
 
   const qrUrl = `https://img.vietqr.io/image/${bin}-${stk}-compact2.png?amount=${total}&addInfo=${encodeURIComponent(noiDung)}&accountName=${encodeURIComponent(ten)}`;
