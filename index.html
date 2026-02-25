@@ -1,221 +1,617 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HÓA ĐƠN</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    width: 80mm; /* Khổ K80 */
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  /* ===== Header ===== */
-  .header {
-    text-align: center;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #000;
-    padding-bottom: 6px;
-  }
-  .header img {
-    max-width: 95px;
-    display: block;
-    margin: 0 auto 6px;
-  }
-  .header h1 {
-    font-size: 18px;
-    margin: 0;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-
-  /* ===== Tiêu đề bill ===== */
-  h2 {
-    text-align: center;
-    margin: 8px 0;
-    font-size: 15px;
-    font-weight: bold;
-  }
-
-  /* ===== Thông tin khách ===== */
-  .info {
-    margin-bottom: 8px;
-  }
-  .info p {
-    margin: 2px 0;
-    font-size: 12px;
-    line-height: 1.3;
-  }
-
-  /* ===== Bảng món ăn ===== */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  thead th {
-    border-bottom: 1px solid #000;
-    font-weight: bold;
-    padding: 4px 2px;
-  }
-  tbody td {
-    padding: 4px 2px;
-    border-bottom: 1px dashed #ccc;
-  }
-  td:nth-child(1) { width: auto; }
-  td:nth-child(2) { text-align: center; width: 30px; }
-  td:nth-child(3) { text-align: right; width: 60px; }
-
-  /* ===== Tổng cộng ===== */
-  .total {
-    font-weight: bold;
-    margin-top: 4px;
-    font-size: 13px;
-    border-top: 1px solid #000;
-    padding-top: 4px;
-  }
-
-  /* ===== Lời cảm ơn ===== */
-  .thank-you {
-    text-align:center; 
-    font-size:13px; 
-    font-weight: bold;
-    margin-top: 12px;
-  }
-
-  /* ===== QR Code ===== */
-  .qrcode {
-    text-align:center; 
-    margin-top: 8px;
-    padding-top: 4px;
-  }
-  .qrcode img {
-    border: 1px solid #ccc;
-    padding: 4px;
-    border-radius: 6px;
-    background: #fff;
-  }
-
-  @media print {
-    body {
-      margin: 0;
-    }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMS PRO - FULL SYSTEM UPDATED</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.2s ease; }
+        .nav-btn.active { color: #2563eb; border-bottom: 3px solid #2563eb; font-weight: 900; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(8px); padding: 20px; }
+        .modal.active { display: flex; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .timeline-slot { position: absolute; height: 32px; top: 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.2s; border-left-width: 4px; }
+        .timeline-grid { background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px); background-size: calc(100% / 16) 100%; }
+        .status-maintenance { background-color: #f1f5f9 !important; border-color: #cbd5e1 !important; opacity: 0.7; }
+        .pay-method-btn.selected { border-color: #10b981; background-color: #ecfdf5; color: #065f46; }
+        
+        /* Login Screen CSS */
+        #login-screen { position: fixed; inset: 0; background: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="header">
-    <img src="https://i.postimg.cc/ZqqC4VNR/lacduong.jpg" alt="Logo Nhà Hàng">
-    <h1>LẠC DƯƠNG RESTAURANT</h1>
-  </div>
+    <div id="login-screen">
+        <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm">
+            <div class="text-center mb-6">
+                <div class="bg-blue-600 w-12 h-12 rounded-xl text-white flex items-center justify-center mx-auto mb-2 shadow-lg"><i class="fa-solid fa-bolt text-xl"></i></div>
+                <h1 class="font-black text-2xl uppercase italic">PMS LOGIN</h1>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="login-user" placeholder="Tên đăng nhập" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
+                <input type="password" id="login-pass" placeholder="Mật khẩu" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
+                <button onclick="auth.login()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Đăng nhập</button>
+            </div>
+            <p class="text-center text-[10px] text-slate-400 mt-4 italic">Mặc định: admin / 123</p>
+        </div>
+    </div>
 
-  <!-- Tiêu đề bill -->
-  <h2>HÓA ĐƠN TÍNH TIỀN</h2>
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 flex justify-between items-center overflow-x-auto whitespace-nowrap">
+            <div class="flex items-center gap-6">
+                <div class="py-4 flex items-center gap-2">
+                    <div class="bg-blue-600 p-1.5 rounded text-white shadow-lg"><i class="fa-solid fa-bolt"></i></div>
+                    <span class="font-black text-xl tracking-tighter uppercase italic">PMS PRO</span>
+                </div>
+                <div class="flex gap-1">
+                    <button onclick="ui.switchTab('op')" id="btn-op" class="nav-btn active px-3 py-5 text-[10px] font-bold uppercase">Vận hành</button>
+                    <button onclick="ui.switchTab('bill')" id="btn-bill" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hóa đơn</button>
+                    <button onclick="ui.switchTab('court')" id="btn-court" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Sân</button>
+                    <button onclick="ui.switchTab('service')" id="btn-service" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Dịch vụ</button>
+                    <button onclick="ui.switchTab('stock')" id="btn-stock" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nhập kho</button>
+                    <button onclick="ui.switchTab('member')" id="btn-member" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hội viên</button>
+                    <button onclick="ui.switchTab('staff')" id="btn-staff" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nhân viên</button>
+                    <button onclick="ui.switchTab('config')" id="btn-config" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400"><i class="fa-solid fa-gear"></i></button>
+                    <button onclick="location.reload()" class="px-3 py-5 text-[10px] font-bold uppercase text-rose-500"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Thông tin khách -->
-  <div class="info">
-    <p><strong>Số phiếu:</strong> <span id="soPhieu"></span></p>
-    <p><strong>Ngày:</strong> <span id="ngayTao"></span></p>
-    <p><strong>Khách hàng:</strong> <span id="khachHang"></span></p>
-  </div>
+    <main class="max-w-[1400px] mx-auto p-4 md:p-6">
+        <div id="tab-op" class="tab-content active">
+            <div class="bg-white rounded-[2.5rem] p-6 border card-shadow mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="font-black text-xl uppercase italic">Lịch đặt sân</h2>
+                        <input type="date" id="view-date" onchange="app.reloadTimeline()" class="text-[10px] font-bold uppercase border-none bg-slate-100 rounded-lg px-2 py-1 mt-1 outline-none">
+                    </div>
+                    <button onclick="ui.openModal('booking')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase shadow-lg">+ Đặt sân trước</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <div class="min-w-[1000px] relative pb-4">
+                        <div id="timeline-hours-header" class="flex ml-24 mb-4"></div>
+                        <div id="timeline-rows" class="space-y-4"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="grid-courts" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
 
-  <!-- Bảng món ăn -->
-  <table>
-    <thead>
-      <tr>
-        <th>Tên Món</th>
-        <th>SL</th>
-        <th>Thành tiền</th>
-      </tr>
-    </thead>
-    <tbody id="itemsBody"></tbody>
-  </table>
+        <div id="tab-bill" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="font-black text-xl uppercase italic">Lịch sử Hóa đơn</h2>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <div class="flex flex-col">
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Từ ngày</span>
+                                <input type="date" id="filter-bill-from" onchange="app.renderBills()" class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none">
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Đến ngày</span>
+                                <input type="date" id="filter-bill-to" onchange="app.renderBills()" class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none">
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Tìm kiếm khách/nội dung</span>
+                                <input type="text" id="filter-bill-search" oninput="app.renderBills()" placeholder="Gõ để tìm..." class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none w-48">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-[10px] font-bold uppercase text-slate-400 text-right">
+                        Doanh thu theo lọc: <br>
+                        <span id="total-revenue" class="text-emerald-600 text-2xl font-black">0đ</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400">
+                            <tr>
+                                <th class="p-4">Thời gian</th>
+                                <th class="p-4">Khách hàng</th>
+                                <th class="p-4">Nội dung</th>
+                                <th class="p-4">PTTT</th>
+                                <th class="p-4">Tổng tiền</th>
+                                <th class="p-4 text-right">#</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-bills-table" class="divide-y font-bold text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-  <!-- Tổng cộng -->
-  <p class="total">Tổng cộng: <span id="tongCong">0</span></p>
+        <div id="tab-staff" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="font-black text-xl uppercase italic">Quản lý tài khoản</h2>
+                    <button onclick="ui.openModal('staff')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm tài khoản</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400">
+                            <tr><th class="p-4">Tên đăng nhập</th><th class="p-4">Mật khẩu</th><th class="p-4">Quyền</th><th class="p-4 text-right">#</th></tr>
+                        </thead>
+                        <tbody id="list-staff-table" class="divide-y font-bold text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-  <!-- Lời cảm ơn -->
-  <p class="thank-you">
-    Xin cảm ơn, hẹn gặp lại quý khách!
-  </p>
+        <div id="tab-config" class="tab-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-3xl p-6 border card-shadow">
+                    <h2 class="font-black text-xl uppercase italic mb-6">Giá sân tự động</h2>
+                    <div class="space-y-4">
+                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Giá giờ thường (đ/h)</label><input id="conf-price-normal" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Bắt đầu giờ vàng</label><input id="conf-peak-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Giá giờ vàng (đ/h)</label><input id="conf-price-peak" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                        </div>
+                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Phụ phí Cuối tuần (%)</label><input id="conf-weekend-up" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                        <button onclick="app.saveConfig()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu cấu hình</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-6 border card-shadow">
+                    <h2 class="font-black text-xl uppercase italic mb-6">Ưu đãi Hội viên</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-slate-50 p-4 rounded-2xl"><span>Đồng (Giảm %)</span><input id="conf-m-copper" type="number" class="w-20 p-2 rounded border font-bold text-center"></div>
+                        <div class="flex items-center justify-between bg-slate-50 p-4 rounded-2xl"><span>Bạc (Giảm %)</span><input id="conf-m-silver" type="number" class="w-20 p-2 rounded border font-bold text-center"></div>
+                        <div class="flex items-center justify-between bg-slate-50 p-4 rounded-2xl border-2 border-yellow-400"><span>Vàng (Giảm %)</span><input id="conf-m-gold" type="number" class="w-20 p-2 rounded border font-bold text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <!-- QR Code -->
-  <div class="qrcode">
-    <img id="vietqr" alt="QR Thanh toán" width="120" height="120">
-  </div>
+        <div id="tab-court" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="font-black text-xl uppercase italic">Cài đặt Sân</h2>
+                    <button onclick="ui.openModal('court')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm sân</button>
+                </div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Tên sân</th><th class="p-4">Loại</th><th class="p-4">Trạng thái</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-courts-table" class="divide-y font-bold text-sm"></tbody></table></div>
+            </div>
+        </div>
 
-<script>
-  function formatCurrency(n){
-    return new Intl.NumberFormat('vi-VN').format(n);
-  }
+        <div id="tab-service" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="font-black text-xl uppercase italic">Menu Dịch vụ</h2>
+                    <button onclick="ui.openModal('service')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm món mới</button>
+                </div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Ảnh</th><th class="p-4">Tên món</th><th class="p-4">Giá bán</th><th class="p-4">Tồn kho</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-services-table" class="divide-y font-bold text-sm"></tbody></table></div>
+            </div>
+        </div>
 
-  function getParam(name){
-    const p = new URLSearchParams(window.location.search).get(name);
-    return p ? decodeURIComponent(p) : '';
-  }
+        <div id="tab-stock" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="font-black text-xl uppercase italic">Lịch sử Nhập kho</h2>
+                    <button onclick="ui.openModal('stock')" class="bg-black text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Phiếu mới</button>
+                </div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Ngày</th><th class="p-4">Sản phẩm</th><th class="p-4 text-center">SL</th><th class="p-4">Thành tiền</th><th class="p-4">Trạng thái</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-stocks-table" class="divide-y font-bold text-sm"></tbody></table></div>
+            </div>
+        </div>
 
-  // Hàm hỗ trợ parse số: bỏ dấu chấm/dấu phẩy, ký tự khác
-  function parseNumber(str){
-    if (!str && str !== 0) return 0;
-    // Loại bỏ mọi ký tự không phải số hoặc dấu trừ
-    const clean = String(str).replace(/[^\d\-]/g, '');
-    return parseInt(clean, 10) || 0;
-  }
+        <div id="tab-member" class="tab-content">
+            <div class="bg-white rounded-3xl p-6 border card-shadow">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="font-black text-xl uppercase italic">Hội viên</h2>
+                    <button onclick="ui.openModal('member')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm khách</button>
+                </div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Tên</th><th class="p-4">SĐT</th><th class="p-4 text-emerald-600">Ví dư</th><th class="p-4">Hạng</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-members-table" class="divide-y font-bold text-sm"></tbody></table></div>
+            </div>
+        </div>
+    </main>
 
-  // Thông tin cơ bản
-  document.getElementById('soPhieu').textContent = getParam('soPhieu');
-  document.getElementById('ngayTao').textContent = getParam('ngayTao');
-  document.getElementById('khachHang').textContent = getParam('khachHang');
+    <div id="modal-recharge" class="modal">
+        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
+            <h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Nạp tiền vào ví</h2>
+            <input type="hidden" id="recharge-member-id">
+            <p id="recharge-member-name" class="font-bold text-sm mb-4"></p>
+            <div class="space-y-4">
+                <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Số tiền nạp (VNĐ)</label><input id="recharge-amount" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-emerald-500" placeholder="0"></div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-slate-400 pl-2">Phương thức</label>
+                    <select id="recharge-method" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-emerald-500">
+                        <option value="Tiền mặt">Tiền mặt</option><option value="Chuyển khoản">Chuyển khoản</option>
+                    </select>
+                </div>
+                <button onclick="app.confirmRecharge()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg mt-4">Xác nhận nạp</button>
+                <button onclick="ui.closeModal('recharge')" class="w-full text-[10px] font-bold uppercase text-slate-400">Hủy</button>
+            </div>
+        </div>
+    </div>
 
-  const itemsRaw = getParam('items') || '';
-  const rawParts = itemsRaw.split('|').map(s => s.trim()).filter(Boolean);
+    <div id="modal-checkin" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-2xl uppercase italic mb-6">Nhận sân</h2><input type="hidden" id="checkin-court-id"><div class="space-y-4"><select id="checkin-mode" onchange="ui.toggleCheckinMode()" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"><option value="walk-in">Khách vãng lai</option><option value="member">Hội viên</option></select><div id="checkin-walkin-box" class="space-y-4"><input id="checkin-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tên khách hàng"><input id="checkin-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Số điện thoại"></div><div id="checkin-member-box" class="hidden"><select id="checkin-member-id" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></select></div><button onclick="app.confirmCheckin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase mt-4">Xác nhận vào sân</button><button onclick="ui.closeModal('checkin')" class="w-full text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div></div>
+    <div id="modal-court-detail" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl"><div class="flex justify-between items-start mb-6"><div><h2 id="detail-court-name" class="font-black text-2xl uppercase italic">Sân</h2><p id="detail-customer" class="text-blue-600 font-bold text-xs uppercase"></p></div><div class="text-right"><span class="text-[10px] font-bold text-slate-400 uppercase">Giờ vào</span><p id="detail-start-time" class="font-black text-lg"></p></div></div><div class="mb-6"><div class="flex justify-between items-center mb-2 border-b pb-2"><h3 class="font-black text-[10px] uppercase text-slate-400">Dịch vụ đang dùng</h3><button onclick="ui.toggleAddService()" class="bg-slate-900 text-white px-3 py-1 rounded-lg text-[9px] font-black uppercase">+ Thêm món</button></div><div id="detail-services-list" class="space-y-2 max-h-40 overflow-y-auto pr-2 mb-4"></div><div id="add-service-box" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200"><div class="grid grid-cols-3 gap-2"><select id="add-service-id" class="col-span-2 bg-white rounded-xl p-2 text-xs font-bold outline-none border"></select><input id="add-service-qty" type="number" value="1" class="bg-white rounded-xl p-2 text-xs font-bold outline-none border" placeholder="SL"></div><button onclick="app.addServiceToCourt()" class="w-full bg-blue-600 text-white text-[10px] font-black uppercase py-2 rounded-xl mt-2">Thêm ngay</button></div></div><div class="grid grid-cols-2 gap-3"><button onclick="ui.openCheckout()" class="bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Thanh toán</button><button onclick="ui.closeModal('court-detail')" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-xs">Đóng</button></div></div></div>
+    <div id="modal-checkout" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-2xl uppercase italic text-center mb-6">Thanh toán</h2><div id="bill-content" class="space-y-3 mb-6"></div><div class="mb-6"><label class="text-[10px] font-black uppercase text-slate-400 ml-2">Phương thức thanh toán</label><div class="grid grid-cols-1 gap-2 mt-2" id="payment-methods-grid"></div><input type="hidden" id="selected-payment" value="Tiền mặt"><input type="hidden" id="temp-bill-total" value="0"><input type="hidden" id="temp-bill-desc" value=""></div><button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl">Xác nhận thanh toán</button><button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay lại</button></div></div>
+    <div id="modal-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-indigo-600">Đặt lịch mới</h2><input type="date" id="b-date" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><select id="b-court-id" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-indigo-500"></select><input id="b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên khách hàng"><div class="grid grid-cols-2 gap-4 mb-6"><div><label class="text-[9px] font-bold uppercase pl-2">Giờ vào</label><input id="b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-bold uppercase pl-2">Giờ ra</label><input id="b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><button onclick="app.saveBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu lịch đặt</button><button onclick="ui.closeModal('booking')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
+    <div id="modal-manage-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600"><h2 class="font-black text-xl uppercase italic mb-4">Chi tiết lịch đặt</h2><div class="space-y-4"><input type="hidden" id="manage-b-id"><div class="grid grid-cols-1 gap-2"><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Tên khách hàng</label><input id="manage-b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ vào</label><input id="manage-b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ ra</label><input id="manage-b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><div class="pt-4 space-y-3"><button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Lưu thay đổi</button><button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (Vào sân)</button><button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Hủy lịch đặt</button><button onclick="ui.closeModal('manage-booking')" class="w-full py-2 text-[10px] font-bold uppercase text-slate-300">Đóng</button></div></div></div></div>
+    <div id="modal-court" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Thông tin sân</h2><input type="hidden" id="court-id"><input id="c-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên sân"><select id="c-type" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Standard">Standard</option><option value="VIP">VIP</option></select><button onclick="app.saveCourt()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu sân</button><button onclick="ui.closeModal('court')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
+    <div id="modal-service" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Dịch vụ</h2><input type="hidden" id="service-id"><input id="s-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên món"><div class="grid grid-cols-2 gap-4 mb-4"><input id="s-price" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá bán"><input id="s-stock" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tồn kho"></div><input id="s-img" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none text-xs" placeholder="Link ảnh"><button onclick="app.saveService()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase">Lưu</button><button onclick="ui.closeModal('service')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
+    <div id="modal-stock" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Phiếu nhập kho</h2><input type="hidden" id="stock-id"><input type="hidden" id="old-qty"><select id="stock-product-select" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"></select><div class="grid grid-cols-2 gap-4 mb-4"><input id="stock-qty" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SL"><input id="stock-cost" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá nhập"></div><input id="stock-supplier" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Nhà cung cấp"><select id="stock-status" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Đã thanh toán">Đã thanh toán</option><option value="Chưa thanh toán">Chưa thanh toán</option></select><button onclick="app.saveStock()" class="w-full bg-black text-white py-4 rounded-2xl font-black uppercase">Lưu phiếu</button><button onclick="ui.closeModal('stock')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
+    <div id="modal-member" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Hội viên</h2><input type="hidden" id="member-id"><input id="m-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên khách"><input id="m-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SĐT"><input id="m-wallet" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Ví tiền"><button onclick="app.saveMember()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu khách</button><button onclick="ui.closeModal('member')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
 
-  const tbody = document.getElementById('itemsBody');
-  let total = 0;
+    <div id="modal-staff" class="modal">
+        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
+            <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">Tài khoản nhân viên</h2>
+            <div class="space-y-4">
+                <input id="st-user" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tên đăng nhập">
+                <input id="st-pass" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Mật khẩu">
+                <select id="st-role" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
+                    <option value="Staff">Nhân viên (Chỉ xem lịch/bill)</option>
+                    <option value="Admin">Admin (Toàn quyền)</option>
+                </select>
+                <button onclick="app.saveStaff()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu tài khoản</button>
+                <button onclick="ui.closeModal('staff')" class="w-full mt-2 text-[10px] font-bold uppercase text-slate-400">Hủy</button>
+            </div>
+        </div>
+    </div>
 
-  rawParts.forEach(part => {
-    const cols = part.split(',');
-    if (cols.length >= 3) {
-      // Lấy 2 trường cuối: theo bạn, trường cuối là "Thành tiền" (đã = SoLuong * DonGia)
-      const priceStr = cols.pop().trim(); // thành tiền (đã tính sẵn)
-      const qtyStr = cols.pop().trim();
-      let name = cols.join(',').trim();
-      name = name.replace(/^,|,$/g, "").trim();
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue, set, update, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-      const qty = parseInt(qtyStr.replace(/[^\d\-]/g,''), 10) || 0;
-      // *** SỬA: vì priceStr là 'Thành tiền' (đã = Soluong * Dongia),
-      // không nhân thêm với qty nữa — dùng trực tiếp thành tiền.
-      const amount = parseNumber(priceStr);
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDHLEhcMPuI6CaC9MGrnAJxSnnZdMZwx8",
+            databaseURL: "https://pms-pickleball-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pms-pickleball",
+            appId: "1:34607569124:web:85977243452d0549a734f1"
+        };
+        const db = getDatabase(initializeApp(firebaseConfig));
 
-      if (name !== '' && qty > 0) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${name}</td>
-          <td>${qty}</td>
-          <td>${formatCurrency(amount)}</td>
-        `;
-        tbody.appendChild(tr);
-        total += amount;
-      }
-    }
-  });
+        let dataCache = { courts: {}, bookings: {}, services: {}, members: {}, config: {}, bills: {}, staff: {} };
+        let currentCourtId = null;
+        let currentUser = null;
 
-  document.getElementById('tongCong').textContent = formatCurrency(total);
+        // Set default filter dates to Today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('view-date').value = today;
+        document.getElementById('filter-bill-from').value = today;
+        document.getElementById('filter-bill-to').value = today;
 
-  // QR VietQR
-  const bin = "970422"; // Mã ngân hàng MBbank
-  const stk = "388386686666"; // Số tài khoản
-  const ten = "NGUYEN DUY TOAN"; // Tên chủ tài khoản
-  const noiDung = "Thanh toan hoa don " + getParam('soPhieu');
+        // AUTH LOGIC
+        window.auth = {
+            login: () => {
+                const u = document.getElementById('login-user').value;
+                const p = document.getElementById('login-pass').value;
+                if(u === 'admin' && p === '123') { auth.success({User: 'admin', Role: 'Admin'}); return; }
+                const staff = Object.values(dataCache.staff || {}).find(s => s.User === u && s.Pass === p);
+                if(staff) { auth.success(staff); } else { alert("Sai tài khoản hoặc mật khẩu!"); }
+            },
+            success: (user) => {
+                currentUser = user;
+                document.getElementById('login-screen').classList.add('hidden');
+                auth.applyPermissions();
+            },
+            applyPermissions: () => {
+                if(currentUser.Role === 'Staff') {
+                    document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+                    const style = document.createElement('style');
+                    style.innerHTML = '.fa-trash, .fa-wrench, .fa-pen { display: none !important; }';
+                    document.head.appendChild(style);
+                } else {
+                    document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+                }
+            }
+        };
 
-  const qrUrl = `https://img.vietqr.io/image/${bin}-${stk}-compact2.png?amount=${total}&addInfo=${encodeURIComponent(noiDung)}&accountName=${encodeURIComponent(ten)}`;
-  document.getElementById("vietqr").src = qrUrl;
-</script>
+        window.ui = {
+            switchTab: (id) => {
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                document.getElementById('tab-' + id).classList.add('active');
+                document.querySelectorAll('.nav-btn').forEach(b => { b.classList.remove('active'); b.classList.add('text-slate-400'); });
+                document.getElementById('btn-' + id).classList.add('active');
+            },
+            openModal: (type, id = null, data = null) => {
+                if(type === 'manage-booking') {
+                    document.getElementById('manage-b-id').value = id;
+                    document.getElementById('manage-b-name').value = data.Ten_Khach;
+                    document.getElementById('manage-b-start').value = data.Bat_Dau;
+                    document.getElementById('manage-b-end').value = data.Ket_Thuc;
+                } else if(type === 'court') {
+                    document.getElementById('court-id').value = id || "";
+                    document.getElementById('c-name').value = data?.Ten_San || "";
+                    document.getElementById('c-type').value = data?.Loai_San || "Standard";
+                } else if(type === 'service') {
+                    document.getElementById('service-id').value = id || "";
+                    document.getElementById('s-name').value = data?.Ten_Dich_Vu || "";
+                    document.getElementById('s-price').value = data?.Gia_Ban || "";
+                    document.getElementById('s-stock').value = data?.Ton_Kho || 0;
+                    document.getElementById('s-img').value = data?.Hinh_Anh || "";
+                } else if(type === 'stock') {
+                    document.getElementById('stock-id').value = id || "";
+                    document.getElementById('stock-product-select').value = data?.Product_ID || "";
+                    document.getElementById('stock-qty').value = data?.So_Luong || "";
+                    document.getElementById('old-qty').value = data?.So_Luong || 0;
+                    document.getElementById('stock-cost').value = data?.Gia_Nhap || "";
+                    document.getElementById('stock-supplier').value = data?.Nha_Cung_Cap || "";
+                } else if(type === 'member') {
+                    document.getElementById('member-id').value = id || "";
+                    document.getElementById('m-name').value = data?.Ten_HV || "";
+                    document.getElementById('m-phone').value = data?.SDT || "";
+                    document.getElementById('m-wallet').value = data?.Vi_Du || 0;
+                } else if(type === 'recharge') {
+                    document.getElementById('recharge-member-id').value = id;
+                    document.getElementById('recharge-member-name').innerText = "Hội viên: " + data.Ten_HV;
+                    document.getElementById('recharge-amount').value = "";
+                } else if(type === 'staff') {
+                    document.getElementById('st-user').value = "";
+                    document.getElementById('st-pass').value = "";
+                }
+                document.getElementById('modal-' + type).classList.add('active');
+            },
+            closeModal: (type) => document.getElementById('modal-' + type).classList.remove('active'),
+            toggleCheckinMode: () => {
+                const mode = document.getElementById('checkin-mode').value;
+                document.getElementById('checkin-walkin-box').classList.toggle('hidden', mode !== 'walk-in');
+                document.getElementById('checkin-member-box').classList.toggle('hidden', mode !== 'member');
+            },
+            toggleAddService: () => document.getElementById('add-service-box').classList.toggle('hidden'),
+            selectPayment: (val, btn) => {
+                document.getElementById('selected-payment').value = val;
+                document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+            },
+            openCheckout: () => {
+                const court = dataCache.courts[currentCourtId];
+                const conf = dataCache.config || {};
+                const startTime = court.Gio_Vao;
+                const now = new Date();
+                const endTime = now.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+                const [h1, m1] = startTime.split(':').map(Number);
+                const [h2, m2] = endTime.split(':').map(Number);
+                const minutes = (h2*60+m2) - (h1*60+m1);
+                let hourlyRate = parseInt(conf.priceNormal || 100000);
+                if(startTime >= (conf.peakStart || "17:00")) hourlyRate = parseInt(conf.pricePeak || 120000);
+                if(now.getDay() === 0 || now.getDay() === 6) hourlyRate *= (1 + (parseInt(conf.weekendUp || 0)/100));
+                let timeMoney = Math.max(0, Math.ceil(minutes/60 * hourlyRate));
+                let discText = "";
+                if(court.Member_ID) {
+                    const m = dataCache.members[court.Member_ID];
+                    const discPercent = parseInt(conf[`m${m.Hang === 'Đồng' ? 'Copper' : m.Hang === 'Bạc' ? 'Silver' : 'Gold'}`] || 0);
+                    if(discPercent > 0) { timeMoney *= (1 - discPercent/100); discText = `<div class="text-[10px] text-emerald-500 font-bold">- Giảm ${discPercent}% hạng ${m.Hang}</div>`; }
+                }
+                let sMoney = 0; let sLines = '';
+                for(let sid in (court.Dich_Vu || {})) {
+                    const item = court.Dich_Vu[sid];
+                    sMoney += (item.Gia * item.SL);
+                    sLines += `<div class="flex justify-between text-xs"><span>${item.Ten} x${item.SL}</span><span>${(item.Gia * item.SL).toLocaleString()}đ</span></div>`;
+                }
+                const finalTotal = timeMoney + sMoney;
+                document.getElementById('temp-bill-total').value = finalTotal;
+                document.getElementById('temp-bill-desc').value = `Sân ${court.Ten_San} (${startTime}-${endTime})`;
+                let pGridHtml = `<div class="grid grid-cols-2 gap-3"><button onclick="ui.selectPayment('Tiền mặt', this)" class="pay-method-btn selected border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Tiền mặt</button><button onclick="ui.selectPayment('Chuyển khoản', this)" class="pay-method-btn border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Chuyển khoản</button></div>`;
+                if(court.Member_ID) {
+                    const member = dataCache.members[court.Member_ID];
+                    pGridHtml += `<button onclick="ui.selectPayment('Ví hội viên', this)" class="w-full mt-2 pay-method-btn border-2 p-4 rounded-2xl font-black text-[10px] uppercase border-emerald-200 text-emerald-700">Ví hội viên (Số dư: ${member.Vi_Du.toLocaleString()}đ)</button>`;
+                }
+                document.getElementById('payment-methods-grid').innerHTML = pGridHtml;
+                document.getElementById('selected-payment').value = 'Tiền mặt';
+                document.getElementById('bill-content').innerHTML = `
+                    <div class="flex justify-between font-bold border-b pb-2"><div><span>Tiền giờ (${startTime}-${endTime})</span>${discText}</div><span>${timeMoney.toLocaleString()}đ</span></div>
+                    ${sLines}
+                    <div class="flex justify-between font-black text-lg text-blue-600 border-t pt-2 uppercase"><span>Tổng tiền</span><span>${finalTotal.toLocaleString()}đ</span></div>
+                `;
+                ui.closeModal('court-detail'); ui.openModal('checkout');
+            }
+        };
 
+        window.app = {
+            saveStaff: () => {
+                const user = document.getElementById('st-user').value;
+                const pass = document.getElementById('st-pass').value;
+                const role = document.getElementById('st-role').value;
+                if(!user || !pass) return alert("Nhập đủ tin!");
+                update(ref(db, 'staff/' + user), { User: user, Pass: pass, Role: role }).then(() => ui.closeModal('staff'));
+            },
+            confirmPayment: () => {
+                const total = parseInt(document.getElementById('temp-bill-total').value);
+                const desc = document.getElementById('temp-bill-desc').value;
+                const method = document.getElementById('selected-payment').value;
+                const court = dataCache.courts[currentCourtId];
+                if(method === 'Ví hội viên') {
+                    const member = dataCache.members[court.Member_ID];
+                    if(member.Vi_Du < total) return alert("❌ Lỗi: Số dư ví không đủ để thanh toán!");
+                    runTransaction(ref(db, `members/${court.Member_ID}/Vi_Du`), (v) => (v || 0) - total);
+                }
+                set(ref(db, 'bills/' + Date.now()), { 
+                    Thoi_Gian: new Date().toLocaleString('vi-VN'), 
+                    Ngay_Thang: new Date().toISOString().split('T')[0], // Dùng để lọc
+                    Khach_Hang: court.Ten_Khach, 
+                    Noi_Dung: desc, 
+                    Tong_Tien: total, 
+                    PTTT: method 
+                });
+                update(ref(db, 'courts/' + currentCourtId), { Trang_Thai: "Sẵn sàng", Ten_Khach: "", Member_ID: null, Gio_Vao: "", Dich_Vu: null });
+                ui.closeModal('checkout');
+            },
+            renderBills: () => {
+                const from = document.getElementById('filter-bill-from').value;
+                const to = document.getElementById('filter-bill-to').value;
+                const search = document.getElementById('filter-bill-search').value.toLowerCase();
+                let tH = ''; let total = 0;
+                Object.entries(dataCache.bills).reverse().forEach(([id, b]) => {
+                    const billDate = b.Ngay_Thang || b.Thoi_Gian.split(' ')[0].split('/').reverse().join('-');
+                    const matchDate = (!from || billDate >= from) && (!to || billDate <= to);
+                    const matchSearch = !search || b.Khach_Hang.toLowerCase().includes(search) || b.Noi_Dung.toLowerCase().includes(search);
+                    if (matchDate && matchSearch) {
+                        total += b.Tong_Tien;
+                        tH += `<tr><td class="p-4 text-slate-400 text-[10px]">${b.Thoi_Gian}</td><td class="p-4">${b.Khach_Hang}</td><td class="p-4 text-xs italic text-slate-500 max-w-xs truncate">${b.Noi_Dung}</td><td class="p-4">${b.PTTT || 'TM'}</td><td class="p-4 text-emerald-600 font-black">${b.Tong_Tien.toLocaleString()}đ</td><td class="p-4 text-right"><button onclick="app.deleteItem('bills/${id}')" class="text-red-200"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                    }
+                });
+                document.getElementById('list-bills-table').innerHTML = tH;
+                document.getElementById('total-revenue').innerText = total.toLocaleString() + 'đ';
+            },
+            confirmCheckin: () => {
+                const courtId = document.getElementById('checkin-court-id').value;
+                const mode = document.getElementById('checkin-mode').value;
+                let khach = mode === 'walk-in' ? document.getElementById('checkin-name').value : document.getElementById('checkin-member-id').options[document.getElementById('checkin-member-id').selectedIndex].text;
+                let mId = mode === 'member' ? document.getElementById('checkin-member-id').value : null;
+                update(ref(db, 'courts/' + courtId), { Trang_Thai: "Đang chơi", Ten_Khach: khach, Member_ID: mId, Gio_Vao: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}), Dich_Vu: {} }).then(() => ui.closeModal('checkin'));
+            },
+            showDetail: (id) => {
+                currentCourtId = id; const c = dataCache.courts[id];
+                document.getElementById('detail-court-name').innerText = c.Ten_San;
+                document.getElementById('detail-customer').innerText = c.Ten_Khach;
+                document.getElementById('detail-start-time').innerText = c.Gio_Vao;
+                let list = '';
+                for(let sid in (c.Dich_Vu || {})) {
+                    list += `<div class="flex justify-between items-center bg-slate-50 p-2 rounded-lg mb-1"><div class="text-xs font-bold"><span>${c.Dich_Vu[sid].Ten} x${c.Dich_Vu[sid].SL}</span><div class="text-[9px] text-slate-400 font-normal">${(c.Dich_Vu[sid].Gia * c.Dich_Vu[sid].SL).toLocaleString()}đ</div></div></div>`;
+                }
+                document.getElementById('detail-services-list').innerHTML = list || '<p class="text-center text-[10px] text-slate-300">Chưa có dịch vụ</p>';
+                ui.openModal('court-detail');
+            },
+            addServiceToCourt: () => {
+                const sid = document.getElementById('add-service-id').value; 
+                const qty = parseInt(document.getElementById('add-service-qty').value);
+                if(!sid || qty <= 0) return alert("Vui lòng chọn món và số lượng!");
+                const s = dataCache.services[sid];
+                if(s.Ton_Kho < qty) return alert(`❌ Lỗi: Không đủ hàng trong kho! (Tồn: ${s.Ton_Kho})`);
+                runTransaction(ref(db, `courts/${currentCourtId}/Dich_Vu/${sid}`), (cur) => {
+                    if(cur) { cur.SL += qty; return cur; }
+                    return { Ten: s.Ten_Dich_Vu, Gia: s.Gia_Ban, SL: qty };
+                });
+                runTransaction(ref(db, `services/${sid}/Ton_Kho`), (t) => (t || 0) - qty);
+                ui.toggleAddService();
+            },
+            confirmRecharge: () => {
+                const mId = document.getElementById('recharge-member-id').value;
+                const amount = parseInt(document.getElementById('recharge-amount').value);
+                const method = document.getElementById('recharge-method').value;
+                const member = dataCache.members[mId];
+                if(!amount || amount <= 0) return alert("Vui lòng nhập số tiền hợp lệ!");
+                runTransaction(ref(db, `members/${mId}/Vi_Du`), (v) => (v || 0) + amount);
+                set(ref(db, 'bills/' + Date.now()), { 
+                    Thoi_Gian: new Date().toLocaleString('vi-VN'), 
+                    Ngay_Thang: new Date().toISOString().split('T')[0],
+                    Khach_Hang: member.Ten_HV, 
+                    Noi_Dung: `Nạp tiền vào ví hội viên`, 
+                    Tong_Tien: amount, 
+                    PTTT: method 
+                });
+                alert(`Nạp thành công ${amount.toLocaleString()}đ cho hội viên ${member.Ten_HV}`);
+                ui.closeModal('recharge');
+            },
+            saveConfig: () => {
+                const config = { priceNormal: document.getElementById('conf-price-normal').value, peakStart: document.getElementById('conf-peak-start').value, pricePeak: document.getElementById('conf-price-peak').value, weekendUp: document.getElementById('conf-weekend-up').value, mCopper: document.getElementById('conf-m-copper').value, mSilver: document.getElementById('conf-m-silver').value, mGold: document.getElementById('conf-m-gold').value };
+                set(ref(db, 'config'), config).then(() => alert("Đã lưu!"));
+            },
+            reloadTimeline: () => {
+                const vD = document.getElementById('view-date').value; let html = '';
+                for (let cId in dataCache.courts) {
+                    const cB = Object.entries(dataCache.bookings || {}).filter(([id, b]) => b.Court_ID === cId && b.Ngay === vD);
+                    html += `<div class="flex items-center"><div class="w-24 font-black text-[11px] uppercase pr-2 text-slate-600">${dataCache.courts[cId].Ten_San}</div><div class="flex-1 h-10 bg-slate-50 rounded-xl relative border border-slate-100 timeline-grid">${cB.map(([bId, b]) => {
+                        const [hS, mS] = b.Bat_Dau.split(':').map(Number); const [hE, mE] = b.Ket_Thuc.split(':').map(Number);
+                        const left = (((hS - 6) * 60 + mS) / (16 * 60)) * 100;
+                        const width = (((hE * 60 + mE) - (hS * 60 + mS)) / (16 * 60)) * 100;
+                        return `<div onclick='ui.openModal("manage-booking", "${bId}", ${JSON.stringify(b)})' class="timeline-slot absolute bg-indigo-500 text-[9px] text-white flex items-center justify-center font-bold px-2 overflow-hidden truncate border-indigo-700" style="left: ${left}%; width: ${width}%">${b.Ten_Khach}</div>`;
+                    }).join('')}</div></div>`;
+                }
+                document.getElementById('timeline-rows').innerHTML = html;
+            },
+            saveBooking: () => {
+                const cId = document.getElementById('b-court-id').value; const date = document.getElementById('b-date').value;
+                const start = document.getElementById('b-start').value; const end = document.getElementById('b-end').value; const name = document.getElementById('b-name').value;
+                if (!cId || !date || !start || !end || !name) return alert("Thiếu thông tin!");
+                const toMin = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+                const nS = toMin(start); const nE = toMin(end);
+                if (nE <= nS) return alert("Giờ kết thúc phải sau giờ bắt đầu!");
+                const isOverlapping = Object.values(dataCache.bookings || {}).some(b => b.Court_ID === cId && b.Ngay === date && (nS < toMin(b.Ket_Thuc) && nE > toMin(b.Bat_Dau)));
+                if (isOverlapping) return alert("❌ Lỗi: Khung giờ này đã có người đặt trên sân này!");
+                set(ref(db, 'bookings/' + 'B' + Date.now()), { Court_ID: cId, Ten_Khach: name, Bat_Dau: start, Ket_Thuc: end, Ngay: date }).then(() => ui.closeModal('booking'));
+            },
+            updateBooking: () => {
+                const id = document.getElementById('manage-b-id').value;
+                const bOld = dataCache.bookings[id];
+                const start = document.getElementById('manage-b-start').value;
+                const end = document.getElementById('manage-b-end').value;
+                const toMin = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+                const nS = toMin(start); const nE = toMin(end);
+                const isOverlapping = Object.entries(dataCache.bookings || {}).some(([bid, b]) => bid !== id && b.Court_ID === bOld.Court_ID && b.Ngay === bOld.Ngay && (nS < toMin(b.Ket_Thuc) && nE > toMin(b.Bat_Dau)));
+                if (isOverlapping) return alert("❌ Lỗi: Giờ mới bị trùng với lịch đặt khác!");
+                update(ref(db, 'bookings/' + id), { Ten_Khach: document.getElementById('manage-b-name').value, Bat_Dau: start, Ket_Thuc: end }).then(() => ui.closeModal('manage-booking'));
+            },
+            confirmCheckinFromBooking: () => { const bId = document.getElementById('manage-b-id').value; const b = dataCache.bookings[bId]; update(ref(db, 'courts/' + b.Court_ID), { Trang_Thai: "Đang chơi", Ten_Khach: b.Ten_Khach, Gio_Vao: b.Bat_Dau, Dich_Vu: {} }); remove(ref(db, 'bookings/' + bId)); ui.closeModal('manage-booking'); },
+            confirmDeleteBooking: () => { if(confirm("Xóa lịch đặt?")) { remove(ref(db, 'bookings/' + document.getElementById('manage-b-id').value)); ui.closeModal('manage-booking'); } },
+            saveCourt: () => { const id = document.getElementById('court-id').value || 'S' + Date.now(); update(ref(db, 'courts/' + id), { Ten_San: document.getElementById('c-name').value, Loai_San: document.getElementById('c-type').value, Trang_Thai: "Sẵn sàng" }).then(() => ui.closeModal('court')); },
+            saveService: () => { const id = document.getElementById('service-id').value || 'M' + Date.now(); update(ref(db, 'services/' + id), { Ten_Dich_Vu: document.getElementById('s-name').value, Gia_Ban: parseInt(document.getElementById('s-price').value || 0), Ton_Kho: parseInt(document.getElementById('s-stock').value || 0), Hinh_Anh: document.getElementById('s-img').value || "" }).then(() => ui.closeModal('service')); },
+            saveStock: () => {
+                const id = document.getElementById('stock-id').value || 'P' + Date.now(); const pId = document.getElementById('stock-product-select').value;
+                const nQ = parseInt(document.getElementById('stock-qty').value || 0); const oQ = parseInt(document.getElementById('old-qty').value || 0);
+                update(ref(db, 'stocks/' + id), { Product_ID: pId, Product_Name: document.getElementById('stock-product-select').options[document.getElementById('stock-product-select').selectedIndex].text, So_Luong: nQ, Gia_Nhap: parseInt(document.getElementById('stock-cost').value || 0), Thanh_Tien: nQ * parseInt(document.getElementById('stock-cost').value || 0), Nha_Cung_Cap: document.getElementById('stock-supplier').value, Tinh_Trang: document.getElementById('stock-status').value, Ngay_Nhap: new Date().toLocaleDateString('vi-VN') }).then(() => { if(pId) runTransaction(ref(db, `services/${pId}/Ton_Kho`), (c) => (c || 0) + (nQ - oQ)); ui.closeModal('stock'); });
+            },
+            saveMember: () => { const id = document.getElementById('member-id').value || 'H' + Date.now(); update(ref(db, 'members/' + id), { Ten_HV: document.getElementById('m-name').value, SDT: document.getElementById('m-phone').value, Vi_Du: parseInt(document.getElementById('m-wallet').value || 0), Hang: "Đồng" }).then(() => ui.closeModal('member')); },
+            toggleMaintenance: (id, cur) => update(ref(db, 'courts/' + id), { Trang_Thai: cur === "Bảo trì" ? "Sẵn sàng" : "Bảo trì" }),
+            deleteItem: (path) => { if(confirm("Xóa mục này?")) remove(ref(db, path)); }
+        };
+
+        // LISTENERS
+        onValue(ref(db, 'config'), (s) => { const c = s.val() || {}; dataCache.config = c; document.getElementById('conf-price-normal').value = c.priceNormal || 100000; document.getElementById('conf-peak-start').value = c.peakStart || "17:00"; document.getElementById('conf-price-peak').value = c.pricePeak || 120000; document.getElementById('conf-weekend-up').value = c.weekendUp || 20; document.getElementById('conf-m-copper').value = c.mCopper || 0; document.getElementById('conf-m-silver').value = c.mSilver || 5; document.getElementById('conf-m-gold').value = c.mGold || 10; });
+        
+        onValue(ref(db, 'bills'), (s) => { dataCache.bills = s.val() || {}; app.renderBills(); });
+
+        onValue(ref(db, 'courts'), (s) => {
+            dataCache.courts = s.val() || {}; let gH = ''; let tH = ''; let bOpts = '';
+            for (let id in dataCache.courts) {
+                const c = dataCache.courts[id]; const isBusy = c.Trang_Thai === "Đang chơi"; const isMaint = c.Trang_Thai === "Bảo trì";
+                bOpts += `<option value="${id}">${c.Ten_San}</option>`;
+                gH += `<div onclick="${isBusy ? `app.showDetail('${id}')` : isMaint ? '' : `(function(){ document.getElementById('checkin-court-id').value='${id}'; ui.openModal('checkin')})()`}" class="bg-white rounded-[2.5rem] p-6 border-2 card-shadow cursor-pointer ${isBusy ? 'border-blue-500 bg-blue-50/20' : isMaint ? 'status-maintenance border-slate-200' : 'border-white'}">
+                    <h3 class="font-black text-lg uppercase italic">${c.Ten_San}</h3><p class="text-[10px] font-black mb-10 ${isBusy ? 'text-blue-600' : isMaint ? 'text-red-400' : 'text-slate-300'}">${isBusy ? '● '+c.Ten_Khach : isMaint ? '⚠ BẢO TRÌ' : '○ SẴN SÀNG'}</p>
+                    <div class="w-full ${isBusy ? 'bg-slate-900' : isMaint ? 'bg-slate-300' : 'bg-blue-600'} text-white py-4 rounded-2xl font-black text-[10px] uppercase text-center">${isBusy ? 'Đang sử dụng' : isMaint ? 'Bảo trì' : 'Nhận sân'}</div>
+                </div>`;
+                tH += `<tr><td class="p-4">${c.Ten_San}</td><td class="p-4 text-slate-400">${c.Loai_San}</td><td class="p-4"><span class="px-2 py-1 rounded text-[9px] uppercase ${isMaint ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'}">${c.Trang_Thai}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick="app.toggleMaintenance('${id}', '${c.Trang_Thai}')" class="p-2 text-slate-400"><i class="fa-solid fa-wrench"></i></button><button onclick='ui.openModal("court", "${id}", ${JSON.stringify(c)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('courts/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+            }
+            document.getElementById('grid-courts').innerHTML = gH; document.getElementById('list-courts-table').innerHTML = tH; document.getElementById('b-court-id').innerHTML = bOpts; app.reloadTimeline();
+        });
+
+        onValue(ref(db, 'services'), (s) => {
+            dataCache.services = s.val() || {}; let tH = ''; let opts = '<option value="">Chọn món...</option>';
+            for (let id in dataCache.services) { const v = dataCache.services[id]; opts += `<option value="${id}">${v.Ten_Dich_Vu} (Tồn: ${v.Ton_Kho})</option>`; tH += `<tr><td class="p-4"><img src="${v.Hinh_Anh || 'https://placehold.co/50x50'}" class="w-10 h-10 rounded-lg"></td><td class="p-4 uppercase">${v.Ten_Dich_Vu}</td><td class="p-4 text-emerald-600">${(v.Gia_Ban || 0).toLocaleString()}đ</td><td class="p-4">${v.Ton_Kho}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("service", "${id}", ${JSON.stringify(v)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('services/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
+            document.getElementById('list-services-table').innerHTML = tH; document.getElementById('stock-product-select').innerHTML = opts; document.getElementById('add-service-id').innerHTML = opts;
+        });
+
+        onValue(ref(db, 'stocks'), (s) => {
+            const data = s.val() || {}; let tH = '';
+            for (let id in data) { const st = data[id]; tH += `<tr><td class="p-4 text-[10px] text-slate-400">${st.Ngay_Nhap}</td><td class="p-4 uppercase">${st.Product_Name}</td><td class="p-4 text-center">${st.So_Luong}</td><td class="p-4 text-blue-600">${(st.Thanh_Tien || 0).toLocaleString()}đ</td><td class="p-4 text-xs font-bold">${st.Tinh_Trang}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("stock", "${id}", ${JSON.stringify(st)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('stocks/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
+            document.getElementById('list-stocks-table').innerHTML = tH;
+        });
+
+        onValue(ref(db, 'members'), (s) => {
+            dataCache.members = s.val() || {}; let tH = ''; let opts = '';
+            for (let id in dataCache.members) { 
+                const m = dataCache.members[id]; 
+                opts += `<option value="${id}">${m.Ten_HV}</option>`; 
+                tH += `<tr><td class="p-4 uppercase">${m.Ten_HV}</td><td class="p-4 text-slate-400">${m.SDT}</td><td class="p-4 text-emerald-600 font-black">${(m.Vi_Du || 0).toLocaleString()}đ</td><td class="p-4">${m.Hang}</td><td class="p-4 text-right whitespace-nowrap">
+                    <button onclick='ui.openModal("recharge", "${id}", ${JSON.stringify(m)})' class="p-2 text-emerald-500" title="Nạp tiền"><i class="fa-solid fa-wallet"></i></button>
+                    <button onclick='ui.openModal("member", "${id}", ${JSON.stringify(m)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="app.deleteItem('members/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button>
+                </td></tr>`; 
+            }
+            document.getElementById('list-members-table').innerHTML = tH; document.getElementById('checkin-member-id').innerHTML = opts;
+        });
+
+        onValue(ref(db, 'staff'), (s) => {
+            dataCache.staff = s.val() || {}; let tH = '';
+            for (let id in dataCache.staff) {
+                const v = dataCache.staff[id];
+                tH += `<tr><td class="p-4">${v.User}</td><td class="p-4">${v.Pass}</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] ${v.Role === 'Admin' ? 'bg-purple-100 text-purple-600':'bg-blue-100 text-blue-600'}">${v.Role}</span></td><td class="p-4 text-right"><button onclick="app.deleteItem('staff/${id}')" class="text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+            }
+            document.getElementById('list-staff-table').innerHTML = tH;
+        });
+
+        onValue(ref(db, 'bookings'), (s) => { dataCache.bookings = s.val() || {}; app.reloadTimeline(); });
+
+        const renderHoursHeader = () => { let hH = ''; for(let i=6; i<=22; i++) hH += `<div class="flex-1 text-[10px] font-black text-slate-300 border-l pl-1">${i}:00</div>`; document.getElementById('timeline-hours-header').innerHTML = hH; };
+        renderHoursHeader();
+    </script>
 </body>
 </html>
