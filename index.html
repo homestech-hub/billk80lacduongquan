@@ -273,7 +273,32 @@
         </div>
     </div>
 
-    <div id="modal-checkout" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-2xl uppercase italic text-center mb-6">Thanh toán</h2><div id="bill-content" class="space-y-3 mb-6"></div><div class="mb-6"><label class="text-[10px] font-black uppercase text-slate-400 ml-2">Phương thức thanh toán</label><div class="grid grid-cols-1 gap-2 mt-2" id="payment-methods-grid"></div><input type="hidden" id="selected-payment" value="Tiền mặt"><input type="hidden" id="temp-bill-total" value="0"><input type="hidden" id="temp-bill-desc" value=""></div><button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl">Xác nhận thanh toán</button><button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay lại</button></div></div>
+    <div id="modal-checkout" class="modal">
+        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
+            <h2 class="font-black text-2xl uppercase italic text-center mb-6">Thanh toán</h2>
+            
+            <div id="bill-content" class="space-y-3 mb-4"></div>
+
+            <div class="mb-4">
+                <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Giảm tiền trực tiếp (đ)</label>
+                <input type="number" id="manual-discount" oninput="ui.recalculateWithDiscount()" value="0" class="w-full bg-slate-100 rounded-xl p-3 font-bold outline-none border-2 border-transparent focus:border-rose-500 mt-1" placeholder="Nhập số tiền giảm...">
+            </div>
+            
+            <div class="mb-6">
+                <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Phương thức thanh toán</label>
+                <div class="grid grid-cols-1 gap-2 mt-2" id="payment-methods-grid"></div>
+                
+                <input type="hidden" id="selected-payment" value="Tiền mặt">
+                <input type="hidden" id="temp-bill-total" value="0">
+                <input type="hidden" id="temp-bill-desc" value="">
+                <input type="hidden" id="base-total-without-manual" value="0">
+            </div>
+
+            <button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl">Xác nhận thanh toán</button>
+            <button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay lại</button>
+        </div>
+    </div>
+
     <div id="modal-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-indigo-600">Đặt lịch mới</h2><input type="date" id="b-date" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><select id="b-court-id" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-indigo-500"></select><input id="b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên khách hàng"><div class="grid grid-cols-2 gap-4 mb-6"><div><label class="text-[9px] font-bold uppercase pl-2">Giờ vào</label><input id="b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-bold uppercase pl-2">Giờ ra</label><input id="b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><button onclick="app.saveBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu lịch đặt</button><button onclick="ui.closeModal('booking')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
     <div id="modal-manage-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600"><h2 class="font-black text-xl uppercase italic mb-4">Chi tiết lịch đặt</h2><div class="space-y-4"><input type="hidden" id="manage-b-id"><div class="grid grid-cols-1 gap-2"><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Tên khách hàng</label><input id="manage-b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ vào</label><input id="manage-b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ ra</label><input id="manage-b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><div class="pt-4 space-y-3"><button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Lưu thay đổi</button><button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (Vào sân)</button><button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Hủy lịch đặt</button><button onclick="ui.closeModal('manage-booking')" class="w-full py-2 text-[10px] font-bold uppercase text-slate-300">Đóng</button></div></div></div></div>
     <div id="modal-court" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Thông tin sân</h2><input type="hidden" id="court-id"><input id="c-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên sân"><select id="c-type" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Standard">Standard</option><option value="VIP">VIP</option></select><button onclick="app.saveCourt()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu sân</button><button onclick="ui.closeModal('court')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
@@ -399,6 +424,8 @@
                 document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
             },
+            
+            // --- CẬP NHẬT LOGIC THANH TOÁN & LÀM TRÒN ---
             openCheckout: () => {
                 const court = dataCache.courts[currentCourtId];
                 const conf = dataCache.config || {};
@@ -408,25 +435,42 @@
                 const [h1, m1] = startTime.split(':').map(Number);
                 const [h2, m2] = endTime.split(':').map(Number);
                 const minutes = (h2*60+m2) - (h1*60+m1);
+                
                 let hourlyRate = parseInt(conf.priceNormal || 100000);
                 if(startTime >= (conf.peakStart || "17:00")) hourlyRate = parseInt(conf.pricePeak || 120000);
                 if(now.getDay() === 0 || now.getDay() === 6) hourlyRate *= (1 + (parseInt(conf.weekendUp || 0)/100));
-                let timeMoney = Math.max(0, Math.ceil(minutes/60 * hourlyRate));
+                
+                // 1. LÀM TRÒN TIỀN GIỜ ĐẾN HÀNG NGHÌN
+                let timeMoney = Math.max(0, (minutes/60 * hourlyRate));
+                timeMoney = Math.ceil(timeMoney / 1000) * 1000; 
+
                 let discText = "";
                 if(court.Member_ID) {
                     const m = dataCache.members[court.Member_ID];
                     const discPercent = parseInt(conf[`m${m.Hang === 'Đồng' ? 'Copper' : m.Hang === 'Bạc' ? 'Silver' : 'Gold'}`] || 0);
-                    if(discPercent > 0) { timeMoney *= (1 - discPercent/100); discText = `<div class="text-[10px] text-emerald-500 font-bold">- Giảm ${discPercent}% hạng ${m.Hang}</div>`; }
+                    if(discPercent > 0) { 
+                        timeMoney *= (1 - discPercent/100); 
+                        timeMoney = Math.ceil(timeMoney / 1000) * 1000; // Làm tròn lại sau chiết khấu hạng
+                        discText = `<div class="text-[10px] text-emerald-500 font-bold">- Giảm ${discPercent}% hạng ${m.Hang}</div>`; 
+                    }
                 }
+
                 let sMoney = 0; let sLines = '';
                 for(let sid in (court.Dich_Vu || {})) {
                     const item = court.Dich_Vu[sid];
                     sMoney += (item.Gia * item.SL);
                     sLines += `<div class="flex justify-between text-xs"><span>${item.Ten} x${item.SL}</span><span>${(item.Gia * item.SL).toLocaleString()}đ</span></div>`;
                 }
-                const finalTotal = timeMoney + sMoney;
-                document.getElementById('temp-bill-total').value = finalTotal;
+
+                const baseTotal = timeMoney + sMoney;
+                
+                // Lưu vào các hidden input để quản lý
+                document.getElementById('base-total-without-manual').value = baseTotal;
+                document.getElementById('temp-bill-total').value = baseTotal;
+                document.getElementById('manual-discount').value = 0; 
                 document.getElementById('temp-bill-desc').value = `Sân ${court.Ten_San} (${startTime}-${endTime})`;
+
+                // Render Phương thức thanh toán
                 let pGridHtml = `<div class="grid grid-cols-2 gap-3"><button onclick="ui.selectPayment('Tiền mặt', this)" class="pay-method-btn selected border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Tiền mặt</button><button onclick="ui.selectPayment('Chuyển khoản', this)" class="pay-method-btn border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Chuyển khoản</button></div>`;
                 if(court.Member_ID) {
                     const member = dataCache.members[court.Member_ID];
@@ -434,12 +478,31 @@
                 }
                 document.getElementById('payment-methods-grid').innerHTML = pGridHtml;
                 document.getElementById('selected-payment').value = 'Tiền mặt';
-                document.getElementById('bill-content').innerHTML = `
-                    <div class="flex justify-between font-bold border-b pb-2"><div><span>Tiền giờ (${startTime}-${endTime})</span>${discText}</div><span>${timeMoney.toLocaleString()}đ</span></div>
-                    ${sLines}
-                    <div class="flex justify-between font-black text-lg text-blue-600 border-t pt-2 uppercase"><span>Tổng tiền</span><span>${finalTotal.toLocaleString()}đ</span></div>
-                `;
+                
+                // Hàm render con để dùng lại khi nhập ô giảm tiền
+                window.renderBillUI = (total, tMoney, sLinesHtml, dText) => {
+                    document.getElementById('bill-content').innerHTML = `
+                        <div class="flex justify-between font-bold border-b pb-2"><div><span>Tiền giờ (${startTime}-${endTime})</span>${dText}</div><span>${tMoney.toLocaleString()}đ</span></div>
+                        ${sLinesHtml}
+                        <div class="flex justify-between font-black text-lg text-blue-600 border-t pt-2 uppercase"><span>Tổng thanh toán</span><span>${total.toLocaleString()}đ</span></div>
+                    `;
+                };
+
+                window.renderBillUI(baseTotal, timeMoney, sLines, discText);
+                window.lastBillData = { timeMoney, sLines, discText }; // Cache dữ liệu
+
                 ui.closeModal('court-detail'); ui.openModal('checkout');
+            },
+
+            // --- BỔ SUNG HÀM TÍNH LẠI KHI NHẬP GIẢM TIỀN ---
+            recalculateWithDiscount: () => {
+                const baseTotal = parseInt(document.getElementById('base-total-without-manual').value || 0);
+                const manualDisc = parseInt(document.getElementById('manual-discount').value || 0);
+                const finalTotal = Math.max(0, baseTotal - manualDisc);
+                
+                document.getElementById('temp-bill-total').value = finalTotal;
+                const { timeMoney, sLines, discText } = window.lastBillData;
+                window.renderBillUI(finalTotal, timeMoney, sLines, discText);
             }
         };
 
@@ -483,35 +546,25 @@
                 update(ref(db, 'staff/' + user), { User: user, Pass: pass, Role: role }).then(() => ui.closeModal('staff'));
             },
 
-            // --- TÍNH NĂNG MỚI: TỰ ĐỘNG THĂNG HẠNG ---
             updateMemberRank: (memberId) => {
                 if (!memberId || !dataCache.members[memberId]) return;
-                
                 const member = dataCache.members[memberId];
                 const bills = Object.values(dataCache.bills || {});
-                
-                // Tính tổng chi tiêu của khách hàng này (Dựa theo tên chính xác)
-                const totalSpent = bills
-                    .filter(b => b.Khach_Hang === member.Ten_HV)
-                    .reduce((sum, b) => sum + (b.Tong_Tien || 0), 0);
-
+                const totalSpent = bills.filter(b => b.Khach_Hang === member.Ten_HV).reduce((sum, b) => sum + (b.Tong_Tien || 0), 0);
                 const conf = dataCache.config || {};
                 const sMilestone = parseInt(conf.rankSilver || 5000000);
                 const gMilestone = parseInt(conf.rankGold || 10000000);
-
                 let newRank = "Đồng";
                 if (totalSpent >= gMilestone) newRank = "Vàng";
                 else if (totalSpent >= sMilestone) newRank = "Bạc";
-
-                if (member.Hang !== newRank) {
-                    update(ref(db, `members/${memberId}`), { Hang: newRank });
-                }
+                if (member.Hang !== newRank) update(ref(db, `members/${memberId}`), { Hang: newRank });
             },
 
             confirmPayment: () => {
                 const total = parseInt(document.getElementById('temp-bill-total').value);
                 const desc = document.getElementById('temp-bill-desc').value;
                 const method = document.getElementById('selected-payment').value;
+                const manualDisc = parseInt(document.getElementById('manual-discount').value || 0);
                 const court = dataCache.courts[currentCourtId];
                 const mId = court.Member_ID;
 
@@ -526,13 +579,10 @@
                     Thoi_Gian: new Date().toLocaleString('vi-VN'), 
                     Ngay_Thang: new Date().toISOString().split('T')[0],
                     Khach_Hang: court.Ten_Khach, 
-                    Noi_Dung: desc, 
+                    Noi_Dung: desc + (manualDisc > 0 ? ` (Giảm trực tiếp: -${manualDisc.toLocaleString()}đ)` : ''), 
                     Tong_Tien: total, 
                     PTTT: method 
-                }).then(() => {
-                    // Cập nhật hạng sau khi thanh toán
-                    if (mId) setTimeout(() => app.updateMemberRank(mId), 1000);
-                });
+                }).then(() => { if (mId) setTimeout(() => app.updateMemberRank(mId), 1000); });
 
                 update(ref(db, 'courts/' + currentCourtId), { Trang_Thai: "Sẵn sàng", Ten_Khach: "", Member_ID: null, Gio_Vao: "", Dich_Vu: null });
                 ui.closeModal('checkout');
@@ -559,6 +609,7 @@
                 const mode = document.getElementById('checkin-mode').value;
                 let khach = mode === 'walk-in' ? document.getElementById('checkin-name').value : document.getElementById('checkin-member-id').options[document.getElementById('checkin-member-id').selectedIndex].text;
                 let mId = mode === 'member' ? document.getElementById('checkin-member-id').value : null;
+                if(!khach) return alert("Vui lòng chọn/nhập khách!");
                 update(ref(db, 'courts/' + courtId), { Trang_Thai: "Đang chơi", Ten_Khach: khach, Member_ID: mId, Gio_Vao: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}), Dich_Vu: {} }).then(() => ui.closeModal('checkin'));
             },
 
@@ -646,7 +697,7 @@
             deleteItem: (path) => { if(confirm("Xóa?")) remove(ref(db, path)); }
         };
 
-        // LISTENERS
+        // LISTENERS - GIỮ NGUYÊN
         onValue(ref(db, 'config'), (s) => { 
             const c = s.val() || {}; dataCache.config = c; 
             document.getElementById('conf-price-normal').value = c.priceNormal || 100000; 
@@ -659,9 +710,7 @@
             document.getElementById('conf-rank-silver').value = c.rankSilver || 5000000;
             document.getElementById('conf-rank-gold').value = c.rankGold || 10000000;
         });
-        
         onValue(ref(db, 'bills'), (s) => { dataCache.bills = s.val() || {}; app.renderBills(); });
-        
         onValue(ref(db, 'courts'), (s) => {
             dataCache.courts = s.val() || {}; let gH = ''; let tH = ''; let bOpts = '';
             for (let id in dataCache.courts) {
@@ -675,35 +724,26 @@
             }
             document.getElementById('grid-courts').innerHTML = gH; document.getElementById('list-courts-table').innerHTML = tH; document.getElementById('b-court-id').innerHTML = bOpts; app.reloadTimeline();
         });
-
         onValue(ref(db, 'services'), (s) => {
             dataCache.services = s.val() || {}; let tH = ''; let opts = '<option value="">Chọn món...</option>';
             for (let id in dataCache.services) { const v = dataCache.services[id]; opts += `<option value="${id}">${v.Ten_Dich_Vu} (Tồn: ${v.Ton_Kho})</option>`; tH += `<tr><td class="p-4"><img src="${v.Hinh_Anh || 'https://placehold.co/50x50'}" class="w-10 h-10 rounded-lg"></td><td class="p-4 uppercase">${v.Ten_Dich_Vu}</td><td class="p-4 text-emerald-600">${(v.Gia_Ban || 0).toLocaleString()}đ</td><td class="p-4">${v.Ton_Kho}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("service", "${id}", ${JSON.stringify(v)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('services/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
             document.getElementById('list-services-table').innerHTML = tH; document.getElementById('stock-product-select').innerHTML = opts; document.getElementById('add-service-id').innerHTML = opts;
         });
-
         onValue(ref(db, 'members'), (s) => {
             dataCache.members = s.val() || {}; let tH = ''; let opts = '';
-            for (let id in dataCache.members) { 
-                const m = dataCache.members[id]; 
-                opts += `<option value="${id}">${m.Ten_HV}</option>`; 
-                tH += `<tr><td class="p-4 uppercase">${m.Ten_HV}</td><td class="p-4 text-slate-400">${m.SDT}</td><td class="p-4 text-emerald-600 font-black">${(m.Vi_Du || 0).toLocaleString()}đ</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] font-bold ${m.Hang === 'Vàng' ? 'bg-yellow-100 text-yellow-700' : m.Hang === 'Bạc' ? 'bg-slate-100 text-slate-700' : 'bg-orange-50 text-orange-700'}">${m.Hang}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("recharge", "${id}", ${JSON.stringify(m)})' class="p-2 text-emerald-500"><i class="fa-solid fa-wallet"></i></button><button onclick='ui.openModal("member", "${id}", ${JSON.stringify(m)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('members/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button></td></tr>`; 
-            }
+            for (let id in dataCache.members) { const m = dataCache.members[id]; opts += `<option value="${id}">${m.Ten_HV}</option>`; tH += `<tr><td class="p-4 uppercase">${m.Ten_HV}</td><td class="p-4 text-slate-400">${m.SDT}</td><td class="p-4 text-emerald-600 font-black">${(m.Vi_Du || 0).toLocaleString()}đ</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] font-bold ${m.Hang === 'Vàng' ? 'bg-yellow-100 text-yellow-700' : m.Hang === 'Bạc' ? 'bg-slate-100 text-slate-700' : 'bg-orange-50 text-orange-700'}">${m.Hang}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("recharge", "${id}", ${JSON.stringify(m)})' class="p-2 text-emerald-500"><i class="fa-solid fa-wallet"></i></button><button onclick='ui.openModal("member", "${id}", ${JSON.stringify(m)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('members/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
             document.getElementById('list-members-table').innerHTML = tH; document.getElementById('checkin-member-id').innerHTML = opts;
         });
-
         onValue(ref(db, 'staff'), (s) => {
             dataCache.staff = s.val() || {}; let tH = '';
             for (let id in dataCache.staff) { const v = dataCache.staff[id]; tH += `<tr><td class="p-4">${v.User}</td><td class="p-4">${v.Pass}</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] ${v.Role === 'Admin' ? 'bg-purple-100 text-purple-600':'bg-blue-100 text-blue-600'}">${v.Role}</span></td><td class="p-4 text-right"><button onclick="app.deleteItem('staff/${id}')" class="text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
             document.getElementById('list-staff-table').innerHTML = tH;
         });
-
         onValue(ref(db, 'stocks'), (s) => {
             const data = s.val() || {}; let tH = '';
             for (let id in data) { const st = data[id]; tH += `<tr><td class="p-4 text-[10px] text-slate-400">${st.Ngay_Nhap}</td><td class="p-4 uppercase">${st.Product_Name}</td><td class="p-4 text-center">${st.So_Luong}</td><td class="p-4 text-blue-600">${(st.Thanh_Tien || 0).toLocaleString()}đ</td><td class="p-4 text-xs font-bold">${st.Tinh_Trang}</td><td class="p-4 text-right"><button onclick='ui.openModal("stock", "${id}", ${JSON.stringify(st)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button></td></tr>`; }
             document.getElementById('list-stocks-table').innerHTML = tH;
         });
-
         onValue(ref(db, 'bookings'), (s) => { dataCache.bookings = s.val() || {}; app.reloadTimeline(); });
 
         const renderHoursHeader = () => { let hH = ''; for(let i=6; i<=22; i++) hH += `<div class="flex-1 text-[10px] font-black text-slate-300 border-l pl-1">${i}:00</div>`; document.getElementById('timeline-hours-header').innerHTML = hH; };
