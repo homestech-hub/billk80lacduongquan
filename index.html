@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+clickTimeline:<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -238,7 +238,42 @@
         </div>
     </div>
 
-    <div id="modal-checkin" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-2xl uppercase italic mb-6">Nhận sân</h2><input type="hidden" id="checkin-court-id"><div class="space-y-4"><select id="checkin-mode" onchange="ui.toggleCheckinMode()" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"><option value="walk-in">Khách vãng lai</option><option value="member">Hội viên</option></select><div id="checkin-walkin-box" class="space-y-4"><input id="checkin-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tên khách hàng"><input id="checkin-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Số điện thoại"></div><div id="checkin-member-box" class="hidden"><select id="checkin-member-id" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></select></div><button onclick="app.confirmCheckin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase mt-4">Xác nhận vào sân</button><button onclick="ui.closeModal('checkin')" class="w-full text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div></div>
+    <div id="modal-checkin" class="modal">
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
+        <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">Nhận sân nhanh</h2>
+        <input type="hidden" id="checkin-court-id">
+
+        <div class="flex gap-4 mb-4 bg-slate-50 p-3 rounded-2xl">
+            <label class="flex items-center gap-2 cursor-pointer grow">
+                <input type="radio" name="checkin-customer-type" value="Vãng lai" checked onchange="ui.toggleCheckinMode()" class="w-4 h-4 accent-blue-600">
+                <span class="text-[10px] font-black uppercase">Vãng lai</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer grow">
+                <input type="radio" name="checkin-customer-type" value="Hội viên" onchange="ui.toggleCheckin()" class="w-4 h-4 accent-blue-600">
+                <span class="text-[10px] font-black uppercase">Hội viên</span>
+            </label>
+        </div>
+
+        <div id="checkin-name-container">
+            <input id="checkin-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-blue-500" placeholder="Tên khách hàng">
+        </div>
+
+        <div id="checkin-member-container" class="hidden">
+            <input list="checkin-member-list" id="checkin-member-search" 
+                   oninput="ui.onSearchMemberCheckin(this)" 
+                   onchange="ui.onSearchMemberCheckin(this)"
+                   class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-blue-500" 
+                   placeholder="Gõ tên hoặc SĐT hội viên...">
+            <datalist id="checkin-member-list"></datalist>
+            <input type="hidden" id="checkin-member-id">
+        </div>
+
+        <input id="checkin-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-6 outline-none" placeholder="Số điện thoại">
+
+        <button onclick="app.confirmCheckin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Bắt đầu chơi</button>
+        <button onclick="ui.closeModal('checkin')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy bỏ</button>
+    </div>
+</div>
 
     <div id="modal-court-detail" class="modal">
         <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl">
@@ -299,8 +334,134 @@
         </div>
     </div>
 
-    <div id="modal-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-indigo-600">Đặt lịch mới</h2><input type="date" id="b-date" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><select id="b-court-id" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-indigo-500"></select><input id="b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên khách hàng"><div class="grid grid-cols-2 gap-4 mb-6"><div><label class="text-[9px] font-bold uppercase pl-2">Giờ vào</label><input id="b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-bold uppercase pl-2">Giờ ra</label><input id="b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><button onclick="app.saveBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu lịch đặt</button><button onclick="ui.closeModal('booking')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
-    <div id="modal-manage-booking" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600"><h2 class="font-black text-xl uppercase italic mb-4">Chi tiết lịch đặt</h2><div class="space-y-4"><input type="hidden" id="manage-b-id"><div class="grid grid-cols-1 gap-2"><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Tên khách hàng</label><input id="manage-b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500"></div><div class="grid grid-cols-2 gap-4"><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ vào</label><input id="manage-b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div><div><label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ ra</label><input id="manage-b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div></div><div class="pt-4 space-y-3"><button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Lưu thay đổi</button><button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (Vào sân)</button><button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Hủy lịch đặt</button><button onclick="ui.closeModal('manage-booking')" class="w-full py-2 text-[10px] font-bold uppercase text-slate-300">Đóng</button></div></div></div></div>
+    <div id="modal-booking" class="modal">
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <h2 class="font-black text-xl uppercase italic mb-6 text-indigo-600 flex items-center gap-2">
+            <i class="fa-solid fa-calendar-plus"></i> Đặt lịch mới
+        </h2>
+        
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div>
+                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">Ngày đặt</label>
+                <input type="date" id="b-date" class="w-full bg-slate-100 rounded-2xl p-3 font-bold outline-none border-2 border-transparent focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">Chọn sân</label>
+                <select id="b-court-id" class="w-full bg-slate-100 rounded-2xl p-3 font-bold outline-none border-2 border-transparent focus:border-indigo-500"></select>
+            </div>
+        </div>
+
+        <div class="flex gap-2 mb-4 bg-slate-100 p-1.5 rounded-2xl">
+            <label class="flex-1">
+                <input type="radio" name="b-customer-type" value="Vãng lai" checked onchange="ui.toggleBookingType()" class="hidden peer">
+                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">Vãng lai</div>
+            </label>
+            <label class="flex-1">
+                <input type="radio" name="b-customer-type" value="Hội viên" onchange="ui.toggleBookingType()" class="hidden peer">
+                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">Hội viên</div>
+            </label>
+        </div>
+
+        <div id="b-name-container" class="mb-3">
+            <input id="b-name" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold outline-none focus:bg-white" placeholder="Tên khách hàng">
+        </div>
+
+        <div id="b-member-container" class="hidden mb-3">
+            <input list="b-member-list" id="b-member-search" oninput="ui.onSearchMemberBooking(this)" class="w-full bg-white border-2 border-indigo-500 rounded-2xl p-4 font-bold outline-none" placeholder="Tìm tên hội viên...">
+            <datalist id="b-member-list"></datalist>
+            <input type="hidden" id="b-member-id">
+            
+            <div class="mt-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                <label class="flex items-center gap-2 font-bold text-indigo-700 cursor-pointer text-xs">
+                    <input type="checkbox" id="b-repeat" class="w-4 h-4 accent-indigo-600" onchange="document.getElementById('repeat-options').classList.toggle('hidden', !this.checked)">
+                    Đặt lịch cố định hàng tuần
+                </label>
+                <div id="repeat-options" class="hidden mt-3 space-y-3">
+                    <div class="flex flex-wrap gap-1.5">
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="1" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white transition-all">T2</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="2" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">T3</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="3" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">T4</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="4" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">T5</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="5" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">T6</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="6" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">T7</div></label>
+                        <label class="flex-1"><input type="checkbox" name="repeat-days" value="0" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">CN</div></label>
+                    </div>
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">Số tuần lặp lại:</span>
+                        <input type="number" id="b-repeat-weeks" value="4" min="1" max="52" class="w-16 p-1 rounded-lg border text-center font-black text-indigo-600 bg-white">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input id="b-phone" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold mb-4 outline-none focus:bg-white" placeholder="Số điện thoại">
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giờ vào</label>
+                <input id="b-start" type="time" class="w-full bg-transparent font-black text-lg outline-none">
+            </div>
+            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giờ ra</label>
+                <input id="b-end" type="time" class="w-full bg-transparent font-black text-lg outline-none">
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chú (Yêu cầu thêm)</label>
+            <textarea id="b-note" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-medium outline-none focus:bg-white resize-none" placeholder="Ví dụ: Lấy thêm nước, mượn vợt..."></textarea>
+        </div>
+
+        <div class="flex gap-3">
+            <button onclick="ui.closeModal('booking')" class="flex-1 px-4 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-red-50 hover:text-red-500 transition-all">Đóng</button>
+            <button onclick="app.saveBooking()" class="flex-[2] px-4 py-4 bg-indigo-600 text-white rounded-2xl font-black shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-95 transition-all uppercase italic">Xác nhận đặt</button>
+        </div>
+    </div>
+</div>
+    <div id="modal-manage-booking" class="modal">
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600">
+        <h2 class="font-black text-xl uppercase italic mb-4">Chi tiết lịch đặt</h2>
+        <div class="space-y-4">
+            <input type="hidden" id="manage-b-id">
+            
+            <div class="grid grid-cols-1 gap-2">
+                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Tên khách hàng</label>
+                <input id="manage-b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500">
+            </div>
+
+            <div class="grid grid-cols-1 gap-2">
+                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Số điện thoại</label>
+                <input id="manage-b-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500" placeholder="Chưa có SĐT">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ vào</label>
+                    <input id="manage-b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
+                </div>
+                <div>
+                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ ra</label>
+                    <input id="manage-b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
+                </div>
+            </div>
+
+            <div class="mb-4">
+    <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chú</label>
+    <textarea id="manage-b-note" class="w-full bg-slate-100 rounded-2xl p-4 font-medium outline-none border-2 border-transparent focus:border-blue-500"></textarea>
+</div>
+
+            <div class="pt-4 space-y-3">
+                <button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Lưu thay đổi</button>
+                <button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (Vào sân)</button>
+                <button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Hủy lịch đặt</button>
+                <button onclick="ui.closeModal('manage-booking')" 
+        class="flex-1 px-6 py-2.5 bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-600 rounded-xl font-bold transition-all duration-200 border border-slate-200 hover:border-red-200">
+    <i class="fa-solid fa-xmark mr-2"></i>Đóng
+</button>
+            </div>
+        </div>
+    </div>
+</div>
     <div id="modal-court" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Thông tin sân</h2><input type="hidden" id="court-id"><input id="c-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên sân"><select id="c-type" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Standard">Standard</option><option value="VIP">VIP</option></select><button onclick="app.saveCourt()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu sân</button><button onclick="ui.closeModal('court')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
     <div id="modal-service" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Dịch vụ</h2><input type="hidden" id="service-id"><input id="s-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên món"><div class="grid grid-cols-2 gap-4 mb-4"><input id="s-price" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá bán"><input id="s-stock" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tồn kho"></div><input id="s-img" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none text-xs" placeholder="Link ảnh"><button onclick="app.saveService()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase">Lưu</button><button onclick="ui.closeModal('service')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
     <div id="modal-stock" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Phiếu nhập kho</h2><input type="hidden" id="stock-id"><input type="hidden" id="old-qty"><select id="stock-product-select" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"></select><div class="grid grid-cols-2 gap-4 mb-4"><input id="stock-qty" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SL"><input id="stock-cost" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá nhập"></div><input id="stock-supplier" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Nhà cung cấp"><select id="stock-status" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Đã thanh toán">Đã thanh toán</option><option value="Chưa thanh toán">Chưa thanh toán</option></select><button onclick="app.saveStock()" class="w-full bg-black text-white py-4 rounded-2xl font-black uppercase">Lưu phiếu</button><button onclick="ui.closeModal('stock')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
@@ -375,55 +536,152 @@
                 document.getElementById('btn-' + id).classList.add('active');
             },
             openModal: (type, id = null, data = null) => {
-                if(type === 'manage-booking') {
-                    document.getElementById('manage-b-id').value = id;
-                    document.getElementById('manage-b-name').value = data.Ten_Khach;
-                    document.getElementById('manage-b-start').value = data.Bat_Dau;
-                    document.getElementById('manage-b-end').value = data.Ket_Thuc;
-                } else if(type === 'court') {
-                    document.getElementById('court-id').value = id || "";
-                    document.getElementById('c-name').value = data?.Ten_San || "";
-                    document.getElementById('c-type').value = data?.Loai_San || "Standard";
-                } else if(type === 'service') {
-                    document.getElementById('service-id').value = id || "";
-                    document.getElementById('s-name').value = data?.Ten_Dich_Vu || "";
-                    document.getElementById('s-price').value = data?.Gia_Ban || "";
-                    document.getElementById('s-stock').value = data?.Ton_Kho || 0;
-                    document.getElementById('s-img').value = data?.Hinh_Anh || "";
-                } else if(type === 'stock') {
-                    document.getElementById('stock-id').value = id || "";
-                    document.getElementById('stock-product-select').value = data?.Product_ID || "";
-                    document.getElementById('stock-qty').value = data?.So_Luong || "";
-                    document.getElementById('old-qty').value = data?.So_Luong || 0;
-                    document.getElementById('stock-cost').value = data?.Gia_Nhap || "";
-                    document.getElementById('stock-supplier').value = data?.Nha_Cung_Cap || "";
-                } else if(type === 'member') {
-                    document.getElementById('member-id').value = id || "";
-                    document.getElementById('m-name').value = data?.Ten_HV || "";
-                    document.getElementById('m-phone').value = data?.SDT || "";
-                    document.getElementById('m-wallet').value = data?.Vi_Du || 0;
-                } else if(type === 'recharge') {
-                    document.getElementById('recharge-member-id').value = id;
-                    document.getElementById('recharge-member-name').innerText = "Hội viên: " + data.Ten_HV;
-                    document.getElementById('recharge-amount').value = "";
-                } else if(type === 'staff') {
-                    document.getElementById('st-user').value = "";
-                    document.getElementById('st-pass').value = "";
-                }
-                document.getElementById('modal-' + type).classList.add('active');
-            },
+    // --- PHẦN BỔ SUNG: Chặn chọn ngày cũ ---
+    if (type === 'booking') {
+        const todayStr = new Date().toISOString().split('T')[0];
+        const bDateInput = document.getElementById('b-date');
+        if (bDateInput) {
+            bDateInput.setAttribute('min', todayStr); // Không cho chọn ngày trước hôm nay
+            
+            // Nếu chưa có ngày nào được chọn, mặc định lấy ngày hiện tại đang xem ở Timeline
+            const viewDate = document.getElementById('view-date').value;
+            bDateInput.value = viewDate || todayStr;
+        }
+        ui.toggleBookingType(); // Cập nhật lại giao diện hội viên/vãng lai
+    }
+    // ---------------------------------------
+
+    // Tìm đoạn này trong code của bạn và cập nhật:
+if (type === 'manage-booking') {
+    document.getElementById('manage-b-id').value = id;
+    document.getElementById('manage-b-name').value = data.Ten_Khach || "";
+    document.getElementById('manage-b-phone').value = data.SDT || "";
+    document.getElementById('manage-b-start').value = data.Bat_Dau || "";
+    document.getElementById('manage-b-end').value = data.Ket_Thuc || "";
+    
+    // DÒNG NÀY GIÚP GHI CHÚ KHÔNG BỊ NHẢY:
+    // Nếu data.Ghi_Chu không tồn tại, nó sẽ xóa trắng ô nhập (về ""), 
+    // thay vì để lại ghi chú của lịch trước đó.
+    document.getElementById('manage-b-note').value = data.Ghi_Chu || "";
+    } else if(type === 'court') {
+        document.getElementById('court-id').value = id || "";
+        document.getElementById('c-name').value = data?.Ten_San || "";
+        document.getElementById('c-type').value = data?.Loai_San || "Standard";
+    } else if(type === 'service') {
+        document.getElementById('service-id').value = id || "";
+        document.getElementById('s-name').value = data?.Ten_Dich_Vu || "";
+        document.getElementById('s-price').value = data?.Gia_Ban || "";
+        document.getElementById('s-stock').value = data?.Ton_Kho || 0;
+        document.getElementById('s-img').value = data?.Hinh_Anh || "";
+    } else if(type === 'stock') {
+        document.getElementById('stock-id').value = id || "";
+        document.getElementById('stock-product-select').value = data?.Product_ID || "";
+        document.getElementById('stock-qty').value = data?.So_Luong || "";
+        document.getElementById('old-qty').value = data?.So_Luong || 0;
+        document.getElementById('stock-cost').value = data?.Gia_Nhap || "";
+        document.getElementById('stock-supplier').value = data?.Nha_Cung_Cap || "";
+    } else if(type === 'member') {
+        document.getElementById('member-id').value = id || "";
+        document.getElementById('m-name').value = data?.Ten_HV || "";
+        document.getElementById('m-phone').value = data?.SDT || "";
+        document.getElementById('m-wallet').value = data?.Vi_Du || 0;
+    } else if(type === 'recharge') {
+        document.getElementById('recharge-member-id').value = id;
+        document.getElementById('recharge-member-name').innerText = "Hội viên: " + data.Ten_HV;
+        document.getElementById('recharge-amount').value = "";
+    } else if(type === 'staff') {
+        document.getElementById('st-user').value = "";
+        document.getElementById('st-pass').value = "";
+    }
+    document.getElementById('modal-' + type).classList.add('active');
+},
             closeModal: (type) => document.getElementById('modal-' + type).classList.remove('active'),
             toggleCheckinMode: () => {
                 const mode = document.getElementById('checkin-mode').value;
                 document.getElementById('checkin-walkin-box').classList.toggle('hidden', mode !== 'walk-in');
                 document.getElementById('checkin-member-box').classList.toggle('hidden', mode !== 'member');
             },
+            toggleBookingType: () => {
+    const type = document.querySelector('input[name="b-customer-type"]:checked').value;
+    const nameCont = document.getElementById('b-name-container');
+    const membCont = document.getElementById('b-member-container');
+    
+    if(type === 'Hội viên') {
+        nameCont.classList.add('hidden');
+        membCont.classList.remove('hidden');
+        // Đổ danh sách vào datalist
+        let listHtml = '';
+        for(let id in dataCache.members) {
+            const m = dataCache.members[id];
+            listHtml += `<option value="${m.Ten_HV}" data-id="${id}" data-phone="${m.SDT}">${m.SDT}</option>`;
+        }
+        document.getElementById('b-member-list').innerHTML = listHtml;
+    } else {
+        nameCont.classList.remove('hidden');
+        membCont.classList.add('hidden');
+        document.getElementById('b-member-search').value = '';
+        document.getElementById('b-member-id').value = '';
+    }
+},
+
+onSearchMemberBooking: (el) => {
+    const val = el.value.trim();
+    const opts = document.getElementById('b-member-list').options;
+    const phoneInput = document.getElementById('b-phone');
+    const idInput = document.getElementById('b-member-id');
+
+    let found = false;
+    for (let i = 0; i < opts.length; i++) {
+        if (opts[i].value === val) {
+            idInput.value = opts[i].getAttribute('data-id');
+            phoneInput.value = opts[i].getAttribute('data-phone') || '';
+            found = true;
+            break;
+        }
+    }
+    if (!found) { idInput.value = ''; phoneInput.value = ''; }
+},
             toggleAddService: () => document.getElementById('add-service-box').classList.toggle('hidden'),
             selectPayment: (val, btn) => {
                 document.getElementById('selected-payment').value = val;
                 document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
             },
+            clickTimeline: (courtId, hour) => {
+    // 1. Lấy thời gian hiện tại và ngày đang xem
+    const now = new Date();
+    const viewDateValue = document.getElementById('view-date').value;
+    const viewDate = new Date(viewDateValue);
+
+    // Chuẩn hóa ngày hôm nay và ngày đang xem về 00:00:00 để so sánh chính xác theo ngày
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const compareDate = new Date(viewDate);
+    compareDate.setHours(0, 0, 0, 0);
+
+    // 2. KIỂM TRA LÙI NGÀY: Nếu ngày đang xem nhỏ hơn ngày hôm nay
+    if (compareDate < today) {
+        alert("Không thể đặt sân cho những ngày đã qua!");
+        return;
+    }
+
+    // 3. KIỂM TRA LÙI GIỜ: Nếu là ngày hôm nay và giờ được click nhỏ hơn giờ hiện tại
+    const isToday = now.toDateString() === viewDate.toDateString();
+    if (isToday && hour < now.getHours()) {
+        const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+        alert(`Không thể đặt lịch vào khung giờ đã qua! (Giờ hiện tại là ${timeStr})`);
+        return; 
+    }
+
+    // 4. Nếu hợp lệ thì mới thực hiện mở Modal và điền thông tin
+    ui.openModal('booking');
+    document.getElementById('b-date').value = viewDateValue;
+    document.getElementById('b-court-id').value = courtId;
+    
+    // Tự động điền giờ bắt đầu và kết thúc (mặc định cách nhau 1 tiếng)
+    document.getElementById('b-start').value = `${hour.toString().padStart(2, '0')}:00`;
+    document.getElementById('b-end').value = `${(hour + 1).toString().padStart(2, '0')}:00`;
+},
             
             // --- CẬP NHẬT LOGIC THANH TOÁN & LÀM TRÒN ---
             openCheckout: () => {
@@ -546,6 +804,33 @@
                 update(ref(db, 'staff/' + user), { User: user, Pass: pass, Role: role }).then(() => ui.closeModal('staff'));
             },
 
+            confirmCheckinFromBooking: () => { 
+    // 1. Lấy ID của lịch đặt đang mở
+    const bId = document.getElementById('manage-b-id').value; 
+    const b = dataCache.bookings[bId]; 
+    if(!b) return alert("Không tìm thấy thông tin lịch đặt!");
+
+    // 2. Lấy giờ hệ thống hiện tại để ghi vào giờ vào sân
+    const now = new Date();
+    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    // 3. Cập nhật trạng thái sân (Chuyển từ "Trống" sang "Đang chơi")
+    update(ref(db, 'courts/' + b.Court_ID), { 
+        Trang_Thai: "Đang chơi", 
+        Ten_Khach: b.Ten_Khach, 
+        SDT: b.SDT || "", 
+        Gio_Vao: currentTime, // Ghi giờ thực tế lúc bấm nút
+        Dich_Vu: {} 
+    }); 
+
+    // 4. Xóa lịch đặt này khỏi danh sách chờ (vì đã vào sân rồi)
+    remove(ref(db, 'bookings/' + bId)); 
+
+    // 5. Đóng modal và thông báo
+    ui.closeModal('manage-booking'); 
+    alert(`Khách ${b.Ten_Khach} đã nhận sân vào lúc ${currentTime}`);
+},
+
             updateMemberRank: (memberId) => {
                 if (!memberId || !dataCache.members[memberId]) return;
                 const member = dataCache.members[memberId];
@@ -643,6 +928,66 @@
                 ui.closeModal('recharge');
             },
 
+               // Hàm lưu chỉnh sửa (Bạn cần dán đoạn này vào vì file cũ không có)
+    updateBooking: async () => {
+    const id = document.getElementById('manage-b-id').value;
+    const name = document.getElementById('manage-b-name').value;
+    const phone = document.getElementById('manage-b-phone').value;
+    const start = document.getElementById('manage-b-start').value;
+    const end = document.getElementById('manage-b-end').value;
+    const note = document.getElementById('manage-b-note')?.value || "";
+
+    if (!id) return;
+    if (!name || !start || !end) return alert("Vui lòng nhập đủ thông tin!");
+    if (start >= end) return alert("Giờ kết thúc phải lớn hơn giờ bắt đầu!");
+
+    // Lấy thông tin lịch hiện tại từ cache để giữ lại Court_ID và Ngay
+    const currentBooking = dataCache.bookings[id];
+    const cId = currentBooking.Court_ID;
+    const date = currentBooking.Ngay;
+
+    // --- KIỂM TRA TRÙNG LỊCH ---
+    const isOverlapping = Object.keys(dataCache.bookings || {}).some(key => {
+        if (key === id) return false; // Bỏ qua chính nó
+        const b = dataCache.bookings[key];
+        if (b.Court_ID === cId && b.Ngay === date) {
+            return (
+                (start >= b.Bat_Dau && start < b.Ket_Thuc) || 
+                (end > b.Bat_Dau && end <= b.Ket_Thuc) ||
+                (start <= b.Bat_Dau && end >= b.Ket_Thuc)
+            );
+        }
+        return false;
+    });
+
+    if (isOverlapping) {
+        return alert("Sân đã được đặt vui lòng chọn khung giờ khác");
+    }
+
+    try {
+        // Cập nhật lên Firebase dùng các tên trường đúng với file của bạn
+        await update(ref(db, 'bookings/' + id), {
+            Ten_Khach: name,
+            SDT: phone,
+            Bat_Dau: start,
+            Ket_Thuc: end,
+            Ghi_Chu: note
+        });
+
+        alert("Đã cập nhật thay đổi thành công!");
+        ui.closeModal('manage-booking');
+    } catch (error) {
+        console.error(error);
+        alert("Lỗi khi lưu: " + error.message);
+    }
+},
+    // Hàm đặt mới (Hàm này có sẵn trong file của bạn)
+    saveBooking: () => { 
+        // ... code cũ của bạn
+    },
+    
+    // ... các hàm khác
+
             saveConfig: () => {
                 const config = { 
                     priceNormal: document.getElementById('conf-price-normal').value, 
@@ -659,31 +1004,119 @@
             },
 
             reloadTimeline: () => {
-                const vD = document.getElementById('view-date').value; let html = '';
-                for (let cId in dataCache.courts) {
-                    const cB = Object.entries(dataCache.bookings || {}).filter(([id, b]) => b.Court_ID === cId && b.Ngay === vD);
-                    html += `<div class="flex items-center"><div class="w-24 font-black text-[11px] uppercase pr-2 text-slate-600">${dataCache.courts[cId].Ten_San}</div><div class="flex-1 h-10 bg-slate-50 rounded-xl relative border border-slate-100 timeline-grid">${cB.map(([bId, b]) => {
-                        const [hS, mS] = b.Bat_Dau.split(':').map(Number); const [hE, mE] = b.Ket_Thuc.split(':').map(Number);
-                        const left = (((hS - 6) * 60 + mS) / (16 * 60)) * 100;
-                        const width = (((hE * 60 + mE) - (hS * 60 + mS)) / (16 * 60)) * 100;
-                        return `<div onclick='ui.openModal("manage-booking", "${bId}", ${JSON.stringify(b)})' class="timeline-slot absolute bg-indigo-500 text-[9px] text-white flex items-center justify-center font-bold px-2 overflow-hidden truncate border-indigo-700" style="left: ${left}%; width: ${width}%">${b.Ten_Khach}</div>`;
-                    }).join('')}</div></div>`;
-                }
-                document.getElementById('timeline-rows').innerHTML = html;
-            },
+    const vD = document.getElementById('view-date').value;
+    let html = '';
+    for (let cId in dataCache.courts) {
+        const court = dataCache.courts[cId];
+        const bks = Object.entries(dataCache.bookings || {}).filter(([id, b]) => b.Court_ID === cId && b.Ngay === vD);
+        
+        // Bắt đầu dòng của một sân
+        html += `<div class="flex items-center gap-2">
+            <div class="w-24 font-black text-[10px] uppercase truncate">${court.Ten_San}</div>
+            <div class="flex-1 h-10 bg-slate-100 rounded-xl relative timeline-grid">`;
+        
+        // --- ĐOẠN THÊM MỚI: TẠO VÙNG CLICK ĐỂ ĐẶT SÂN ---
+        for(let i = 6; i <= 22; i++) {
+            html += `<div onclick="ui.clickTimeline('${cId}', ${i})" 
+                          class="absolute h-full" 
+                          style="left:${(i - 6) * 100 / 17}%; width:${100 / 17}%; z-index:10; cursor:cell;">
+                     </div>`;
+        }
+        // --- HẾT ĐOẠN THÊM MỚI ---
+
+        // Đoạn này vẽ các lịch đã đặt (Giữ nguyên logic cũ của bạn)
+        bks.forEach(([id, b]) => {
+            const [hS, mS] = b.Bat_Dau.split(':').map(Number);
+            const [hE, mE] = b.Ket_Thuc.split(':').map(Number);
+            const left = (hS - 6 + mS / 60) * (100 / 17);
+            const width = (hE - hS + (mE - mS) / 60) * (100 / 17);
+            
+            // Chú ý: z-index phải là 30 để nằm đè lên ô click ảo ở trên
+            html += `<div onclick="event.stopPropagation(); ui.openModal('manage-booking', '${id}', ${JSON.stringify(b).replace(/"/g, '&quot;')})" 
+                        class="timeline-slot bg-indigo-600 text-white text-[8px] flex flex-col justify-center px-1" 
+                        style="left:${left}%; width:${width}%; z-index:30">
+                        <span class="truncate font-bold">${b.Ten_Khach}</span>
+                     </div>`;
+        });
+
+        html += `</div></div>`;
+    }
+    document.getElementById('timeline-rows').innerHTML = html;
+},
 
             saveBooking: () => {
-                const cId = document.getElementById('b-court-id').value; const date = document.getElementById('b-date').value;
-                const start = document.getElementById('b-start').value; const end = document.getElementById('b-end').value; const name = document.getElementById('b-name').value;
-                if (!cId || !date || !start || !end || !name) return alert("Thiếu tin!");
-                set(ref(db, 'bookings/' + 'B' + Date.now()), { Court_ID: cId, Ten_Khach: name, Bat_Dau: start, Ket_Thuc: end, Ngay: date }).then(() => ui.closeModal('booking'));
-            },
+    const cId = document.getElementById('b-court-id').value; 
+    const date = document.getElementById('b-date').value;
+    const start = document.getElementById('b-start').value; 
+    const end = document.getElementById('b-end').value; 
+    const phone = document.getElementById('b-phone').value;
+    const note = document.getElementById('b-note')?.value || ""; // Lấy ghi chú
+    const type = document.querySelector('input[name="b-customer-type"]:checked').value;
 
-            updateBooking: () => {
-                update(ref(db, 'bookings/' + document.getElementById('manage-b-id').value), { Ten_Khach: document.getElementById('manage-b-name').value, Bat_Dau: document.getElementById('manage-b-start').value, Ket_Thuc: document.getElementById('manage-b-end').value }).then(() => ui.closeModal('manage-booking'));
-            },
+    let name = '', memberId = '';
+    if (type === 'Hội viên') {
+        name = document.getElementById('b-member-search').value;
+        memberId = document.getElementById('b-member-id').value;
+        if (!memberId) return alert("Vui lòng chọn hội viên chính xác!");
+    } else {
+        name = document.getElementById('b-name').value;
+    }
 
-            confirmCheckinFromBooking: () => { const bId = document.getElementById('manage-b-id').value; const b = dataCache.bookings[bId]; update(ref(db, 'courts/' + b.Court_ID), { Trang_Thai: "Đang chơi", Ten_Khach: b.Ten_Khach, Gio_Vao: b.Bat_Dau, Dich_Vu: {} }); remove(ref(db, 'bookings/' + bId)); ui.closeModal('manage-booking'); },
+    if (!cId || !date || !start || !end || !name || !phone) return alert("Thiếu thông tin!");
+    if (start >= end) return alert("Giờ kết thúc phải sau giờ bắt đầu!");
+
+    const isRepeat = document.getElementById('b-repeat')?.checked || false;
+    const repeatDays = Array.from(document.querySelectorAll('input[name="repeat-days"]:checked')).map(el => parseInt(el.value));
+    const repeatWeeks = parseInt(document.getElementById('b-repeat-weeks')?.value) || 1;
+
+    // Kiểm tra trùng lịch
+    const checkOverlap = (targetDate) => {
+        return Object.values(dataCache.bookings || {}).some(b => {
+            if (b.Court_ID === cId && b.Ngay === targetDate) {
+                return ((start >= b.Bat_Dau && start < b.Ket_Thuc) || (end > b.Bat_Dau && end <= b.Ket_Thuc) || (start <= b.Bat_Dau && end >= b.Ket_Thuc));
+            }
+            return false;
+        });
+    };
+
+    let datesToBook = [];
+    if (isRepeat && type === 'Hội viên') {
+        if (repeatDays.length === 0) return alert("Chọn ít nhất một thứ để lặp lại!");
+        let startDate = new Date(date);
+        for (let i = 0; i < repeatWeeks * 7; i++) {
+            let d = new Date(startDate);
+            d.setDate(startDate.getDate() + i);
+            if (repeatDays.includes(d.getDay())) {
+                const dateStr = d.toISOString().split('T')[0];
+                if (!checkOverlap(dateStr)) datesToBook.push(dateStr);
+            }
+        }
+    } else {
+        if (checkOverlap(date)) return alert("Sân đã được đặt vào khung giờ này!");
+        datesToBook.push(date);
+    }
+
+    if (datesToBook.length === 0) return alert("Không có lịch nào được tạo (do trùng lịch)!");
+
+    const promises = datesToBook.map(targetDate => {
+        const newId = 'B' + Date.now() + Math.floor(Math.random() * 1000);
+        return set(ref(db, 'bookings/' + newId), { 
+            Court_ID: cId, Ten_Khach: name, SDT: phone, Loai_Khach: type,
+            Member_ID: memberId, Bat_Dau: start, Ket_Thuc: end, Ngay: targetDate,
+            Ghi_Chu: note // LƯU GHI CHÚ VÀO ĐÂY
+        });
+    });
+
+    Promise.all(promises).then(() => {
+        ui.closeModal('booking');
+        alert(isRepeat ? `Đã tạo ${promises.length} lịch cố định!` : "Đặt sân thành công!");
+        // Reset form
+        ['b-name', 'b-phone', 'b-member-search', 'b-note'].forEach(id => {
+            if(document.getElementById(id)) document.getElementById(id).value = '';
+        });
+    });
+},
+
             confirmDeleteBooking: () => { if(confirm("Hủy?")) { remove(ref(db, 'bookings/' + document.getElementById('manage-b-id').value)); ui.closeModal('manage-booking'); } },
             saveCourt: () => { const id = document.getElementById('court-id').value || 'S' + Date.now(); update(ref(db, 'courts/' + id), { Ten_San: document.getElementById('c-name').value, Loai_San: document.getElementById('c-type').value, Trang_Thai: "Sẵn sàng" }).then(() => ui.closeModal('court')); },
             saveService: () => { const id = document.getElementById('service-id').value || 'M' + Date.now(); update(ref(db, 'services/' + id), { Ten_Dich_Vu: document.getElementById('s-name').value, Gia_Ban: parseInt(document.getElementById('s-price').value || 0), Ton_Kho: parseInt(document.getElementById('s-stock').value || 0), Hinh_Anh: document.getElementById('s-img').value || "" }).then(() => ui.closeModal('service')); },
@@ -711,19 +1144,39 @@
             document.getElementById('conf-rank-gold').value = c.rankGold || 10000000;
         });
         onValue(ref(db, 'bills'), (s) => { dataCache.bills = s.val() || {}; app.renderBills(); });
-        onValue(ref(db, 'courts'), (s) => {
-            dataCache.courts = s.val() || {}; let gH = ''; let tH = ''; let bOpts = '';
-            for (let id in dataCache.courts) {
-                const c = dataCache.courts[id]; const isBusy = c.Trang_Thai === "Đang chơi"; const isMaint = c.Trang_Thai === "Bảo trì";
-                bOpts += `<option value="${id}">${c.Ten_San}</option>`;
-                gH += `<div onclick="${isBusy ? `app.showDetail('${id}')` : isMaint ? '' : `(function(){ document.getElementById('checkin-court-id').value='${id}'; ui.openModal('checkin')})()`}" class="bg-white rounded-[2.5rem] p-6 border-2 card-shadow cursor-pointer ${isBusy ? 'border-blue-500 bg-blue-50/20' : isMaint ? 'status-maintenance border-slate-200' : 'border-white'}">
-                    <h3 class="font-black text-lg uppercase italic">${c.Ten_San}</h3><p class="text-[10px] font-black mb-10 ${isBusy ? 'text-blue-600' : isMaint ? 'text-red-400' : 'text-slate-300'}">${isBusy ? '● '+c.Ten_Khach : isMaint ? '⚠ BẢO TRÌ' : '○ SẴN SÀNG'}</p>
-                    <div class="w-full ${isBusy ? 'bg-slate-900' : isMaint ? 'bg-slate-300' : 'bg-blue-600'} text-white py-4 rounded-2xl font-black text-[10px] uppercase text-center">${isBusy ? 'Đang sử dụng' : isMaint ? 'Bảo trì' : 'Nhận sân'}</div>
-                </div>`;
-                tH += `<tr><td class="p-4">${c.Ten_San}</td><td class="p-4 text-slate-400">${c.Loai_San}</td><td class="p-4"><span class="px-2 py-1 rounded text-[9px] uppercase ${isMaint ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'}">${c.Trang_Thai}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick="app.toggleMaintenance('${id}', '${c.Trang_Thai}')" class="p-2 text-slate-400"><i class="fa-solid fa-wrench"></i></button><button onclick='ui.openModal("court", "${id}", ${JSON.stringify(c)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('courts/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-            }
-            document.getElementById('grid-courts').innerHTML = gH; document.getElementById('list-courts-table').innerHTML = tH; document.getElementById('b-court-id').innerHTML = bOpts; app.reloadTimeline();
-        });
+       onValue(ref(db, 'courts'), (s) => {
+    dataCache.courts = s.val() || {}; let gH = ''; let tH = ''; let bOpts = '';
+    for (let id in dataCache.courts) {
+        const c = dataCache.courts[id]; 
+        const isBusy = c.Trang_Thai === "Đang chơi"; 
+        const isMaint = c.Trang_Thai === "Bảo trì";
+        
+        bOpts += `<option value="${id}">${c.Ten_San}</option>`;
+        
+        gH += `<div onclick="${isBusy ? `app.showDetail('${id}')` : isMaint ? '' : `(function(){ document.getElementById('checkin-court-id').value='${id}'; ui.openModal('checkin')})()`}" class="bg-white rounded-[2.5rem] p-6 border-2 card-shadow cursor-pointer ${isBusy ? 'border-blue-500 bg-blue-50/20' : isMaint ? 'status-maintenance border-slate-200' : 'border-white'}">
+            <div class="flex justify-between items-center mb-1">
+                <h3 class="font-black text-lg uppercase italic">${c.Ten_San}</h3>
+                ${isBusy && c.Gio_Vao ? `<span class="text-[10px] font-black text-blue-600 bg-blue-100 px-2 py-1 rounded-lg">Vào: ${c.Gio_Vao}</span>` : ''}
+            </div>
+
+            <p class="text-[10px] font-black ${isBusy ? 'text-blue-600' : isMaint ? 'text-red-400' : 'text-slate-300'}">
+                ${isBusy ? '● '+c.Ten_Khach : isMaint ? '⚠ BẢO TRÌ' : '○ SẴN SÀNG'}
+            </p>
+
+            <p class="text-[10px] font-bold text-indigo-500 mb-10">
+                ${isBusy && c.SDT ? '<i class="fa-solid fa-phone text-[8px]"></i> ' + c.SDT : '&nbsp;'}
+            </p>
+
+            <div class="w-full ${isBusy ? 'bg-slate-900' : isMaint ? 'bg-slate-300' : 'bg-blue-600'} text-white py-4 rounded-2xl font-black text-[10px] uppercase text-center">${isBusy ? 'Đang sử dụng' : isMaint ? 'Bảo trì' : 'Nhận sân'}</div>
+        </div>`;
+
+        tH += `<tr><td class="p-4">${c.Ten_San}</td><td class="p-4 text-slate-400">${c.Loai_San}</td><td class="p-4"><span class="px-2 py-1 rounded text-[9px] uppercase ${isMaint ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'}">${c.Trang_Thai}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick="app.toggleMaintenance('${id}', '${c.Trang_Thai}')" class="p-2 text-slate-400"><i class="fa-solid fa-wrench"></i></button><button onclick='ui.openModal("court", "${id}", ${JSON.stringify(c)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('courts/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    }
+    document.getElementById('grid-courts').innerHTML = gH; 
+    document.getElementById('list-courts-table').innerHTML = tH; 
+    document.getElementById('b-court-id').innerHTML = bOpts; 
+    app.reloadTimeline();
+});
         onValue(ref(db, 'services'), (s) => {
             dataCache.services = s.val() || {}; let tH = ''; let opts = '<option value="">Chọn món...</option>';
             for (let id in dataCache.services) { const v = dataCache.services[id]; opts += `<option value="${id}">${v.Ten_Dich_Vu} (Tồn: ${v.Ton_Kho})</option>`; tH += `<tr><td class="p-4"><img src="${v.Hinh_Anh || 'https://placehold.co/50x50'}" class="w-10 h-10 rounded-lg"></td><td class="p-4 uppercase">${v.Ten_Dich_Vu}</td><td class="p-4 text-emerald-600">${(v.Gia_Ban || 0).toLocaleString()}đ</td><td class="p-4">${v.Ton_Kho}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("service", "${id}", ${JSON.stringify(v)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('services/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
