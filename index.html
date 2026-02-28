@@ -1,4 +1,4 @@
-clickTimeline:<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -33,11 +33,11 @@ clickTimeline:<!DOCTYPE html>
                 <h1 class="font-black text-2xl uppercase italic">PMS LOGIN</h1>
             </div>
             <div class="space-y-4">
-                <input type="text" id="login-user" placeholder="Tên đăng nhập" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
-                <input type="password" id="login-pass" placeholder="Mật khẩu" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
-                <button onclick="auth.login()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Đăng nhập</button>
+                <input type="text" id="login-user" placeholder="TÃªn ÄÄng nháº­p" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
+                <input type="password" id="login-pass" placeholder="Máº­t kháº©u" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
+                <button onclick="auth.login()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">ÄÄng nháº­p</button>
             </div>
-            <p class="text-center text-[10px] text-slate-400 mt-4 italic">Mặc định: admin / 123</p>
+            <p class="text-center text-[10px] text-slate-400 mt-4 italic">Máº·c Äá»nh: admin / 123</p>
         </div>
     </div>
 
@@ -49,13 +49,13 @@ clickTimeline:<!DOCTYPE html>
                     <span class="font-black text-xl tracking-tighter uppercase italic">PMS PRO</span>
                 </div>
                 <div class="flex gap-1">
-                    <button onclick="ui.switchTab('op')" id="btn-op" class="nav-btn active px-3 py-5 text-[10px] font-bold uppercase">Vận hành</button>
-                    <button onclick="ui.switchTab('bill')" id="btn-bill" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hóa đơn</button>
-                    <button onclick="ui.switchTab('court')" id="btn-court" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Sân</button>
-                    <button onclick="ui.switchTab('service')" id="btn-service" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Dịch vụ</button>
-                    <button onclick="ui.switchTab('stock')" id="btn-stock" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nhập kho</button>
-                    <button onclick="ui.switchTab('member')" id="btn-member" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hội viên</button>
-                    <button onclick="ui.switchTab('staff')" id="btn-staff" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nhân viên</button>
+                    <button onclick="ui.switchTab('op')" id="btn-op" class="nav-btn active px-3 py-5 text-[10px] font-bold uppercase">Váº­n hÃ nh</button>
+                    <button onclick="ui.switchTab('bill')" id="btn-bill" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">HÃ³a ÄÆ¡n</button>
+                    <button onclick="ui.switchTab('court')" id="btn-court" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">SÃ¢n</button>
+                    <button onclick="ui.switchTab('service')" id="btn-service" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Dá»ch vá»¥</button>
+                    <button onclick="ui.switchTab('stock')" id="btn-stock" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nháº­p kho</button>
+                    <button onclick="ui.switchTab('member')" id="btn-member" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Há»i viÃªn</button>
+                    <button onclick="ui.switchTab('staff')" id="btn-staff" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">NhÃ¢n viÃªn</button>
                     <button onclick="ui.switchTab('config')" id="btn-config" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400"><i class="fa-solid fa-gear"></i></button>
                     <button onclick="location.reload()" class="px-3 py-5 text-[10px] font-bold uppercase text-rose-500"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
@@ -68,10 +68,10 @@ clickTimeline:<!DOCTYPE html>
             <div class="bg-white rounded-[2.5rem] p-6 border card-shadow mb-8">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
-                        <h2 class="font-black text-xl uppercase italic">Lịch đặt sân</h2>
+                        <h2 class="font-black text-xl uppercase italic">Lá»ch Äáº·t sÃ¢n</h2>
                         <input type="date" id="view-date" onchange="app.reloadTimeline()" class="text-[10px] font-bold uppercase border-none bg-slate-100 rounded-lg px-2 py-1 mt-1 outline-none">
                     </div>
-                    <button onclick="ui.openModal('booking')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase shadow-lg">+ Đặt sân trước</button>
+                    <button onclick="ui.openModal('booking')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase shadow-lg">+ Äáº·t sÃ¢n trÆ°á»c</button>
                 </div>
                 <div class="overflow-x-auto">
                     <div class="min-w-[1000px] relative pb-4">
@@ -87,36 +87,36 @@ clickTimeline:<!DOCTYPE html>
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
-                        <h2 class="font-black text-xl uppercase italic">Lịch sử Hóa đơn</h2>
+                        <h2 class="font-black text-xl uppercase italic">Lá»ch sá»­ HÃ³a ÄÆ¡n</h2>
                         <div class="flex flex-wrap gap-2 mt-2">
                             <div class="flex flex-col">
-                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Từ ngày</span>
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Tá»« ngÃ y</span>
                                 <input type="date" id="filter-bill-from" onchange="app.renderBills()" class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none">
                             </div>
                             <div class="flex flex-col">
-                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Đến ngày</span>
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Äáº¿n ngÃ y</span>
                                 <input type="date" id="filter-bill-to" onchange="app.renderBills()" class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none">
                             </div>
                             <div class="flex flex-col">
-                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">Tìm kiếm khách/nội dung</span>
-                                <input type="text" id="filter-bill-search" oninput="app.renderBills()" placeholder="Gõ để tìm..." class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none w-48">
+                                <span class="text-[8px] font-bold text-slate-400 uppercase ml-1">TÃ¬m kiáº¿m khÃ¡ch/ná»i dung</span>
+                                <input type="text" id="filter-bill-search" oninput="app.renderBills()" placeholder="GÃµ Äá» tÃ¬m..." class="text-[10px] font-bold border bg-slate-50 rounded-lg px-2 py-1 outline-none w-48">
                             </div>
                         </div>
                     </div>
                     <div class="text-[10px] font-bold uppercase text-slate-400 text-right">
-                        Doanh thu theo lọc: <br>
-                        <span id="total-revenue" class="text-emerald-600 text-2xl font-black">0đ</span>
+                        Doanh thu theo lá»c: <br>
+                        <span id="total-revenue" class="text-emerald-600 text-2xl font-black">0Ä</span>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left">
                         <thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400">
                             <tr>
-                                <th class="p-4">Thời gian</th>
-                                <th class="p-4">Khách hàng</th>
-                                <th class="p-4">Nội dung</th>
+                                <th class="p-4">Thá»i gian</th>
+                                <th class="p-4">KhÃ¡ch hÃ ng</th>
+                                <th class="p-4">Ná»i dung</th>
                                 <th class="p-4">PTTT</th>
-                                <th class="p-4">Tổng tiền</th>
+                                <th class="p-4">Tá»ng tiá»n</th>
                                 <th class="p-4 text-right">#</th>
                             </tr>
                         </thead>
@@ -129,13 +129,13 @@ clickTimeline:<!DOCTYPE html>
         <div id="tab-staff" class="tab-content">
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black text-xl uppercase italic">Quản lý tài khoản</h2>
-                    <button onclick="ui.openModal('staff')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm tài khoản</button>
+                    <h2 class="font-black text-xl uppercase italic">Quáº£n lÃ½ tÃ i khoáº£n</h2>
+                    <button onclick="ui.openModal('staff')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ ThÃªm tÃ i khoáº£n</button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left">
                         <thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400">
-                            <tr><th class="p-4">Tên đăng nhập</th><th class="p-4">Mật khẩu</th><th class="p-4">Quyền</th><th class="p-4 text-right">#</th></tr>
+                            <tr><th class="p-4">TÃªn ÄÄng nháº­p</th><th class="p-4">Máº­t kháº©u</th><th class="p-4">Quyá»n</th><th class="p-4 text-right">#</th></tr>
                         </thead>
                         <tbody id="list-staff-table" class="divide-y font-bold text-sm"></tbody>
                     </table>
@@ -146,33 +146,33 @@ clickTimeline:<!DOCTYPE html>
         <div id="tab-config" class="tab-content">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-3xl p-6 border card-shadow">
-                    <h2 class="font-black text-xl uppercase italic mb-6">Giá sân tự động</h2>
+                    <h2 class="font-black text-xl uppercase italic mb-6">GiÃ¡ sÃ¢n tá»± Äá»ng</h2>
                     <div class="space-y-4">
-                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Giá giờ thường (đ/h)</label><input id="conf-price-normal" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">GiÃ¡ giá» thÆ°á»ng (Ä/h)</label><input id="conf-price-normal" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Bắt đầu giờ vàng</label><input id="conf-peak-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
-                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Giá giờ vàng (đ/h)</label><input id="conf-price-peak" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Báº¯t Äáº§u giá» vÃ ng</label><input id="conf-peak-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                            <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">GiÃ¡ giá» vÃ ng (Ä/h)</label><input id="conf-price-peak" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
                         </div>
-                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Phụ phí Cuối tuần (%)</label><input id="conf-weekend-up" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
-                        <button onclick="app.saveConfig()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu cấu hình</button>
+                        <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Phá»¥ phÃ­ Cuá»i tuáº§n (%)</label><input id="conf-weekend-up" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none"></div>
+                        <button onclick="app.saveConfig()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">LÆ°u cáº¥u hÃ¬nh</button>
                     </div>
                 </div>
                 <div class="bg-white rounded-3xl p-6 border card-shadow">
-                    <h2 class="font-black text-xl uppercase italic mb-6">Thăng hạng Hội viên</h2>
+                    <h2 class="font-black text-xl uppercase italic mb-6">ThÄng háº¡ng Há»i viÃªn</h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl">
-                            <div><label class="text-[9px] font-bold text-slate-400">ĐỒNG (Giảm %)</label><input id="conf-m-copper" type="number" class="w-full p-2 rounded border font-bold"></div>
-                            <div><label class="text-[9px] font-bold text-slate-400">MỐC DOANH THU</label><input value="Mặc định" disabled class="w-full p-2 rounded border font-bold bg-slate-100 text-center text-[10px]"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">Äá»NG (Giáº£m %)</label><input id="conf-m-copper" type="number" class="w-full p-2 rounded border font-bold"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">Má»C DOANH THU</label><input value="Máº·c Äá»nh" disabled class="w-full p-2 rounded border font-bold bg-slate-100 text-center text-[10px]"></div>
                         </div>
                         <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border-l-4 border-slate-400">
-                            <div><label class="text-[9px] font-bold text-slate-400">BẠC (Giảm %)</label><input id="conf-m-silver" type="number" class="w-full p-2 rounded border font-bold"></div>
-                            <div><label class="text-[9px] font-bold text-slate-400">MỐC LÊN HẠNG (đ)</label><input id="conf-rank-silver" type="number" class="w-full p-2 rounded border font-bold text-emerald-600"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">Báº C (Giáº£m %)</label><input id="conf-m-silver" type="number" class="w-full p-2 rounded border font-bold"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">Má»C LÃN Háº NG (Ä)</label><input id="conf-rank-silver" type="number" class="w-full p-2 rounded border font-bold text-emerald-600"></div>
                         </div>
                         <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border-l-4 border-yellow-400">
-                            <div><label class="text-[9px] font-bold text-slate-400">VÀNG (Giảm %)</label><input id="conf-m-gold" type="number" class="w-full p-2 rounded border font-bold"></div>
-                            <div><label class="text-[9px] font-bold text-slate-400">MỐC LÊN HẠNG (đ)</label><input id="conf-rank-gold" type="number" class="w-full p-2 rounded border font-bold text-emerald-600"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">VÃNG (Giáº£m %)</label><input id="conf-m-gold" type="number" class="w-full p-2 rounded border font-bold"></div>
+                            <div><label class="text-[9px] font-bold text-slate-400">Má»C LÃN Háº NG (Ä)</label><input id="conf-rank-gold" type="number" class="w-full p-2 rounded border font-bold text-emerald-600"></div>
                         </div>
-                        <p class="text-[10px] italic text-slate-400">* Hệ thống tự thăng hạng khi tổng tiền hóa đơn khách đã trả đạt mốc.</p>
+                        <p class="text-[10px] italic text-slate-400">* Há» thá»ng tá»± thÄng háº¡ng khi tá»ng tiá»n hÃ³a ÄÆ¡n khÃ¡ch ÄÃ£ tráº£ Äáº¡t má»c.</p>
                     </div>
                 </div>
             </div>
@@ -181,200 +181,233 @@ clickTimeline:<!DOCTYPE html>
         <div id="tab-court" class="tab-content">
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black text-xl uppercase italic">Cài đặt Sân</h2>
-                    <button onclick="ui.openModal('court')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm sân</button>
+                    <h2 class="font-black text-xl uppercase italic">CÃ i Äáº·t SÃ¢n</h2>
+                    <button onclick="ui.openModal('court')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ ThÃªm sÃ¢n</button>
                 </div>
-                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Tên sân</th><th class="p-4">Loại</th><th class="p-4">Trạng thái</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-courts-table" class="divide-y font-bold text-sm"></tbody></table></div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">TÃªn sÃ¢n</th><th class="p-4">Loáº¡i</th><th class="p-4">Tráº¡ng thÃ¡i</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-courts-table" class="divide-y font-bold text-sm"></tbody></table></div>
             </div>
         </div>
 
         <div id="tab-service" class="tab-content">
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black text-xl uppercase italic">Menu Dịch vụ</h2>
-                    <button onclick="ui.openModal('service')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm món mới</button>
+                    <h2 class="font-black text-xl uppercase italic">Menu Dá»ch vá»¥</h2>
+                    <button onclick="ui.openModal('service')" class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ ThÃªm mÃ³n má»i</button>
                 </div>
-                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Ảnh</th><th class="p-4">Tên món</th><th class="p-4">Giá bán</th><th class="p-4">Tồn kho</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-services-table" class="divide-y font-bold text-sm"></tbody></table></div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">áº¢nh</th><th class="p-4">TÃªn mÃ³n</th><th class="p-4">GiÃ¡ bÃ¡n</th><th class="p-4">Tá»n kho</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-services-table" class="divide-y font-bold text-sm"></tbody></table></div>
             </div>
         </div>
 
         <div id="tab-stock" class="tab-content">
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black text-xl uppercase italic">Lịch sử Nhập kho</h2>
-                    <button onclick="ui.openModal('stock')" class="bg-black text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Phiếu mới</button>
+                    <h2 class="font-black text-xl uppercase italic">Lá»ch sá»­ Nháº­p kho</h2>
+                    <button onclick="ui.openModal('stock')" class="bg-black text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Phiáº¿u má»i</button>
                 </div>
-                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Ngày</th><th class="p-4">Sản phẩm</th><th class="p-4 text-center">SL</th><th class="p-4">Thành tiền</th><th class="p-4">Trạng thái</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-stocks-table" class="divide-y font-bold text-sm"></tbody></table></div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">NgÃ y</th><th class="p-4">Sáº£n pháº©m</th><th class="p-4 text-center">SL</th><th class="p-4">ThÃ nh tiá»n</th><th class="p-4">Tráº¡ng thÃ¡i</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-stocks-table" class="divide-y font-bold text-sm"></tbody></table></div>
             </div>
         </div>
 
         <div id="tab-member" class="tab-content">
             <div class="bg-white rounded-3xl p-6 border card-shadow">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black text-xl uppercase italic">Hội viên</h2>
-                    <button onclick="ui.openModal('member')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ Thêm khách</button>
+                    <h2 class="font-black text-xl uppercase italic">Há»i viÃªn</h2>
+                    <button onclick="ui.openModal('member')" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase">+ ThÃªm khÃ¡ch</button>
                 </div>
-                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">Tên</th><th class="p-4">SĐT</th><th class="p-4 text-emerald-600">Ví dư</th><th class="p-4">Hạng</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-members-table" class="divide-y font-bold text-sm"></tbody></table></div>
+                <div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400"><tr><th class="p-4">TÃªn</th><th class="p-4">SÄT</th><th class="p-4 text-emerald-600">VÃ­ dÆ°</th><th class="p-4">Háº¡ng</th><th class="p-4 text-right">#</th></tr></thead><tbody id="list-members-table" class="divide-y font-bold text-sm"></tbody></table></div>
             </div>
         </div>
     </main>
 
     <div id="modal-recharge" class="modal">
         <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
-            <h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Nạp tiền vào ví</h2>
+            <h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Náº¡p tiá»n vÃ o vÃ­</h2>
             <input type="hidden" id="recharge-member-id">
             <p id="recharge-member-name" class="font-bold text-sm mb-4"></p>
             <div class="space-y-4">
-                <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Số tiền nạp (VNĐ)</label><input id="recharge-amount" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-emerald-500" placeholder="0"></div>
+                <div><label class="text-[10px] font-black uppercase text-slate-400 pl-2">Sá» tiá»n náº¡p (VNÄ)</label><input id="recharge-amount" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-emerald-500" placeholder="0"></div>
                 <div>
-                    <label class="text-[10px] font-black uppercase text-slate-400 pl-2">Phương thức</label>
+                    <label class="text-[10px] font-black uppercase text-slate-400 pl-2">PhÆ°Æ¡ng thá»©c</label>
                     <select id="recharge-method" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-emerald-500">
-                        <option value="Tiền mặt">Tiền mặt</option><option value="Chuyển khoản">Chuyển khoản</option>
+                        <option value="Tiá»n máº·t">Tiá»n máº·t</option><option value="Chuyá»n khoáº£n">Chuyá»n khoáº£n</option>
                     </select>
                 </div>
-                <button onclick="app.confirmRecharge()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg mt-4">Xác nhận nạp</button>
-                <button onclick="ui.closeModal('recharge')" class="w-full text-[10px] font-bold uppercase text-slate-400">Hủy</button>
+                <button onclick="app.confirmRecharge()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg mt-4">XÃ¡c nháº­n náº¡p</button>
+                <button onclick="ui.closeModal('recharge')" class="w-full text-[10px] font-bold uppercase text-slate-400">Há»§y</button>
             </div>
         </div>
     </div>
 
     <div id="modal-checkin" class="modal">
     <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
-        <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">Nhận sân nhanh</h2>
+        <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">Nháº­n sÃ¢n nhanh</h2>
         <input type="hidden" id="checkin-court-id">
-
-        <div class="flex gap-4 mb-4 bg-slate-50 p-3 rounded-2xl">
-            <label class="flex items-center gap-2 cursor-pointer grow">
-                <input type="radio" name="checkin-customer-type" value="Vãng lai" checked onchange="ui.toggleCheckinMode()" class="w-4 h-4 accent-blue-600">
-                <span class="text-[10px] font-black uppercase">Vãng lai</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer grow">
-                <input type="radio" name="checkin-customer-type" value="Hội viên" onchange="ui.toggleCheckin()" class="w-4 h-4 accent-blue-600">
-                <span class="text-[10px] font-black uppercase">Hội viên</span>
-            </label>
-        </div>
+        
+        <input type="hidden" name="checkin-customer-type" value="VÃ£ng lai">
 
         <div id="checkin-name-container">
-            <input id="checkin-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-blue-500" placeholder="Tên khách hàng">
+            <input id="checkin-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-transparent focus:border-blue-500" placeholder="TÃªn khÃ¡ch hÃ ng">
         </div>
 
-        <div id="checkin-member-container" class="hidden">
-            <input list="checkin-member-list" id="checkin-member-search" 
-                   oninput="ui.onSearchMemberCheckin(this)" 
-                   onchange="ui.onSearchMemberCheckin(this)"
-                   class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none border-2 border-blue-500" 
-                   placeholder="Gõ tên hoặc SĐT hội viên...">
-            <datalist id="checkin-member-list"></datalist>
-            <input type="hidden" id="checkin-member-id">
-        </div>
+        <input id="checkin-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-6 outline-none border-2 border-transparent focus:border-blue-500" placeholder="Sá» Äiá»n thoáº¡i">
 
-        <input id="checkin-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-6 outline-none" placeholder="Số điện thoại">
-
-        <button onclick="app.confirmCheckin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Bắt đầu chơi</button>
-        <button onclick="ui.closeModal('checkin')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy bỏ</button>
+        <button onclick="app.confirmCheckin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Báº¯t Äáº§u chÆ¡i</button>
+        <button onclick="ui.closeModal('checkin')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Há»§y bá»</button>
     </div>
 </div>
 
     <div id="modal-court-detail" class="modal">
-        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl">
-            <div class="flex justify-between items-start mb-6">
-                <div>
-                    <h2 id="detail-court-name" class="font-black text-2xl uppercase italic">Sân</h2>
-                    <p id="detail-customer" class="text-blue-600 font-bold text-xs uppercase"></p>
-                </div>
-                <div class="text-right">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase">Giờ vào</span>
-                    <p id="detail-start-time" class="font-black text-lg"></p>
-                </div>
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-lg shadow-2xl">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h2 id="detail-court-name" class="font-black text-2xl uppercase italic">SÃ¢n</h2>
+                <p id="detail-customer" class="text-blue-600 font-bold text-xs uppercase"></p>
             </div>
-            <div class="mb-6">
-                <div class="flex justify-between items-center mb-2 border-b pb-2">
-                    <h3 class="font-black text-[10px] uppercase text-slate-400">Dịch vụ đang dùng</h3>
-                    <button onclick="ui.toggleAddService()" class="bg-slate-900 text-white px-3 py-1 rounded-lg text-[9px] font-black uppercase">+ Thêm món</button>
-                </div>
-                <div id="detail-services-list" class="space-y-2 max-h-60 overflow-y-auto pr-2 mb-4"></div>
-                <div id="add-service-box" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
-                    <div class="grid grid-cols-3 gap-2">
-                        <select id="add-service-id" class="col-span-2 bg-white rounded-xl p-2 text-xs font-bold outline-none border"></select>
-                        <input id="add-service-qty" type="number" value="1" class="bg-white rounded-xl p-2 text-xs font-bold outline-none border" placeholder="SL">
-                    </div>
-                    <button onclick="app.addServiceToCourt()" class="w-full bg-blue-600 text-white text-[10px] font-black uppercase py-2 rounded-xl mt-2">Thêm ngay</button>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <button onclick="ui.openCheckout()" class="bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Thanh toán</button>
-                <button onclick="ui.closeModal('court-detail')" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-xs">Đóng</button>
+            <div class="text-right">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Giá» vÃ o</span>
+                <p id="detail-start-time" class="font-black text-lg"></p>
             </div>
         </div>
+                <div class="mb-4">
+            <div class="flex justify-between items-center mb-2 border-b pb-2">
+                <h3 class="font-black text-[10px] uppercase text-slate-400">Dá»ch vá»¥ Äang dÃ¹ng</h3>
+                <button onclick="ui.toggleAddService()" class="bg-slate-900 text-white px-3 py-1 rounded-lg text-[9px] font-black uppercase">+ ThÃªm mÃ³n</button>
+            </div>
+            <div id="detail-services-list" class="space-y-2 max-h-40 overflow-y-auto pr-2 mb-4"></div>
+            <div id="add-service-box" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200 mb-4">
+                <div class="grid grid-cols-3 gap-2">
+                    <select id="add-service-id" class="col-span-2 bg-white rounded-xl p-2 text-xs font-bold outline-none border"></select>
+                    <input id="add-service-qty" type="number" value="1" class="bg-white rounded-xl p-2 text-xs font-bold outline-none border" placeholder="SL">
+                </div>
+                <button onclick="app.addServiceToCourt()" class="w-full bg-blue-600 text-white text-[10px] font-black uppercase py-2 rounded-xl mt-2">ThÃªm ngay</button>
+            </div>
+        </div>
+
+        <div class="mb-6 p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+            <label class="block text-[10px] font-black text-indigo-400 uppercase mb-2">Äá»i sang sÃ¢n khÃ¡c</label>
+            <div class="flex gap-2">
+                <select id="transfer-to-court-id" class="flex-1 bg-white border-2 border-indigo-200 rounded-xl p-2 font-bold outline-none text-xs">
+                    <option value="">-- Chá»n sÃ¢n trá»ng --</option>
+                </select>
+                <button onclick="app.transferCourt()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase shadow-md transition-transform active:scale-95">
+                    XÃ¡c nháº­n Äá»i
+                </button>
+            </div>
+            <div class="mt-4 pt-4 border-t border-dashed">
+    <button onclick="app.cancelCourtRequest()" class="w-full bg-rose-100 text-rose-600 py-3 rounded-2xl font-black uppercase text-[10px] hover:bg-rose-200 transition-colors">
+        <i class="fa-solid fa-trash-can mr-2"></i> Há»§y sÃ¢n Äang chÆ¡i
+    </button>
+</div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="ui.openCheckout()" class="bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Thanh toÃ¡n</button>
+            <button onclick="ui.closeModal('court-detail')" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black uppercase text-xs">ÄÃ³ng</button>
+        </div>
     </div>
+</div>
 
     <div id="modal-checkout" class="modal">
-        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
-            <h2 class="font-black text-2xl uppercase italic text-center mb-6">Thanh toán</h2>
-            
-            <div id="bill-content" class="space-y-3 mb-4"></div>
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
+        <h2 class="font-black text-2xl uppercase italic text-center mb-6">Thanh toÃ¡n</h2>
+        
+        <div id="bill-content" class="space-y-3 mb-4"></div>
 
-            <div class="mb-4">
-                <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Giảm tiền trực tiếp (đ)</label>
-                <input type="number" id="manual-discount" oninput="ui.recalculateWithDiscount()" value="0" class="w-full bg-slate-100 rounded-xl p-3 font-bold outline-none border-2 border-transparent focus:border-rose-500 mt-1" placeholder="Nhập số tiền giảm...">
-            </div>
+        <div class="mb-4">
+            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Giáº£m tiá»n trá»±c tiáº¿p (Ä)</label>
+            <input type="number" id="manual-discount" oninput="ui.recalculateWithDiscount()" value="0" class="w-full bg-slate-100 rounded-xl p-3 font-bold outline-none border-2 border-transparent focus:border-rose-500 mt-1" placeholder="Nháº­p sá» tiá»n giáº£m...">
+        </div>
+        
+        <div class="mb-6">
+            <label class="text-[10px] font-black uppercase text-slate-400 ml-2">PhÆ°Æ¡ng thá»©c thanh toÃ¡n</label>
+            <select id="payment-method-select" class="w-full bg-slate-100 rounded-xl p-3 font-bold outline-none border-2 border-transparent focus:border-blue-500 mt-2">
+                <option value="Tiá»n máº·t">ðµ Tiá»n máº·t</option>
+        <option value="Chuyá»n khoáº£n">ð² Chuyá»n khoáº£n</option>
+        <option value="VÃ­ há»i viÃªn">ð³ VÃ­ há»i viÃªn (Trá»« tháº»)</option>
+            </select>
             
-            <div class="mb-6">
-                <label class="text-[10px] font-black uppercase text-slate-400 ml-2">Phương thức thanh toán</label>
-                <div class="grid grid-cols-1 gap-2 mt-2" id="payment-methods-grid"></div>
-                
-                <input type="hidden" id="selected-payment" value="Tiền mặt">
-                <input type="hidden" id="temp-bill-total" value="0">
-                <input type="hidden" id="temp-bill-desc" value="">
-                <input type="hidden" id="base-total-without-manual" value="0">
-            </div>
+            <input type="hidden" id="selected-payment" value="Tiá»n máº·t">
+            <input type="hidden" id="temp-bill-total" value="0">
+            <input type="hidden" id="temp-bill-desc" value="">
+            <input type="hidden" id="base-total-without-manual" value="0">
+        </div>
 
-            <button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl">Xác nhận thanh toán</button>
-            <button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay lại</button>
+        <button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl hover:bg-emerald-700 transition-colors">XÃ¡c nháº­n thanh toÃ¡n</button>
+        <button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay láº¡i</button>
+    </div>
+</div>
+
+<div id="modal-activity-log" class="modal">
+    <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-4xl shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="font-black text-2xl uppercase italic text-rose-600">Nháº­t kÃ½ hoáº¡t Äá»ng</h2>
+            <button onclick="ui.closeModal('activity-log')" class="text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div class="overflow-x-auto bg-slate-50 rounded-2xl p-4 border border-slate-100">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="text-[10px] font-black uppercase text-slate-400 border-b-2 border-slate-200">
+                        <th class="pb-3 px-2">Thá»i gian</th>
+                        <th class="pb-3">Thao tÃ¡c</th>
+                        <th class="pb-3">Chi tiáº¿t</th>
+                        <th class="pb-3">NhÃ¢n viÃªn</th>
+                    </tr>
+                </thead>
+                <tbody id="log-table-body" class="text-xs">
+                    </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+            <button onclick="ui.closeModal('activity-log')" class="bg-slate-900 text-white px-8 py-3 rounded-xl font-black uppercase text-[10px] shadow-lg">ÄÃ³ng láº¡i</button>
         </div>
     </div>
+</div>
 
     <div id="modal-booking" class="modal">
     <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl relative max-h-[90vh] overflow-y-auto">
         <h2 class="font-black text-xl uppercase italic mb-6 text-indigo-600 flex items-center gap-2">
-            <i class="fa-solid fa-calendar-plus"></i> Đặt lịch mới
+            <i class="fa-solid fa-calendar-plus"></i> Äáº·t lá»ch má»i
         </h2>
         
         <div class="grid grid-cols-2 gap-3 mb-4">
             <div>
-                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">Ngày đặt</label>
+                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">NgÃ y Äáº·t</label>
                 <input type="date" id="b-date" class="w-full bg-slate-100 rounded-2xl p-3 font-bold outline-none border-2 border-transparent focus:border-indigo-500">
             </div>
             <div>
-                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">Chọn sân</label>
+                <label class="text-[10px] font-bold uppercase pl-2 text-slate-400">Chá»n sÃ¢n</label>
                 <select id="b-court-id" class="w-full bg-slate-100 rounded-2xl p-3 font-bold outline-none border-2 border-transparent focus:border-indigo-500"></select>
             </div>
         </div>
 
         <div class="flex gap-2 mb-4 bg-slate-100 p-1.5 rounded-2xl">
             <label class="flex-1">
-                <input type="radio" name="b-customer-type" value="Vãng lai" checked onchange="ui.toggleBookingType()" class="hidden peer">
-                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">Vãng lai</div>
+                <input type="radio" name="b-customer-type" value="VÃ£ng lai" checked onchange="ui.toggleBookingType()" class="hidden peer">
+                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">VÃ£ng lai</div>
             </label>
             <label class="flex-1">
-                <input type="radio" name="b-customer-type" value="Hội viên" onchange="ui.toggleBookingType()" class="hidden peer">
-                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">Hội viên</div>
+                <input type="radio" name="b-customer-type" value="Há»i viÃªn" onchange="ui.toggleBookingType()" class="hidden peer">
+                <div class="text-center py-2 rounded-xl font-black text-[10px] uppercase cursor-pointer transition-all peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm">Há»i viÃªn</div>
             </label>
         </div>
 
         <div id="b-name-container" class="mb-3">
-            <input id="b-name" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold outline-none focus:bg-white" placeholder="Tên khách hàng">
+            <input id="b-name" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold outline-none focus:bg-white" placeholder="TÃªn khÃ¡ch hÃ ng">
         </div>
 
         <div id="b-member-container" class="hidden mb-3">
-            <input list="b-member-list" id="b-member-search" oninput="ui.onSearchMemberBooking(this)" class="w-full bg-white border-2 border-indigo-500 rounded-2xl p-4 font-bold outline-none" placeholder="Tìm tên hội viên...">
+            <input list="b-member-list" id="b-member-search" oninput="ui.onSearchMemberBooking(this)" class="w-full bg-white border-2 border-indigo-500 rounded-2xl p-4 font-bold outline-none" placeholder="TÃ¬m tÃªn há»i viÃªn...">
             <datalist id="b-member-list"></datalist>
             <input type="hidden" id="b-member-id">
             
             <div class="mt-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
                 <label class="flex items-center gap-2 font-bold text-indigo-700 cursor-pointer text-xs">
                     <input type="checkbox" id="b-repeat" class="w-4 h-4 accent-indigo-600" onchange="document.getElementById('repeat-options').classList.toggle('hidden', !this.checked)">
-                    Đặt lịch cố định hàng tuần
+                    Äáº·t lá»ch cá» Äá»nh hÃ ng tuáº§n
                 </label>
                 <div id="repeat-options" class="hidden mt-3 space-y-3">
                     <div class="flex flex-wrap gap-1.5">
@@ -387,102 +420,101 @@ clickTimeline:<!DOCTYPE html>
                         <label class="flex-1"><input type="checkbox" name="repeat-days" value="0" class="hidden peer"><div class="text-center p-1.5 rounded-lg border bg-white text-[10px] font-bold peer-checked:bg-indigo-600 peer-checked:text-white">CN</div></label>
                     </div>
                     <div class="flex items-center justify-between px-1">
-                        <span class="text-[10px] font-bold text-slate-500 uppercase">Số tuần lặp lại:</span>
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">Sá» tuáº§n láº·p láº¡i:</span>
                         <input type="number" id="b-repeat-weeks" value="4" min="1" max="52" class="w-16 p-1 rounded-lg border text-center font-black text-indigo-600 bg-white">
                     </div>
                 </div>
             </div>
         </div>
 
-        <input id="b-phone" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold mb-4 outline-none focus:bg-white" placeholder="Số điện thoại">
+        <input id="b-phone" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-bold mb-4 outline-none focus:bg-white" placeholder="Sá» Äiá»n thoáº¡i">
 
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giờ vào</label>
+                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giá» vÃ o</label>
                 <input id="b-start" type="time" class="w-full bg-transparent font-black text-lg outline-none">
             </div>
             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giờ ra</label>
+                <label class="text-[9px] font-bold uppercase block text-slate-400 mb-1">Giá» ra</label>
                 <input id="b-end" type="time" class="w-full bg-transparent font-black text-lg outline-none">
             </div>
         </div>
 
         <div class="mb-6">
-            <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chú (Yêu cầu thêm)</label>
-            <textarea id="b-note" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-medium outline-none focus:bg-white resize-none" placeholder="Ví dụ: Lấy thêm nước, mượn vợt..."></textarea>
+            <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chÃº (YÃªu cáº§u thÃªm)</label>
+            <textarea id="b-note" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 font-medium outline-none focus:bg-white resize-none" placeholder="VÃ­ dá»¥: Láº¥y thÃªm nÆ°á»c, mÆ°á»£n vá»£t..."></textarea>
         </div>
 
         <div class="flex gap-3">
-            <button onclick="ui.closeModal('booking')" class="flex-1 px-4 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-red-50 hover:text-red-500 transition-all">Đóng</button>
-            <button onclick="app.saveBooking()" class="flex-[2] px-4 py-4 bg-indigo-600 text-white rounded-2xl font-black shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-95 transition-all uppercase italic">Xác nhận đặt</button>
+            <button onclick="ui.closeModal('booking')" class="flex-1 px-4 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-red-50 hover:text-red-500 transition-all">ÄÃ³ng</button>
+            <button onclick="app.saveBooking()" class="flex-[2] px-4 py-4 bg-indigo-600 text-white rounded-2xl font-black shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-95 transition-all uppercase italic">XÃ¡c nháº­n Äáº·t</button>
         </div>
     </div>
 </div>
     <div id="modal-manage-booking" class="modal">
     <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl border-t-[12px] border-indigo-600">
-        <h2 class="font-black text-xl uppercase italic mb-4">Chi tiết lịch đặt</h2>
+        <h2 class="font-black text-xl uppercase italic mb-4">Chi tiáº¿t lá»ch Äáº·t</h2>
         <div class="space-y-4">
             <input type="hidden" id="manage-b-id">
             
             <div class="grid grid-cols-1 gap-2">
-                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Tên khách hàng</label>
+                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">TÃªn khÃ¡ch hÃ ng</label>
                 <input id="manage-b-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500">
             </div>
 
             <div class="grid grid-cols-1 gap-2">
-                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Số điện thoại</label>
-                <input id="manage-b-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500" placeholder="Chưa có SĐT">
+                <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Sá» Äiá»n thoáº¡i</label>
+                <input id="manage-b-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none border-2 border-transparent focus:border-indigo-500" placeholder="ChÆ°a cÃ³ SÄT">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ vào</label>
+                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giá» vÃ o</label>
                     <input id="manage-b-start" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
                 </div>
                 <div>
-                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giờ ra</label>
+                    <label class="text-[9px] font-black uppercase text-slate-400 pl-2">Giá» ra</label>
                     <input id="manage-b-end" type="time" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
                 </div>
             </div>
 
             <div class="mb-4">
-    <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chú</label>
+    <label class="text-[9px] font-bold uppercase pl-2 text-slate-400">Ghi chÃº</label>
     <textarea id="manage-b-note" class="w-full bg-slate-100 rounded-2xl p-4 font-medium outline-none border-2 border-transparent focus:border-blue-500"></textarea>
 </div>
 
             <div class="pt-4 space-y-3">
-                <button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Lưu thay đổi</button>
-                <button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (Vào sân)</button>
-                <button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Hủy lịch đặt</button>
+                <button onclick="app.updateBooking()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">LÆ°u thay Äá»i</button>
+                <button onclick="app.confirmCheckinFromBooking()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs shadow-lg">Check-in (VÃ o sÃ¢n)</button>
+                <button onclick="app.confirmDeleteBooking()" class="w-full bg-rose-50 text-rose-600 py-4 rounded-2xl font-black uppercase text-xs">Há»§y lá»ch Äáº·t</button>
                 <button onclick="ui.closeModal('manage-booking')" 
         class="flex-1 px-6 py-2.5 bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-600 rounded-xl font-bold transition-all duration-200 border border-slate-200 hover:border-red-200">
-    <i class="fa-solid fa-xmark mr-2"></i>Đóng
+    <i class="fa-solid fa-xmark mr-2"></i>ÄÃ³ng
 </button>
             </div>
         </div>
     </div>
 </div>
-    <div id="modal-court" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Thông tin sân</h2><input type="hidden" id="court-id"><input id="c-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên sân"><select id="c-type" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Standard">Standard</option><option value="VIP">VIP</option></select><button onclick="app.saveCourt()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu sân</button><button onclick="ui.closeModal('court')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
-    <div id="modal-service" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Dịch vụ</h2><input type="hidden" id="service-id"><input id="s-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên món"><div class="grid grid-cols-2 gap-4 mb-4"><input id="s-price" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá bán"><input id="s-stock" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tồn kho"></div><input id="s-img" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none text-xs" placeholder="Link ảnh"><button onclick="app.saveService()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase">Lưu</button><button onclick="ui.closeModal('service')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
-    <div id="modal-stock" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Phiếu nhập kho</h2><input type="hidden" id="stock-id"><input type="hidden" id="old-qty"><select id="stock-product-select" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"></select><div class="grid grid-cols-2 gap-4 mb-4"><input id="stock-qty" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SL"><input id="stock-cost" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Giá nhập"></div><input id="stock-supplier" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Nhà cung cấp"><select id="stock-status" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Đã thanh toán">Đã thanh toán</option><option value="Chưa thanh toán">Chưa thanh toán</option></select><button onclick="app.saveStock()" class="w-full bg-black text-white py-4 rounded-2xl font-black uppercase">Lưu phiếu</button><button onclick="ui.closeModal('stock')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Hủy</button></div></div>
-    <div id="modal-member" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Hội viên</h2><input type="hidden" id="member-id"><input id="m-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Tên khách"><input id="m-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SĐT"><input id="m-wallet" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="Ví tiền"><button onclick="app.saveMember()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">Lưu khách</button><button onclick="ui.closeModal('member')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Đóng</button></div></div>
+    <div id="modal-court" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">ThÃ´ng tin sÃ¢n</h2><input type="hidden" id="court-id"><input id="c-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="TÃªn sÃ¢n"><select id="c-type" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="Standard">Standard</option><option value="VIP">VIP</option></select><button onclick="app.saveCourt()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">LÆ°u sÃ¢n</button><button onclick="ui.closeModal('court')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Há»§y</button></div></div>
+    <div id="modal-service" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6 text-emerald-600">Dá»ch vá»¥</h2><input type="hidden" id="service-id"><input id="s-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="TÃªn mÃ³n"><div class="grid grid-cols-2 gap-4 mb-4"><input id="s-price" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="GiÃ¡ bÃ¡n"><input id="s-stock" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tá»n kho"></div><input id="s-img" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none text-xs" placeholder="Link áº£nh"><button onclick="app.saveService()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase">LÆ°u</button><button onclick="ui.closeModal('service')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">ÄÃ³ng</button></div></div>
+    <div id="modal-stock" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Phiáº¿u nháº­p kho</h2><input type="hidden" id="stock-id"><input type="hidden" id="old-qty"><select id="stock-product-select" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"></select><div class="grid grid-cols-2 gap-4 mb-4"><input id="stock-qty" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SL"><input id="stock-cost" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="GiÃ¡ nháº­p"></div><input id="stock-supplier" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="NhÃ  cung cáº¥p"><select id="stock-status" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none"><option value="ÄÃ£ thanh toÃ¡n">ÄÃ£ thanh toÃ¡n</option><option value="ChÆ°a thanh toÃ¡n">ChÆ°a thanh toÃ¡n</option></select><button onclick="app.saveStock()" class="w-full bg-black text-white py-4 rounded-2xl font-black uppercase">LÆ°u phiáº¿u</button><button onclick="ui.closeModal('stock')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">Há»§y</button></div></div>
+    <div id="modal-member" class="modal"><div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl"><h2 class="font-black text-xl uppercase italic mb-6">Há»i viÃªn</h2><input type="hidden" id="member-id"><input id="m-name" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="TÃªn khÃ¡ch"><input id="m-phone" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="SÄT"><input id="m-wallet" type="number" class="w-full bg-slate-100 rounded-2xl p-4 font-bold mb-4 outline-none" placeholder="VÃ­ tiá»n"><button onclick="app.saveMember()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase">LÆ°u khÃ¡ch</button><button onclick="ui.closeModal('member')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-400">ÄÃ³ng</button></div></div>
     <div id="modal-staff" class="modal">
         <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
-            <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">Tài khoản nhân viên</h2>
+            <h2 class="font-black text-xl uppercase italic mb-6 text-blue-600">TÃ i khoáº£n nhÃ¢n viÃªn</h2>
             <div class="space-y-4">
-                <input id="st-user" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Tên đăng nhập">
-                <input id="st-pass" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Mật khẩu">
+                <input id="st-user" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="TÃªn ÄÄng nháº­p">
+                <input id="st-pass" type="text" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none" placeholder="Máº­t kháº©u">
                 <select id="st-role" class="w-full bg-slate-100 rounded-2xl p-4 font-bold outline-none">
-                    <option value="Staff">Nhân viên (Chỉ xem lịch/bill)</option>
-                    <option value="Admin">Admin (Toàn quyền)</option>
+                    <option value="Staff">NhÃ¢n viÃªn (Chá» xem lá»ch/bill)</option>
+                    <option value="Admin">Admin (ToÃ n quyá»n)</option>
                 </select>
-                <button onclick="app.saveStaff()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">Lưu tài khoản</button>
-                <button onclick="ui.closeModal('staff')" class="w-full mt-2 text-[10px] font-bold uppercase text-slate-400">Hủy</button>
+                <button onclick="app.saveStaff()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg">LÆ°u tÃ i khoáº£n</button>
+                <button onclick="ui.closeModal('staff')" class="w-full mt-2 text-[10px] font-bold uppercase text-slate-400">Há»§y</button>
             </div>
         </div>
     </div>
-
-    <script type="module">
+         <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, update, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -509,7 +541,7 @@ clickTimeline:<!DOCTYPE html>
                 const p = document.getElementById('login-pass').value;
                 if(u === 'admin' && p === '123') { auth.success({User: 'admin', Role: 'Admin'}); return; }
                 const staff = Object.values(dataCache.staff || {}).find(s => s.User === u && s.Pass === p);
-                if(staff) { auth.success(staff); } else { alert("Sai tài khoản hoặc mật khẩu!"); }
+                if(staff) { auth.success(staff); } else { alert("Sai tÃ i khoáº£n hoáº·c máº­t kháº©u!"); }
             },
             success: (user) => {
                 currentUser = user;
@@ -536,22 +568,22 @@ clickTimeline:<!DOCTYPE html>
                 document.getElementById('btn-' + id).classList.add('active');
             },
             openModal: (type, id = null, data = null) => {
-    // --- PHẦN BỔ SUNG: Chặn chọn ngày cũ ---
+    // --- PHáº¦N Bá» SUNG: Cháº·n chá»n ngÃ y cÅ© ---
     if (type === 'booking') {
         const todayStr = new Date().toISOString().split('T')[0];
         const bDateInput = document.getElementById('b-date');
         if (bDateInput) {
-            bDateInput.setAttribute('min', todayStr); // Không cho chọn ngày trước hôm nay
+            bDateInput.setAttribute('min', todayStr); // KhÃ´ng cho chá»n ngÃ y trÆ°á»c hÃ´m nay
             
-            // Nếu chưa có ngày nào được chọn, mặc định lấy ngày hiện tại đang xem ở Timeline
+            // Náº¿u chÆ°a cÃ³ ngÃ y nÃ o ÄÆ°á»£c chá»n, máº·c Äá»nh láº¥y ngÃ y hiá»n táº¡i Äang xem á» Timeline
             const viewDate = document.getElementById('view-date').value;
             bDateInput.value = viewDate || todayStr;
         }
-        ui.toggleBookingType(); // Cập nhật lại giao diện hội viên/vãng lai
+        ui.toggleBookingType(); // Cáº­p nháº­t láº¡i giao diá»n há»i viÃªn/vÃ£ng lai
     }
     // ---------------------------------------
 
-    // Tìm đoạn này trong code của bạn và cập nhật:
+    // TÃ¬m Äoáº¡n nÃ y trong code cá»§a báº¡n vÃ  cáº­p nháº­t:
 if (type === 'manage-booking') {
     document.getElementById('manage-b-id').value = id;
     document.getElementById('manage-b-name').value = data.Ten_Khach || "";
@@ -559,9 +591,9 @@ if (type === 'manage-booking') {
     document.getElementById('manage-b-start').value = data.Bat_Dau || "";
     document.getElementById('manage-b-end').value = data.Ket_Thuc || "";
     
-    // DÒNG NÀY GIÚP GHI CHÚ KHÔNG BỊ NHẢY:
-    // Nếu data.Ghi_Chu không tồn tại, nó sẽ xóa trắng ô nhập (về ""), 
-    // thay vì để lại ghi chú của lịch trước đó.
+    // DÃNG NÃY GIÃP GHI CHÃ KHÃNG Bá» NHáº¢Y:
+    // Náº¿u data.Ghi_Chu khÃ´ng tá»n táº¡i, nÃ³ sáº½ xÃ³a tráº¯ng Ã´ nháº­p (vá» ""), 
+    // thay vÃ¬ Äá» láº¡i ghi chÃº cá»§a lá»ch trÆ°á»c ÄÃ³.
     document.getElementById('manage-b-note').value = data.Ghi_Chu || "";
     } else if(type === 'court') {
         document.getElementById('court-id').value = id || "";
@@ -587,7 +619,7 @@ if (type === 'manage-booking') {
         document.getElementById('m-wallet').value = data?.Vi_Du || 0;
     } else if(type === 'recharge') {
         document.getElementById('recharge-member-id').value = id;
-        document.getElementById('recharge-member-name').innerText = "Hội viên: " + data.Ten_HV;
+        document.getElementById('recharge-member-name').innerText = "Há»i viÃªn: " + data.Ten_HV;
         document.getElementById('recharge-amount').value = "";
     } else if(type === 'staff') {
         document.getElementById('st-user').value = "";
@@ -606,10 +638,10 @@ if (type === 'manage-booking') {
     const nameCont = document.getElementById('b-name-container');
     const membCont = document.getElementById('b-member-container');
     
-    if(type === 'Hội viên') {
+    if(type === 'Há»i viÃªn') {
         nameCont.classList.add('hidden');
         membCont.classList.remove('hidden');
-        // Đổ danh sách vào datalist
+        // Äá» danh sÃ¡ch vÃ o datalist
         let listHtml = '';
         for(let id in dataCache.members) {
             const m = dataCache.members[id];
@@ -648,111 +680,148 @@ onSearchMemberBooking: (el) => {
                 btn.classList.add('selected');
             },
             clickTimeline: (courtId, hour) => {
-    // 1. Lấy thời gian hiện tại và ngày đang xem
+    // 1. Láº¥y thá»i gian hiá»n táº¡i vÃ  ngÃ y Äang xem
     const now = new Date();
     const viewDateValue = document.getElementById('view-date').value;
     const viewDate = new Date(viewDateValue);
 
-    // Chuẩn hóa ngày hôm nay và ngày đang xem về 00:00:00 để so sánh chính xác theo ngày
+    // Chuáº©n hÃ³a ngÃ y hÃ´m nay vÃ  ngÃ y Äang xem vá» 00:00:00 Äá» so sÃ¡nh chÃ­nh xÃ¡c theo ngÃ y
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const compareDate = new Date(viewDate);
     compareDate.setHours(0, 0, 0, 0);
 
-    // 2. KIỂM TRA LÙI NGÀY: Nếu ngày đang xem nhỏ hơn ngày hôm nay
+    // 2. KIá»M TRA LÃI NGÃY: Náº¿u ngÃ y Äang xem nhá» hÆ¡n ngÃ y hÃ´m nay
     if (compareDate < today) {
-        alert("Không thể đặt sân cho những ngày đã qua!");
+        alert("KhÃ´ng thá» Äáº·t sÃ¢n cho nhá»¯ng ngÃ y ÄÃ£ qua!");
         return;
     }
 
-    // 3. KIỂM TRA LÙI GIỜ: Nếu là ngày hôm nay và giờ được click nhỏ hơn giờ hiện tại
+    // 3. KIá»M TRA LÃI GIá»: Náº¿u lÃ  ngÃ y hÃ´m nay vÃ  giá» ÄÆ°á»£c click nhá» hÆ¡n giá» hiá»n táº¡i
     const isToday = now.toDateString() === viewDate.toDateString();
     if (isToday && hour < now.getHours()) {
         const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-        alert(`Không thể đặt lịch vào khung giờ đã qua! (Giờ hiện tại là ${timeStr})`);
+        alert(`KhÃ´ng thá» Äáº·t lá»ch vÃ o khung giá» ÄÃ£ qua! (Giá» hiá»n táº¡i lÃ  ${timeStr})`);
         return; 
     }
 
-    // 4. Nếu hợp lệ thì mới thực hiện mở Modal và điền thông tin
+    // 4. Náº¿u há»£p lá» thÃ¬ má»i thá»±c hiá»n má» Modal vÃ  Äiá»n thÃ´ng tin
     ui.openModal('booking');
     document.getElementById('b-date').value = viewDateValue;
     document.getElementById('b-court-id').value = courtId;
     
-    // Tự động điền giờ bắt đầu và kết thúc (mặc định cách nhau 1 tiếng)
+    // Tá»± Äá»ng Äiá»n giá» báº¯t Äáº§u vÃ  káº¿t thÃºc (máº·c Äá»nh cÃ¡ch nhau 1 tiáº¿ng)
     document.getElementById('b-start').value = `${hour.toString().padStart(2, '0')}:00`;
     document.getElementById('b-end').value = `${(hour + 1).toString().padStart(2, '0')}:00`;
 },
             
-            // --- CẬP NHẬT LOGIC THANH TOÁN & LÀM TRÒN ---
-            openCheckout: () => {
-                const court = dataCache.courts[currentCourtId];
-                const conf = dataCache.config || {};
-                const startTime = court.Gio_Vao;
-                const now = new Date();
-                const endTime = now.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
-                const [h1, m1] = startTime.split(':').map(Number);
-                const [h2, m2] = endTime.split(':').map(Number);
-                const minutes = (h2*60+m2) - (h1*60+m1);
-                
-                let hourlyRate = parseInt(conf.priceNormal || 100000);
-                if(startTime >= (conf.peakStart || "17:00")) hourlyRate = parseInt(conf.pricePeak || 120000);
-                if(now.getDay() === 0 || now.getDay() === 6) hourlyRate *= (1 + (parseInt(conf.weekendUp || 0)/100));
-                
-                // 1. LÀM TRÒN TIỀN GIỜ ĐẾN HÀNG NGHÌN
-                let timeMoney = Math.max(0, (minutes/60 * hourlyRate));
-                timeMoney = Math.ceil(timeMoney / 1000) * 1000; 
+            // --- Cáº¬P NHáº¬T LOGIC THANH TOÃN & LÃM TRÃN ---
+           openCheckout: () => {
+    // 1. GÃ¡n ID sÃ¢n hiá»n táº¡i
+    window.currentCourtId = currentCourtId; 
 
-                let discText = "";
-                if(court.Member_ID) {
-                    const m = dataCache.members[court.Member_ID];
-                    const discPercent = parseInt(conf[`m${m.Hang === 'Đồng' ? 'Copper' : m.Hang === 'Bạc' ? 'Silver' : 'Gold'}`] || 0);
-                    if(discPercent > 0) { 
-                        timeMoney *= (1 - discPercent/100); 
-                        timeMoney = Math.ceil(timeMoney / 1000) * 1000; // Làm tròn lại sau chiết khấu hạng
-                        discText = `<div class="text-[10px] text-emerald-500 font-bold">- Giảm ${discPercent}% hạng ${m.Hang}</div>`; 
-                    }
-                }
+    const court = dataCache.courts[currentCourtId];
+    if (!court) return alert("KhÃ´ng tÃ¬m tháº¥y dá»¯ liá»u sÃ¢n!");
 
-                let sMoney = 0; let sLines = '';
-                for(let sid in (court.Dich_Vu || {})) {
-                    const item = court.Dich_Vu[sid];
-                    sMoney += (item.Gia * item.SL);
-                    sLines += `<div class="flex justify-between text-xs"><span>${item.Ten} x${item.SL}</span><span>${(item.Gia * item.SL).toLocaleString()}đ</span></div>`;
-                }
+    const conf = dataCache.config || {};
+    const startTime = court.Gio_Vao;
+    const now = new Date();
+    const endTime = now.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+    
+    // TÃ­nh sá» phÃºt vÃ  tiá»n giá» (Giá»¯ nguyÃªn logic cá»§a báº¡n)
+    const [h1, m1] = startTime.split(':').map(Number);
+    const [h2, m2] = endTime.split(':').map(Number);
+    const minutes = (h2 * 60 + m2) - (h1 * 60 + m1);
+    
+    let hourlyRate = parseInt(conf.priceNormal || 100000);
+    if(startTime >= (conf.peakStart || "17:00")) hourlyRate = parseInt(conf.pricePeak || 120000);
+    if(now.getDay() === 0 || now.getDay() === 6) hourlyRate *= (1 + (parseInt(conf.weekendUp || 0)/100));
+    
+    let timeMoney = Math.max(0, (minutes/60 * hourlyRate));
+    timeMoney = Math.ceil(timeMoney / 1000) * 1000; 
 
-                const baseTotal = timeMoney + sMoney;
-                
-                // Lưu vào các hidden input để quản lý
-                document.getElementById('base-total-without-manual').value = baseTotal;
-                document.getElementById('temp-bill-total').value = baseTotal;
-                document.getElementById('manual-discount').value = 0; 
-                document.getElementById('temp-bill-desc').value = `Sân ${court.Ten_San} (${startTime}-${endTime})`;
+    // --- BÆ¯á»C 2: TÃM KIáº¾M Há»I VIÃN CHÃNH XÃC ---
+    let member = null;
+    const sdtKhach = court.Sdt_Khach;
+    
+    if (sdtKhach && dataCache.members) {
+        // TÃ¬m trá»±c tiáº¿p báº±ng Key (SÄT) hoáº·c duyá»t qua danh sÃ¡ch Äá» so khá»p trÆ°á»ng SDT
+        if (dataCache.members[sdtKhach]) {
+            member = dataCache.members[sdtKhach];
+        } else {
+            // Duyá»t máº£ng náº¿u Key lÃ  ID ngáº«u nhiÃªn
+            member = Object.values(dataCache.members).find(m => m.SDT === sdtKhach);
+        }
+    }
 
-                // Render Phương thức thanh toán
-                let pGridHtml = `<div class="grid grid-cols-2 gap-3"><button onclick="ui.selectPayment('Tiền mặt', this)" class="pay-method-btn selected border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Tiền mặt</button><button onclick="ui.selectPayment('Chuyển khoản', this)" class="pay-method-btn border-2 p-4 rounded-2xl font-black text-[10px] uppercase">Chuyển khoản</button></div>`;
-                if(court.Member_ID) {
-                    const member = dataCache.members[court.Member_ID];
-                    pGridHtml += `<button onclick="ui.selectPayment('Ví hội viên', this)" class="w-full mt-2 pay-method-btn border-2 p-4 rounded-2xl font-black text-[10px] uppercase border-emerald-200 text-emerald-700">Ví hội viên (Số dư: ${member.Vi_Du.toLocaleString()}đ)</button>`;
-                }
-                document.getElementById('payment-methods-grid').innerHTML = pGridHtml;
-                document.getElementById('selected-payment').value = 'Tiền mặt';
-                
-                // Hàm render con để dùng lại khi nhập ô giảm tiền
-                window.renderBillUI = (total, tMoney, sLinesHtml, dText) => {
-                    document.getElementById('bill-content').innerHTML = `
-                        <div class="flex justify-between font-bold border-b pb-2"><div><span>Tiền giờ (${startTime}-${endTime})</span>${dText}</div><span>${tMoney.toLocaleString()}đ</span></div>
-                        ${sLinesHtml}
-                        <div class="flex justify-between font-black text-lg text-blue-600 border-t pt-2 uppercase"><span>Tổng thanh toán</span><span>${total.toLocaleString()}đ</span></div>
-                    `;
-                };
+    // TÃ­nh giáº£m giÃ¡ náº¿u tÃ¬m tháº¥y há»i viÃªn
+    let discText = "";
+    if(member) {
+        const rankKey = member.Hang === 'VÃ ng' ? 'mGold' : member.Hang === 'Báº¡c' ? 'mSilver' : 'mCopper';
+        const discPercent = parseInt(conf[rankKey] || 0);
+        if(discPercent > 0) { 
+            timeMoney *= (1 - discPercent/100); 
+            timeMoney = Math.ceil(timeMoney / 1000) * 1000; 
+            discText = `<div class="text-[10px] text-emerald-500 font-bold">- Giáº£m ${discPercent}% háº¡ng ${member.Hang}</div>`; 
+        }
+    }
 
-                window.renderBillUI(baseTotal, timeMoney, sLines, discText);
-                window.lastBillData = { timeMoney, sLines, discText }; // Cache dữ liệu
+    // Tiá»n dá»ch vá»¥
+    let sMoney = 0; let sLines = '';
+    for(let sid in (court.Dich_Vu || {})) {
+        const item = court.Dich_Vu[sid];
+        const price = item.Gia_Ban || item.Gia || 0;
+        const qty = item.So_Luong || item.SL || 0;
+        sMoney += (price * qty);
+        sLines += `<div class="flex justify-between text-xs"><span>${item.Ten_DV || item.Ten} x${qty}</span><span>${(price * qty).toLocaleString()}Ä</span></div>`;
+    }
 
-                ui.closeModal('court-detail'); ui.openModal('checkout');
-            },
+    const baseTotal = timeMoney + sMoney;
+    
+    // Cáº­p nháº­t cÃ¡c trÆ°á»ng áº©n
+    document.getElementById('base-total-without-manual').value = baseTotal;
+    document.getElementById('temp-bill-total').value = baseTotal;
+    document.getElementById('manual-discount').value = 0; 
+    document.getElementById('temp-bill-desc').value = `SÃ¢n ${court.Ten_San} (${startTime}-${endTime})`;
 
-            // --- BỔ SUNG HÀM TÍNH LẠI KHI NHẬP GIẢM TIỀN ---
+    // --- BÆ¯á»C 3: Cáº¬P NHáº¬T SELECT PHÆ¯Æ NG THá»¨C THANH TOÃN (3 PHÆ¯Æ NG THá»¨C) ---
+    const methodSelect = document.getElementById('payment-method-select');
+    if (methodSelect) {
+        methodSelect.value = "Tiá»n máº·t"; // Máº·c Äá»nh
+        const optVi = methodSelect.querySelector('option[value="VÃ­ há»i viÃªn"]');
+        
+        if (member) {
+            const currentVi = parseInt(member.Vi_Du || 0);
+            if (currentVi < baseTotal) {
+                optVi.disabled = true;
+                optVi.innerText = `ð³ VÃ­ Há»i viÃªn (DÆ°: ${currentVi.toLocaleString()}Ä - KHÃNG Äá»¦)`;
+            } else {
+                optVi.disabled = false;
+                optVi.innerText = `ð³ VÃ­ Há»i viÃªn (Sá» dÆ°: ${currentVi.toLocaleString()}Ä)`;
+            }
+        } else {
+            optVi.disabled = true;
+            optVi.innerText = "ð³ VÃ­ Há»i viÃªn (ChÆ°a ÄÄng kÃ½)";
+        }
+    }
+
+    // Render giao diá»n Bill
+    window.renderBillUI = (total, tMoney, sLinesHtml, dText) => {
+        document.getElementById('bill-content').innerHTML = `
+            <div class="flex justify-between font-bold border-b pb-2"><div><span>Tiá»n giá» (${startTime}-${endTime})</span>${dText}</div><span>${tMoney.toLocaleString()}Ä</span></div>
+            ${sLinesHtml}
+            <div class="flex justify-between font-black text-lg text-blue-600 border-t pt-2 uppercase"><span>Tá»ng thanh toÃ¡n</span><span>${total.toLocaleString()}Ä</span></div>
+        `;
+    };
+
+    window.renderBillUI(baseTotal, timeMoney, sLines, discText);
+    window.lastBillData = { timeMoney, sLines, discText }; 
+
+    ui.closeModal('court-detail'); 
+    ui.openModal('checkout');
+},
+
+            // --- Bá» SUNG HÃM TÃNH Láº I KHI NHáº¬P GIáº¢M TIá»N ---
             recalculateWithDiscount: () => {
                 const baseTotal = parseInt(document.getElementById('base-total-without-manual').value || 0);
                 const manualDisc = parseInt(document.getElementById('manual-discount').value || 0);
@@ -766,22 +835,58 @@ onSearchMemberBooking: (el) => {
 
         window.app = {
             showDetail: (id) => {
-                currentCourtId = id; const c = dataCache.courts[id];
-                document.getElementById('detail-court-name').innerText = c.Ten_San;
-                document.getElementById('detail-customer').innerText = c.Ten_Khach;
-                document.getElementById('detail-start-time').innerText = c.Gio_Vao;
-                let list = '';
-                for(let sid in (c.Dich_Vu || {})) {
-                    const item = c.Dich_Vu[sid];
-                    list += `<div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl mb-1"><div class="flex-1"><div class="text-xs font-black uppercase">${item.Ten}</div><div class="text-[10px] text-emerald-600 font-bold">${(item.Gia * item.SL).toLocaleString()}đ</div></div><div class="flex items-center gap-2"><div class="flex items-center bg-white border rounded-lg overflow-hidden"><button onclick="app.updateServiceQty('${sid}', -1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 font-bold">-</button><span class="px-2 text-xs font-bold">${item.SL}</span><button onclick="app.updateServiceQty('${sid}', 1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 font-bold">+</button></div><button onclick="app.removeServiceFromCourt('${sid}')" class="text-rose-400 p-2 hover:text-rose-600"><i class="fa-solid fa-trash-can text-sm"></i></button></div></div>`;
-                }
-                document.getElementById('detail-services-list').innerHTML = list || '<p class="text-center text-[10px] text-slate-300 py-4">Chưa có dịch vụ</p>';
-                ui.openModal('court-detail');
-            },
+    currentCourtId = id; 
+    const c = dataCache.courts[id];
+    
+    // Hiá»n thá» thÃ´ng tin cÆ¡ báº£n
+    document.getElementById('detail-court-name').innerText = c.Ten_San;
+    document.getElementById('detail-customer').innerText = c.Ten_Khach || "KhÃ¡ch láº»";
+    document.getElementById('detail-start-time').innerText = c.Gio_Vao;
+
+    // --- Bá» SUNG: LOGIC Äá» DANH SÃCH SÃN TRá»NG Äá» Äá»I SÃN ---
+    const transferSelect = document.getElementById('transfer-to-court-id');
+    if (transferSelect) {
+        let opts = '<option value="">-- Chá»n sÃ¢n trá»ng --</option>';
+        for (let courtId in dataCache.courts) {
+            const court = dataCache.courts[courtId];
+            // Chá» hiá»n sÃ¢n Äang "Sáºµn sÃ ng" vÃ  KHÃNG PHáº¢I lÃ  sÃ¢n hiá»n táº¡i Äang xem
+            if (court.Trang_Thai === "Sáºµn sÃ ng" && courtId !== id) {
+                opts += `<option value="${courtId}">${court.Ten_San}</option>`;
+            }
+        }
+        transferSelect.innerHTML = opts;
+    }
+    
+        // Hiá»n thá» danh sÃ¡ch dá»ch vá»¥ (Giá»¯ nguyÃªn logic cá»§a báº¡n)
+    let list = '';
+    for(let sid in (c.Dich_Vu || {})) {
+        const item = c.Dich_Vu[sid];
+        list += `
+            <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl mb-1">
+                <div class="flex-1">
+                    <div class="text-xs font-black uppercase">${item.Ten}</div>
+                    <div class="text-[10px] text-emerald-600 font-bold">${(item.Gia * item.SL).toLocaleString()}Ä</div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center bg-white border rounded-lg overflow-hidden">
+                        <button onclick="app.updateServiceQty('${sid}', -1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 font-bold">-</button>
+                        <span class="px-2 text-xs font-bold">${item.SL}</span>
+                        <button onclick="app.updateServiceQty('${sid}', 1)" class="px-2 py-1 text-slate-500 hover:bg-slate-100 font-bold">+</button>
+                    </div>
+                    <button onclick="app.removeServiceFromCourt('${sid}')" class="text-rose-400 p-2 hover:text-rose-600">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            </div>`;
+    }
+    document.getElementById('detail-services-list').innerHTML = list || '<p class="text-center text-[10px] text-slate-300 py-4">ChÆ°a cÃ³ dá»ch vá»¥</p>';
+    
+    ui.openModal('court-detail');
+},
 
             updateServiceQty: (serviceId, change) => {
                 const court = dataCache.courts[currentCourtId];
-                if (change > 0 && dataCache.services[serviceId].Ton_Kho < 1) return alert("❌ Hết hàng!");
+                if (change > 0 && dataCache.services[serviceId].Ton_Kho < 1) return alert("â Háº¿t hÃ ng!");
                 if (court.Dich_Vu[serviceId].SL + change <= 0) return app.removeServiceFromCourt(serviceId);
                 runTransaction(ref(db, `courts/${currentCourtId}/Dich_Vu/${serviceId}/SL`), (cur) => (cur || 0) + change);
                 runTransaction(ref(db, `services/${serviceId}/Ton_Kho`), (t) => (t || 0) - change);
@@ -789,7 +894,7 @@ onSearchMemberBooking: (el) => {
             },
 
             removeServiceFromCourt: (serviceId) => {
-                if(!confirm("Xóa món này?")) return;
+                if(!confirm("XÃ³a mÃ³n nÃ y?")) return;
                 const qty = dataCache.courts[currentCourtId].Dich_Vu[serviceId].SL;
                 runTransaction(ref(db, `services/${serviceId}/Ton_Kho`), (t) => (t || 0) + qty);
                 remove(ref(db, `courts/${currentCourtId}/Dich_Vu/${serviceId}`));
@@ -800,109 +905,283 @@ onSearchMemberBooking: (el) => {
                 const user = document.getElementById('st-user').value;
                 const pass = document.getElementById('st-pass').value;
                 const role = document.getElementById('st-role').value;
-                if(!user || !pass) return alert("Nhập đủ tin!");
+                if(!user || !pass) return alert("Nháº­p Äá»§ tin!");
                 update(ref(db, 'staff/' + user), { User: user, Pass: pass, Role: role }).then(() => ui.closeModal('staff'));
             },
 
             confirmCheckinFromBooking: () => { 
-    // 1. Lấy ID của lịch đặt đang mở
+    // 1. Láº¥y ID cá»§a lá»ch Äáº·t Äang má»
     const bId = document.getElementById('manage-b-id').value; 
     const b = dataCache.bookings[bId]; 
-    if(!b) return alert("Không tìm thấy thông tin lịch đặt!");
+    if(!b) return alert("KhÃ´ng tÃ¬m tháº¥y thÃ´ng tin lá»ch Äáº·t!");
 
-    // 2. Lấy giờ hệ thống hiện tại để ghi vào giờ vào sân
+    // 2. Láº¥y giá» há» thá»ng hiá»n táº¡i Äá» ghi vÃ o giá» vÃ o sÃ¢n
     const now = new Date();
     const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-    // 3. Cập nhật trạng thái sân (Chuyển từ "Trống" sang "Đang chơi")
+    // 3. Cáº­p nháº­t tráº¡ng thÃ¡i sÃ¢n (Chuyá»n tá»« "Trá»ng" sang "Äang chÆ¡i")
     update(ref(db, 'courts/' + b.Court_ID), { 
-        Trang_Thai: "Đang chơi", 
+        Trang_Thai: "Äang chÆ¡i", 
         Ten_Khach: b.Ten_Khach, 
-        SDT: b.SDT || "", 
-        Gio_Vao: currentTime, // Ghi giờ thực tế lúc bấm nút
+        Sdt_Khach: b.SDT || "", 
+        Gio_Vao: currentTime, // Ghi giá» thá»±c táº¿ lÃºc báº¥m nÃºt
         Dich_Vu: {} 
     }); 
 
-    // 4. Xóa lịch đặt này khỏi danh sách chờ (vì đã vào sân rồi)
+    // 4. XÃ³a lá»ch Äáº·t nÃ y khá»i danh sÃ¡ch chá» (vÃ¬ ÄÃ£ vÃ o sÃ¢n rá»i)
     remove(ref(db, 'bookings/' + bId)); 
 
-    // 5. Đóng modal và thông báo
+    // 5. ÄÃ³ng modal vÃ  thÃ´ng bÃ¡o
     ui.closeModal('manage-booking'); 
-    alert(`Khách ${b.Ten_Khach} đã nhận sân vào lúc ${currentTime}`);
+    alert(`KhÃ¡ch ${b.Ten_Khach} ÄÃ£ nháº­n sÃ¢n vÃ o lÃºc ${currentTime}`);
 },
 
-            updateMemberRank: (memberId) => {
-                if (!memberId || !dataCache.members[memberId]) return;
-                const member = dataCache.members[memberId];
-                const bills = Object.values(dataCache.bills || {});
-                const totalSpent = bills.filter(b => b.Khach_Hang === member.Ten_HV).reduce((sum, b) => sum + (b.Tong_Tien || 0), 0);
-                const conf = dataCache.config || {};
-                const sMilestone = parseInt(conf.rankSilver || 5000000);
-                const gMilestone = parseInt(conf.rankGold || 10000000);
-                let newRank = "Đồng";
-                if (totalSpent >= gMilestone) newRank = "Vàng";
-                else if (totalSpent >= sMilestone) newRank = "Bạc";
-                if (member.Hang !== newRank) update(ref(db, `members/${memberId}`), { Hang: newRank });
-            },
+            // HÃ m nÃ y nÃªn Äáº·t trong Äá»i tÆ°á»£ng app { ... }
+updateMemberRankByPhone: async (phone) => {
+    if (!phone) return;
+    
+    // 1. TÃ¬m há»i viÃªn theo SÄT
+    const memberEntry = Object.entries(dataCache.members || {}).find(([id, m]) => m.SDT === phone);
+    if (!memberEntry) return;
+    
+    const [mId, mData] = memberEntry;
+    const totalSpend = mData.Tong_Chi_Tieu || 0;
+    
+    // 2. Láº¥y má»c thÄng háº¡ng tá»« cáº¥u hÃ¬nh (Database)
+    const conf = dataCache.config || {};
+    const má»cBáº¡c = parseInt(conf.Rank_Silver || 5000000);
+    const má»cVÃ ng = parseInt(conf.Rank_Gold || 10000000);
+    
+    // 3. XÃ¡c Äá»nh háº¡ng má»i dá»±a trÃªn tá»ng chi tiÃªu
+    let háº¡ngMá»i = "Äá»ng";
+    if (totalSpend >= má»cVÃ ng) háº¡ngMá»i = "VÃ ng";
+    else if (totalSpend >= má»cBáº¡c) háº¡ngMá»i = "Báº¡c";
+    
+    // 4. Náº¿u háº¡ng thay Äá»i thÃ¬ má»i cáº­p nháº­t lÃªn Firebase
+    if (háº¡ngMá»i !== mData.Hang) {
+        await update(ref(db, `members/${mId}`), { Hang: háº¡ngMá»i });
+        console.log(`Há»i viÃªn ${mData.Ten_HV} ÄÃ£ thÄng háº¡ng lÃªn: ${háº¡ngMá»i}`);
+    }
+},
+ confirmPayment: async () => {
+    try {
+        // 1. Láº¤Y GIÃ TRá» Tá»ª GIAO DIá»N
+        const totalInput = document.getElementById('temp-bill-total');
+        const total = totalInput ? parseInt(totalInput.value || 0) : 0;
+        
+        // Sá»¬A Táº I ÄÃY: Láº¥y tá»« select box má»i báº¡n vá»«a thÃªm vÃ o HTML
+        const methodSelect = document.getElementById('payment-method-select');
+        const method = methodSelect ? methodSelect.value : 'Tiá»n máº·t';
+        
+        // Äáº£m báº£o láº¥y ÄÆ°á»£c ID sÃ¢n Äang xá»­ lÃ½
+        const courtId = currentCourtId || document.getElementById('checkin-court-id').value;
+        if (!courtId) {
+            alert("KhÃ´ng xÃ¡c Äá»nh ÄÆ°á»£c ID sÃ¢n!");
+            return;
+        }
 
-            confirmPayment: () => {
-                const total = parseInt(document.getElementById('temp-bill-total').value);
-                const desc = document.getElementById('temp-bill-desc').value;
-                const method = document.getElementById('selected-payment').value;
-                const manualDisc = parseInt(document.getElementById('manual-discount').value || 0);
-                const court = dataCache.courts[currentCourtId];
-                const mId = court.Member_ID;
+        const court = dataCache.courts[courtId];
+        if (!court) {
+            alert("KhÃ´ng tÃ¬m tháº¥y dá»¯ liá»u sÃ¢n trÃªn há» thá»ng!");
+            return;
+        }
+        const sdtKhach = court.Sdt_Khach;
 
-                if(method === 'Ví hội viên') {
-                    const member = dataCache.members[mId];
-                    if(member.Vi_Du < total) return alert("❌ Lỗi: Số dư ví không đủ!");
-                    runTransaction(ref(db, `members/${mId}/Vi_Du`), (v) => (v || 0) - total);
+        // --- BÆ¯á»C 1: GOM Ná»I DUNG Dá»CH Vá»¤ (Giá»¯ nguyÃªn logic cá»§a báº¡n) ---
+        let dsDichVu = [];
+        if (court.Dich_Vu) {
+            Object.values(court.Dich_Vu).forEach(item => {
+                if (item && item.Ten_DV) {
+                    dsDichVu.push(`${item.Ten_DV} x${item.So_Luong}`);
                 }
+            });
+        }
+        const billDescInput = document.getElementById('temp-bill-desc');
+        const noteUI = billDescInput ? billDescInput.value : "";
+        let finalContent = "Tiá»n sÃ¢n";
+        if (dsDichVu.length > 0) finalContent += " + " + dsDichVu.join(", ");
+        if (noteUI) finalContent += ` (${noteUI})`;
 
-                const billId = Date.now();
-                set(ref(db, 'bills/' + billId), { 
-                    Thoi_Gian: new Date().toLocaleString('vi-VN'), 
-                    Ngay_Thang: new Date().toISOString().split('T')[0],
-                    Khach_Hang: court.Ten_Khach, 
-                    Noi_Dung: desc + (manualDisc > 0 ? ` (Giảm trực tiếp: -${manualDisc.toLocaleString()}đ)` : ''), 
-                    Tong_Tien: total, 
-                    PTTT: method 
-                }).then(() => { if (mId) setTimeout(() => app.updateMemberRank(mId), 1000); });
+        // --- BÆ¯á»C 2: Xá»¬ LÃ TRá»ª TIá»N VÃ & TÃCH LÅ¨Y Há»I VIÃN ---
+        if (sdtKhach && dataCache.members) {
+            // TÃ¬m há»i viÃªn dá»±a trÃªn SÄT (vÃ¬ SÄT lÃ  key hoáº·c trÆ°á»ng trong member)
+            let memberId = null;
+            let memberData = null;
 
-                update(ref(db, 'courts/' + currentCourtId), { Trang_Thai: "Sẵn sàng", Ten_Khach: "", Member_ID: null, Gio_Vao: "", Dich_Vu: null });
-                ui.closeModal('checkout');
-            },
-
-            renderBills: () => {
-                const from = document.getElementById('filter-bill-from').value;
-                const to = document.getElementById('filter-bill-to').value;
-                const search = document.getElementById('filter-bill-search').value.toLowerCase();
-                let tH = ''; let total = 0;
-                Object.entries(dataCache.bills).reverse().forEach(([id, b]) => {
-                    const billDate = b.Ngay_Thang || b.Thoi_Gian.split(' ')[0].split('/').reverse().join('-');
-                    if ((!from || billDate >= from) && (!to || billDate <= to) && (!search || b.Khach_Hang.toLowerCase().includes(search) || b.Noi_Dung.toLowerCase().includes(search))) {
-                        total += b.Tong_Tien;
-                        tH += `<tr><td class="p-4 text-slate-400 text-[10px]">${b.Thoi_Gian}</td><td class="p-4">${b.Khach_Hang}</td><td class="p-4 text-xs italic text-slate-500 max-w-xs truncate">${b.Noi_Dung}</td><td class="p-4">${b.PTTT || 'TM'}</td><td class="p-4 text-emerald-600 font-black">${b.Tong_Tien.toLocaleString()}đ</td><td class="p-4 text-right"><button onclick="app.deleteItem('bills/${id}')" class="text-red-200"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+            // Kiá»m tra trá»±c tiáº¿p báº±ng key (Æ°u tiÃªn náº¿u SÄT lÃ  key)
+            if (dataCache.members[sdtKhach]) {
+                memberId = sdtKhach;
+                memberData = dataCache.members[sdtKhach];
+            } else {
+                // Náº¿u khÃ´ng tháº¥y, tÃ¬m trong cÃ¡c object (phÃ²ng trÆ°á»ng há»£p key lÃ  ID ngáº«u nhiÃªn)
+                for (let id in dataCache.members) {
+                    if (dataCache.members[id].SDT === sdtKhach) {
+                        memberId = id;
+                        memberData = dataCache.members[id];
+                        break;
                     }
-                });
-                document.getElementById('list-bills-table').innerHTML = tH;
-                document.getElementById('total-revenue').innerText = total.toLocaleString() + 'đ';
-            },
+                }
+            }
 
+            if (memberId && memberData) {
+                let memberUpdates = {};
+                
+                // TÃ­ch lÅ©y chi tiÃªu
+                const currentSpend = parseInt(memberData.Tong_Chi_Tieu || 0);
+                const newSpend = currentSpend + total;
+                memberUpdates[`members/${memberId}/Tong_Chi_Tieu`] = newSpend;
+
+                // TÃ­nh toÃ¡n háº¡ng há»i viÃªn (theo config hoáº·c máº·c Äá»nh)
+                const conf = dataCache.config || {};
+                const mSilver = parseInt(conf.rankSilver) || 2000000; // Máº·c Äá»nh 2tr
+                const mGold = parseInt(conf.rankGold) || 5000000;    // Máº·c Äá»nh 5tr
+                
+                let rank = "Äá»ng";
+                if (newSpend >= mGold) rank = "VÃ ng";
+                else if (newSpend >= mSilver) rank = "Báº¡c";
+                memberUpdates[`members/${memberId}/Hang`] = rank;
+
+                // Xá»¬ LÃ TRá»ª VÃ Náº¾U CHá»N "VÃ Há»I VIÃN"
+                if (method === 'VÃ­ há»i viÃªn') {
+                    const currentVi = parseInt(memberData.Vi_Du || 0);
+                    if (currentVi < total) {
+                        alert(`â Sá» dÆ° vÃ­ khÃ´ng Äá»§! (Hiá»n cÃ³: ${currentVi.toLocaleString()}Ä)`);
+                        return; // Dá»«ng thanh toÃ¡n
+                    }
+                    memberUpdates[`members/${memberId}/Vi_Du`] = currentVi - total;
+                }
+                
+                // Cáº­p nháº­t lÃªn Firebase
+                await update(ref(db), memberUpdates);
+            } else if (method === 'VÃ­ há»i viÃªn') {
+                // Náº¿u chá»n thanh toÃ¡n vÃ­ mÃ  ko tÃ¬m tháº¥y há»i viÃªn
+                alert("â KhÃ¡ch hÃ ng nÃ y khÃ´ng cÃ³ thÃ´ng tin há»i viÃªn Äá» thanh toÃ¡n vÃ­!");
+                return;
+            }
+        } else if (method === 'VÃ­ há»i viÃªn') {
+            alert("â KhÃ´ng tÃ¬m tháº¥y dá»¯ liá»u há»i viÃªn!");
+            return;
+        }
+
+        // --- BÆ¯á»C 3: LÆ¯U HÃA ÄÆ N VÃO HISTORY ---
+        const billId = Date.now();
+        await set(ref(db, 'bills/' + billId), {
+            Thoi_Gian: new Date().toLocaleString('vi-VN'),
+            Ngay_Thang: new Date().toISOString().split('T')[0],
+            Khach_Hang: court.Ten_Khach || "KhÃ¡ch láº»",
+            Sdt_Khach: sdtKhach || "",
+            Tong_Tien: total,
+            PTTT: method,
+            Noi_Dung: finalContent
+        });
+
+        // --- BÆ¯á»C 4: RESET TRáº NG THÃI SÃN ---
+        await update(ref(db, 'courts/' + courtId), {
+            Trang_Thai: "Sáºµn sÃ ng",
+            Ten_Khach: "",
+            Sdt_Khach: "",
+            Member_ID: null,
+            Gio_Vao: "",
+            Dich_Vu: null
+        });
+
+        // ÄÃNG MODAL VÃ THÃNG BÃO
+        ui.closeModal('checkout');
+        // Náº¿u báº¡n cÃ³ modal detail (chi tiáº¿t sÃ¢n), hÃ£y ÄÃ³ng nÃ³ luÃ´n
+        if(document.getElementById('modal-court-detail')) ui.closeModal('court-detail');
+        
+        alert(`â Thanh toÃ¡n ${method} thÃ nh cÃ´ng!`);
+
+    } catch (error) {
+        consmodal-checkoutole.error("Lá»i confirmPayment:", error);
+        alert("Lá»i há» thá»ng: " + error.message);
+    }
+},
+            renderBills: () => {
+    const from = document.getElementById('filter-bill-from').value;
+    const to = document.getElementById('filter-bill-to').value;
+    const search = document.getElementById('filter-bill-search').value.toLowerCase();
+    
+    let tH = ''; 
+    let total = 0;
+
+    // Kiá»m tra náº¿u chÆ°a cÃ³ dá»¯ liá»u bills trong cache thÃ¬ dá»«ng
+    if (!dataCache.bills) return;
+
+    // Chuyá»n thÃ nh máº£ng vÃ  Äáº£o ngÆ°á»£c Äá» hÃ³a ÄÆ¡n má»i nháº¥t lÃªn Äáº§u
+    Object.entries(dataCache.bills).reverse().forEach(([id, b]) => {
+        // 1. Xá»­ lÃ½ ngÃ y thÃ¡ng Äá» lá»c
+        const billDate = b.Ngay_Thang || (b.Thoi_Gian ? b.Thoi_Gian.split(' ')[0].split('/').reverse().join('-') : '');
+        
+        // 2. Chuáº©n bá» ná»i dung hiá»n thá» (TrÃ¡nh lá»i undefined)
+        const noiDung = b.Noi_Dung || ""; 
+        const khachHang = b.Khach_Hang || "KhÃ¡ch láº»";
+
+        // 3. Logic Lá»c (NgÃ y thÃ¡ng + TÃ¬m kiáº¿m tÃªn khÃ¡ch hoáº·c ná»i dung dá»ch vá»¥)
+        const matchDate = (!from || billDate >= from) && (!to || billDate <= to);
+        const matchSearch = !search || 
+                           khachHang.toLowerCase().includes(search) || 
+                           noiDung.toLowerCase().includes(search);
+
+        if (matchDate && matchSearch) {
+            total += (b.Tong_Tien || 0);
+            
+            // 4. Táº¡o hÃ ng trong báº£ng (Khá»p vá»i 6 cá»t báº¡n ÄÃ£ cÃ³ trong HTML)
+            tH += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                <td class="p-4 text-slate-400 text-[10px] font-mono">${b.Thoi_Gian || '-'}</td>
+                <td class="p-4 font-bold text-slate-700">${khachHang}</td>
+                
+                <td class="p-4 text-xs italic text-slate-500 max-w-[250px] break-words">
+                    ${noiDung || '<span class="text-slate-300">-</span>'}
+                </td>
+                
+                <td class="p-4">
+                    <span class="px-2 py-1 rounded-full bg-slate-100 text-[10px] font-bold">${b.PTTT || 'TM'}</span>
+                </td>
+                <td class="p-4 text-blue-600 font-black">${(b.Tong_Tien || 0).toLocaleString()}Ä</td>
+                <td class="p-4 text-right">
+                    <button onclick="app.deleteItem('bills/${id}')" class="text-red-200 hover:text-red-500 transition-colors">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>`;
+        }
+    });
+
+    // Äá» vÃ o báº£ng ÄÃºng ID list-bills-table
+    const tableBody = document.getElementById('list-bills-table');
+    if (tableBody) tableBody.innerHTML = tH;
+    
+    // Cáº­p nháº­t tá»ng doanh thu theo lá»c
+    const totalRev = document.getElementById('total-revenue');
+    if (totalRev) totalRev.innerText = total.toLocaleString() + 'Ä';
+},
             confirmCheckin: () => {
-                const courtId = document.getElementById('checkin-court-id').value;
-                const mode = document.getElementById('checkin-mode').value;
-                let khach = mode === 'walk-in' ? document.getElementById('checkin-name').value : document.getElementById('checkin-member-id').options[document.getElementById('checkin-member-id').selectedIndex].text;
-                let mId = mode === 'member' ? document.getElementById('checkin-member-id').value : null;
-                if(!khach) return alert("Vui lòng chọn/nhập khách!");
-                update(ref(db, 'courts/' + courtId), { Trang_Thai: "Đang chơi", Ten_Khach: khach, Member_ID: mId, Gio_Vao: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}), Dich_Vu: {} }).then(() => ui.closeModal('checkin'));
-            },
+    const courtId = document.getElementById('checkin-court-id').value;
+    const khach = document.getElementById('checkin-name').value;
+    const sdt = document.getElementById('checkin-phone').value; // Láº¥y SÄT tá»« Ã´ nháº­p
+
+    if (!khach) return alert("Vui lÃ²ng nháº­p tÃªn khÃ¡ch hÃ ng!");
+
+    update(ref(db, 'courts/' + courtId), { 
+        Trang_Thai: "Äang chÆ¡i", 
+        Ten_Khach: khach, 
+        Sdt_Khach: sdt || "", // QUAN TRá»NG: LÆ°u SÄT vÃ o sÃ¢n Äá» sau nÃ y Äá»i chiáº¿u
+        Member_ID: null, 
+        Gio_Vao: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'}), 
+        Dich_Vu: {} 
+    }).then(() => {
+        ui.closeModal('checkin');
+        document.getElementById('checkin-name').value = "";
+        document.getElementById('checkin-phone').value = "";
+    });
+},
 
             addServiceToCourt: () => {
                 const sid = document.getElementById('add-service-id').value; 
                 const qty = parseInt(document.getElementById('add-service-qty').value);
-                if(!sid || qty <= 0) return alert("Vui lòng chọn món!");
-                if(dataCache.services[sid].Ton_Kho < qty) return alert("❌ Không đủ kho!");
+                if(!sid || qty <= 0) return alert("Vui lÃ²ng chá»n mÃ³n!");
+                if(dataCache.services[sid].Ton_Kho < qty) return alert("â KhÃ´ng Äá»§ kho!");
                 runTransaction(ref(db, `courts/${currentCourtId}/Dich_Vu/${sid}`), (cur) => {
                     if(cur) { cur.SL += qty; return cur; }
                     return { Ten: dataCache.services[sid].Ten_Dich_Vu, Gia: dataCache.services[sid].Gia_Ban, SL: qty };
@@ -921,14 +1200,14 @@ onSearchMemberBooking: (el) => {
                     Thoi_Gian: new Date().toLocaleString('vi-VN'), 
                     Ngay_Thang: new Date().toISOString().split('T')[0],
                     Khach_Hang: dataCache.members[mId].Ten_HV, 
-                    Noi_Dung: `Nạp tiền ví`, 
+                    Noi_Dung: `Náº¡p tiá»n vÃ­`, 
                     Tong_Tien: amount, 
                     PTTT: method 
                 });
                 ui.closeModal('recharge');
             },
 
-               // Hàm lưu chỉnh sửa (Bạn cần dán đoạn này vào vì file cũ không có)
+               // HÃ m lÆ°u chá»nh sá»­a (Báº¡n cáº§n dÃ¡n Äoáº¡n nÃ y vÃ o vÃ¬ file cÅ© khÃ´ng cÃ³)
     updateBooking: async () => {
     const id = document.getElementById('manage-b-id').value;
     const name = document.getElementById('manage-b-name').value;
@@ -938,17 +1217,17 @@ onSearchMemberBooking: (el) => {
     const note = document.getElementById('manage-b-note')?.value || "";
 
     if (!id) return;
-    if (!name || !start || !end) return alert("Vui lòng nhập đủ thông tin!");
-    if (start >= end) return alert("Giờ kết thúc phải lớn hơn giờ bắt đầu!");
+    if (!name || !start || !end) return alert("Vui lÃ²ng nháº­p Äá»§ thÃ´ng tin!");
+    if (start >= end) return alert("Giá» káº¿t thÃºc pháº£i lá»n hÆ¡n giá» báº¯t Äáº§u!");
 
-    // Lấy thông tin lịch hiện tại từ cache để giữ lại Court_ID và Ngay
+    // Láº¥y thÃ´ng tin lá»ch hiá»n táº¡i tá»« cache Äá» giá»¯ láº¡i Court_ID vÃ  Ngay
     const currentBooking = dataCache.bookings[id];
     const cId = currentBooking.Court_ID;
     const date = currentBooking.Ngay;
 
-    // --- KIỂM TRA TRÙNG LỊCH ---
+    // --- KIá»M TRA TRÃNG Lá»CH ---
     const isOverlapping = Object.keys(dataCache.bookings || {}).some(key => {
-        if (key === id) return false; // Bỏ qua chính nó
+        if (key === id) return false; // Bá» qua chÃ­nh nÃ³
         const b = dataCache.bookings[key];
         if (b.Court_ID === cId && b.Ngay === date) {
             return (
@@ -961,11 +1240,11 @@ onSearchMemberBooking: (el) => {
     });
 
     if (isOverlapping) {
-        return alert("Sân đã được đặt vui lòng chọn khung giờ khác");
+        return alert("SÃ¢n ÄÃ£ ÄÆ°á»£c Äáº·t vui lÃ²ng chá»n khung giá» khÃ¡c");
     }
 
     try {
-        // Cập nhật lên Firebase dùng các tên trường đúng với file của bạn
+        // Cáº­p nháº­t lÃªn Firebase dÃ¹ng cÃ¡c tÃªn trÆ°á»ng ÄÃºng vá»i file cá»§a báº¡n
         await update(ref(db, 'bookings/' + id), {
             Ten_Khach: name,
             SDT: phone,
@@ -974,19 +1253,19 @@ onSearchMemberBooking: (el) => {
             Ghi_Chu: note
         });
 
-        alert("Đã cập nhật thay đổi thành công!");
+        alert("ÄÃ£ cáº­p nháº­t thay Äá»i thÃ nh cÃ´ng!");
         ui.closeModal('manage-booking');
     } catch (error) {
         console.error(error);
-        alert("Lỗi khi lưu: " + error.message);
+        alert("Lá»i khi lÆ°u: " + error.message);
     }
 },
-    // Hàm đặt mới (Hàm này có sẵn trong file của bạn)
+    // HÃ m Äáº·t má»i (HÃ m nÃ y cÃ³ sáºµn trong file cá»§a báº¡n)
     saveBooking: () => { 
-        // ... code cũ của bạn
+        // ... code cÅ© cá»§a báº¡n
     },
     
-    // ... các hàm khác
+    // ... cÃ¡c hÃ m khÃ¡c
 
             saveConfig: () => {
                 const config = { 
@@ -1000,7 +1279,7 @@ onSearchMemberBooking: (el) => {
                     rankSilver: document.getElementById('conf-rank-silver').value || 5000000,
                     rankGold: document.getElementById('conf-rank-gold').value || 10000000
                 };
-                set(ref(db, 'config'), config).then(() => alert("Đã lưu!"));
+                set(ref(db, 'config'), config).then(() => alert("ÄÃ£ lÆ°u!"));
             },
 
             reloadTimeline: () => {
@@ -1010,28 +1289,28 @@ onSearchMemberBooking: (el) => {
         const court = dataCache.courts[cId];
         const bks = Object.entries(dataCache.bookings || {}).filter(([id, b]) => b.Court_ID === cId && b.Ngay === vD);
         
-        // Bắt đầu dòng của một sân
+        // Báº¯t Äáº§u dÃ²ng cá»§a má»t sÃ¢n
         html += `<div class="flex items-center gap-2">
             <div class="w-24 font-black text-[10px] uppercase truncate">${court.Ten_San}</div>
             <div class="flex-1 h-10 bg-slate-100 rounded-xl relative timeline-grid">`;
         
-        // --- ĐOẠN THÊM MỚI: TẠO VÙNG CLICK ĐỂ ĐẶT SÂN ---
+        // --- ÄOáº N THÃM Má»I: Táº O VÃNG CLICK Äá» Äáº¶T SÃN ---
         for(let i = 6; i <= 22; i++) {
             html += `<div onclick="ui.clickTimeline('${cId}', ${i})" 
                           class="absolute h-full" 
                           style="left:${(i - 6) * 100 / 17}%; width:${100 / 17}%; z-index:10; cursor:cell;">
                      </div>`;
         }
-        // --- HẾT ĐOẠN THÊM MỚI ---
+        // --- Háº¾T ÄOáº N THÃM Má»I ---
 
-        // Đoạn này vẽ các lịch đã đặt (Giữ nguyên logic cũ của bạn)
+        // Äoáº¡n nÃ y váº½ cÃ¡c lá»ch ÄÃ£ Äáº·t (Giá»¯ nguyÃªn logic cÅ© cá»§a báº¡n)
         bks.forEach(([id, b]) => {
             const [hS, mS] = b.Bat_Dau.split(':').map(Number);
             const [hE, mE] = b.Ket_Thuc.split(':').map(Number);
             const left = (hS - 6 + mS / 60) * (100 / 17);
             const width = (hE - hS + (mE - mS) / 60) * (100 / 17);
             
-            // Chú ý: z-index phải là 30 để nằm đè lên ô click ảo ở trên
+            // ChÃº Ã½: z-index pháº£i lÃ  30 Äá» náº±m ÄÃ¨ lÃªn Ã´ click áº£o á» trÃªn
             html += `<div onclick="event.stopPropagation(); ui.openModal('manage-booking', '${id}', ${JSON.stringify(b).replace(/"/g, '&quot;')})" 
                         class="timeline-slot bg-indigo-600 text-white text-[8px] flex flex-col justify-center px-1" 
                         style="left:${left}%; width:${width}%; z-index:30">
@@ -1044,32 +1323,171 @@ onSearchMemberBooking: (el) => {
     document.getElementById('timeline-rows').innerHTML = html;
 },
 
+// ThÃªm hÃ m nÃ y vÃ o trong object app: { ... }
+transferCourt: async () => {
+    const targetId = document.getElementById('transfer-to-court-id').value;
+    if (!targetId) {
+        alert("Vui lÃ²ng chá»n sÃ¢n muá»n chuyá»n Äáº¿n!");
+        return;
+    }
+
+    const oldId = currentCourtId; // ID sÃ¢n hiá»n táº¡i
+    const oldData = dataCache.courts[oldId];
+    const targetName = dataCache.courts[targetId].Ten_San;
+
+    if (!confirm(`Báº¡n cÃ³ cháº¯c cháº¯n muá»n chuyá»n dá»¯ liá»u tá»« ${oldData.Ten_San} sang ${targetName}?`)) return;
+
+    try {
+        const updates = {};
+        
+        // 1. Chuyá»n toÃ n bá» dá»¯ liá»u (KhÃ¡ch, Giá» vÃ o, Dá»ch vá»¥) sang sÃ¢n má»i
+        updates[`courts/${targetId}/Trang_Thai`] = "Äang chÆ¡i";
+        updates[`courts/${targetId}/Ten_Khach`] = oldData.Ten_Khach || "";
+        updates[`courts/${targetId}/Sdt_Khach`] = oldData.Sdt_Khach || "";
+        updates[`courts/${targetId}/Member_ID`] = oldData.Member_ID || null;
+        updates[`courts/${targetId}/Gio_Vao`] = oldData.Gio_Vao || "";
+        updates[`courts/${targetId}/Dich_Vu`] = oldData.Dich_Vu || null;
+
+        // 2. LÃ m trá»ng sÃ¢n cÅ©
+        updates[`courts/${oldId}/Trang_Thai`] = "Sáºµn sÃ ng";
+        updates[`courts/${oldId}/Ten_Khach`] = "";
+        updates[`courts/${oldId}/Sdt_Khach`] = "";
+        updates[`courts/${oldId}/Member_ID`] = null;
+        updates[`courts/${oldId}/Gio_Vao`] = "";
+        updates[`courts/${oldId}/Dich_Vu`] = null;
+
+        // Thá»±c hiá»n cáº­p nháº­t Äá»ng thá»i (Atomic Update)
+        await update(ref(db), updates);
+        
+        ui.closeModal('court-detail');
+        alert(`â Chuyá»n sÃ¢n thÃ nh cÃ´ng sang ${targetName}!`);
+        
+    } catch (error) {
+        console.error("Lá»i Äá»i sÃ¢n:", error);
+        alert("CÃ³ lá»i xáº£y ra: " + error.message);
+    }
+},
+
+// Bá» sung hÃ m writeLog vÃ o ÄÃNG TRONG Äá»i tÆ°á»£ng app
+writeLog: async (action, details) => {
+    try {
+        const logId = Date.now();
+        const { set, ref } = window.fbDatabase; // Äáº£m báº£o láº¥y ÄÃºng ref tá»« database
+        await set(ref(db, `activity_logs/${logId}`), {
+            Thoi_Gian: new Date().toLocaleString('vi-VN'),
+            Thao_Tac: action,
+            Chi_Tiet: details,
+            Nhan_Vien: "Admin" 
+        });
+    } catch (error) {
+        console.error("Lá»i ghi log:", error);
+    }
+},
+
+// ThÃªm vÃ o trong object app: { ... }
+cancelCourtRequest: async () => {
+    const oldId = currentCourtId;
+    const court = dataCache.courts[oldId];
+    
+    // 1. YÃªu cáº§u nháº­p lÃ½ do
+    const reason = prompt(`LÃ½ do há»§y sÃ¢n ${court.Ten_San}:`, "");
+    
+    if (reason === null) return; 
+    if (reason.trim() === "") {
+        alert("Báº¡n pháº£i nháº­p lÃ½ do Äá» há»§y sÃ¢n!");
+        return;
+    }
+
+    if (!confirm(`XÃC NHáº¬N Há»¦Y: Dá»¯ liá»u sÃ¢n ${court.Ten_San} sáº½ bá» xÃ³a sáº¡ch vÃ  ghi vÃ o nháº­t kÃ½ lá»i. Báº¡n cháº¯c cháº¯n chá»©?`)) return;
+
+    try {
+        // 2. Ghi log hoáº¡t Äá»ng trÆ°á»c khi xÃ³a dá»¯ liá»u
+        await app.writeLog("Há»§y sÃ¢n", `SÃ¢n: ${court.Ten_San} | KhÃ¡ch: ${court.Ten_Khach || "KhÃ¡ch láº»"} | LÃ½ do: ${reason} | Giá» vÃ o cÅ©: ${court.Gio_Vao}`);
+
+        // 3. Thá»±c hiá»n Reset tráº¡ng thÃ¡i sÃ¢n
+        const updates = {};
+        updates[`courts/${oldId}`] = {
+            Ten_San: court.Ten_San, // Giá»¯ láº¡i tÃªn sÃ¢n
+            Trang_Thai: "Sáºµn sÃ ng",
+            Ten_Khach: "",
+            Sdt_Khach: "",
+            Member_ID: null,
+            Gio_Vao: "",
+            Dich_Vu: null
+        };
+
+        await update(ref(db), updates);
+        
+        ui.closeModal('court-detail');
+        alert(`â ÄÃ£ há»§y sÃ¢n vÃ  ghi nháº­n vÃ o nháº­t kÃ½ há» thá»ng.`);
+        
+    } catch (error) {
+        console.error("Lá»i há»§y sÃ¢n:", error);
+        alert("Lá»i: " + error.message);
+    }
+},
+
+// ThÃªm vÃ o trong app hoáº·c ui
+showActivityLog: () => {
+    // Láº¥y 50 hoáº¡t Äá»ng gáº§n nháº¥t tá»« Firebase
+    const logRef = query(ref(db, 'activity_logs'), limitToLast(50));
+    
+    onValue(logRef, (snapshot) => {
+        const data = snapshot.val();
+        let rows = '';
+        
+        if (data) {
+            // Sáº¯p xáº¿p log má»i nháº¥t lÃªn trÃªn Äáº§u
+            const sortedLogs = Object.values(data).reverse();
+            
+            sortedLogs.forEach(log => {
+                // Äá» mÃ u theo loáº¡i thao tÃ¡c Äá» dá» nhÃ¬n
+                const badgeColor = log.Thao_Tac === 'Há»§y sÃ¢n' ? 'bg-rose-100 text-rose-600' : 
+                                  log.Thao_Tac === 'Äá»i sÃ¢n' ? 'bg-indigo-100 text-indigo-600' : 
+                                  'bg-emerald-100 text-emerald-600';
+                
+                rows += `
+                <tr class="border-b border-slate-100 hover:bg-white transition-colors">
+                    <td class="py-4 px-2 font-bold text-slate-500 whitespace-nowrap">${log.Thoi_Gian}</td>
+                    <td class="py-4">
+                        <span class="px-2 py-1 rounded-lg font-black text-[9px] uppercase ${badgeColor}">${log.Thao_Tac}</span>
+                    </td>
+                    <td class="py-4 pr-4 font-medium text-slate-700 leading-relaxed">${log.Chi_Tiet}</td>
+                    <td class="py-4 font-black text-slate-900 uppercase italic">${log.Nhan_Vien}</td>
+                </tr>`;
+            });
+        }
+        
+        document.getElementById('log-table-body').innerHTML = rows || '<tr><td colspan="4" class="text-center py-10 text-slate-400">ChÆ°a cÃ³ hoáº¡t Äá»ng nÃ o ÄÆ°á»£c ghi láº¡i.</td></tr>';
+        ui.openModal('activity-log');
+    });
+},
             saveBooking: () => {
     const cId = document.getElementById('b-court-id').value; 
     const date = document.getElementById('b-date').value;
     const start = document.getElementById('b-start').value; 
     const end = document.getElementById('b-end').value; 
     const phone = document.getElementById('b-phone').value;
-    const note = document.getElementById('b-note')?.value || ""; // Lấy ghi chú
+    const note = document.getElementById('b-note')?.value || ""; // Láº¥y ghi chÃº
     const type = document.querySelector('input[name="b-customer-type"]:checked').value;
 
     let name = '', memberId = '';
-    if (type === 'Hội viên') {
+    if (type === 'Há»i viÃªn') {
         name = document.getElementById('b-member-search').value;
         memberId = document.getElementById('b-member-id').value;
-        if (!memberId) return alert("Vui lòng chọn hội viên chính xác!");
+        if (!memberId) return alert("Vui lÃ²ng chá»n há»i viÃªn chÃ­nh xÃ¡c!");
     } else {
         name = document.getElementById('b-name').value;
     }
 
-    if (!cId || !date || !start || !end || !name || !phone) return alert("Thiếu thông tin!");
-    if (start >= end) return alert("Giờ kết thúc phải sau giờ bắt đầu!");
+    if (!cId || !date || !start || !end || !name || !phone) return alert("Thiáº¿u thÃ´ng tin!");
+    if (start >= end) return alert("Giá» káº¿t thÃºc pháº£i sau giá» báº¯t Äáº§u!");
 
     const isRepeat = document.getElementById('b-repeat')?.checked || false;
     const repeatDays = Array.from(document.querySelectorAll('input[name="repeat-days"]:checked')).map(el => parseInt(el.value));
     const repeatWeeks = parseInt(document.getElementById('b-repeat-weeks')?.value) || 1;
 
-    // Kiểm tra trùng lịch
+    // Kiá»m tra trÃ¹ng lá»ch
     const checkOverlap = (targetDate) => {
         return Object.values(dataCache.bookings || {}).some(b => {
             if (b.Court_ID === cId && b.Ngay === targetDate) {
@@ -1080,8 +1498,8 @@ onSearchMemberBooking: (el) => {
     };
 
     let datesToBook = [];
-    if (isRepeat && type === 'Hội viên') {
-        if (repeatDays.length === 0) return alert("Chọn ít nhất một thứ để lặp lại!");
+    if (isRepeat && type === 'Há»i viÃªn') {
+        if (repeatDays.length === 0) return alert("Chá»n Ã­t nháº¥t má»t thá»© Äá» láº·p láº¡i!");
         let startDate = new Date(date);
         for (let i = 0; i < repeatWeeks * 7; i++) {
             let d = new Date(startDate);
@@ -1092,24 +1510,24 @@ onSearchMemberBooking: (el) => {
             }
         }
     } else {
-        if (checkOverlap(date)) return alert("Sân đã được đặt vào khung giờ này!");
+        if (checkOverlap(date)) return alert("SÃ¢n ÄÃ£ ÄÆ°á»£c Äáº·t vÃ o khung giá» nÃ y!");
         datesToBook.push(date);
     }
 
-    if (datesToBook.length === 0) return alert("Không có lịch nào được tạo (do trùng lịch)!");
+    if (datesToBook.length === 0) return alert("KhÃ´ng cÃ³ lá»ch nÃ o ÄÆ°á»£c táº¡o (do trÃ¹ng lá»ch)!");
 
     const promises = datesToBook.map(targetDate => {
         const newId = 'B' + Date.now() + Math.floor(Math.random() * 1000);
         return set(ref(db, 'bookings/' + newId), { 
             Court_ID: cId, Ten_Khach: name, SDT: phone, Loai_Khach: type,
             Member_ID: memberId, Bat_Dau: start, Ket_Thuc: end, Ngay: targetDate,
-            Ghi_Chu: note // LƯU GHI CHÚ VÀO ĐÂY
+            Ghi_Chu: note // LÆ¯U GHI CHÃ VÃO ÄÃY
         });
     });
 
     Promise.all(promises).then(() => {
         ui.closeModal('booking');
-        alert(isRepeat ? `Đã tạo ${promises.length} lịch cố định!` : "Đặt sân thành công!");
+        alert(isRepeat ? `ÄÃ£ táº¡o ${promises.length} lá»ch cá» Äá»nh!` : "Äáº·t sÃ¢n thÃ nh cÃ´ng!");
         // Reset form
         ['b-name', 'b-phone', 'b-member-search', 'b-note'].forEach(id => {
             if(document.getElementById(id)) document.getElementById(id).value = '';
@@ -1117,20 +1535,20 @@ onSearchMemberBooking: (el) => {
     });
 },
 
-            confirmDeleteBooking: () => { if(confirm("Hủy?")) { remove(ref(db, 'bookings/' + document.getElementById('manage-b-id').value)); ui.closeModal('manage-booking'); } },
-            saveCourt: () => { const id = document.getElementById('court-id').value || 'S' + Date.now(); update(ref(db, 'courts/' + id), { Ten_San: document.getElementById('c-name').value, Loai_San: document.getElementById('c-type').value, Trang_Thai: "Sẵn sàng" }).then(() => ui.closeModal('court')); },
+            confirmDeleteBooking: () => { if(confirm("Há»§y?")) { remove(ref(db, 'bookings/' + document.getElementById('manage-b-id').value)); ui.closeModal('manage-booking'); } },
+            saveCourt: () => { const id = document.getElementById('court-id').value || 'S' + Date.now(); update(ref(db, 'courts/' + id), { Ten_San: document.getElementById('c-name').value, Loai_San: document.getElementById('c-type').value, Trang_Thai: "Sáºµn sÃ ng" }).then(() => ui.closeModal('court')); },
             saveService: () => { const id = document.getElementById('service-id').value || 'M' + Date.now(); update(ref(db, 'services/' + id), { Ten_Dich_Vu: document.getElementById('s-name').value, Gia_Ban: parseInt(document.getElementById('s-price').value || 0), Ton_Kho: parseInt(document.getElementById('s-stock').value || 0), Hinh_Anh: document.getElementById('s-img').value || "" }).then(() => ui.closeModal('service')); },
             saveStock: () => {
                 const id = document.getElementById('stock-id').value || 'P' + Date.now(); const pId = document.getElementById('stock-product-select').value;
                 const nQ = parseInt(document.getElementById('stock-qty').value || 0); const oQ = parseInt(document.getElementById('old-qty').value || 0);
                 update(ref(db, 'stocks/' + id), { Product_ID: pId, Product_Name: document.getElementById('stock-product-select').options[document.getElementById('stock-product-select').selectedIndex].text, So_Luong: nQ, Gia_Nhap: parseInt(document.getElementById('stock-cost').value || 0), Thanh_Tien: nQ * parseInt(document.getElementById('stock-cost').value || 0), Nha_Cung_Cap: document.getElementById('stock-supplier').value, Tinh_Trang: document.getElementById('stock-status').value, Ngay_Nhap: new Date().toLocaleDateString('vi-VN') }).then(() => { if(pId) runTransaction(ref(db, `services/${pId}/Ton_Kho`), (c) => (c || 0) + (nQ - oQ)); ui.closeModal('stock'); });
             },
-            saveMember: () => { const id = document.getElementById('member-id').value || 'H' + Date.now(); update(ref(db, 'members/' + id), { Ten_HV: document.getElementById('m-name').value, SDT: document.getElementById('m-phone').value, Vi_Du: parseInt(document.getElementById('m-wallet').value || 0), Hang: "Đồng" }).then(() => ui.closeModal('member')); },
-            toggleMaintenance: (id, cur) => update(ref(db, 'courts/' + id), { Trang_Thai: cur === "Bảo trì" ? "Sẵn sàng" : "Bảo trì" }),
-            deleteItem: (path) => { if(confirm("Xóa?")) remove(ref(db, path)); }
+            saveMember: () => { const id = document.getElementById('member-id').value || 'H' + Date.now(); update(ref(db, 'members/' + id), { Ten_HV: document.getElementById('m-name').value, SDT: document.getElementById('m-phone').value, Vi_Du: parseInt(document.getElementById('m-wallet').value || 0), Hang: "Äá»ng" }).then(() => ui.closeModal('member')); },
+            toggleMaintenance: (id, cur) => update(ref(db, 'courts/' + id), { Trang_Thai: cur === "Báº£o trÃ¬" ? "Sáºµn sÃ ng" : "Báº£o trÃ¬" }),
+            deleteItem: (path) => { if(confirm("XÃ³a?")) remove(ref(db, path)); }
         };
 
-        // LISTENERS - GIỮ NGUYÊN
+        // LISTENERS - GIá»® NGUYÃN
         onValue(ref(db, 'config'), (s) => { 
             const c = s.val() || {}; dataCache.config = c; 
             document.getElementById('conf-price-normal').value = c.priceNormal || 100000; 
@@ -1143,31 +1561,61 @@ onSearchMemberBooking: (el) => {
             document.getElementById('conf-rank-silver').value = c.rankSilver || 5000000;
             document.getElementById('conf-rank-gold').value = c.rankGold || 10000000;
         });
-        onValue(ref(db, 'bills'), (s) => { dataCache.bills = s.val() || {}; app.renderBills(); });
+        onValue(ref(db, 'bills'), (s) => {
+    const data = s.val() || {};
+    let tH = '';
+    // Sáº¯p xáº¿p hÃ³a ÄÆ¡n má»i nháº¥t lÃªn Äáº§u
+    const sortedBills = Object.entries(data).sort((a, b) => b[0] - a[0]);
+
+    sortedBills.forEach(([id, b]) => {
+        // Láº¥y ná»i dung, náº¿u khÃ´ng cÃ³ thÃ¬ Äá» dáº¥u gáº¡ch ngang
+        const noiDungHienThi = b.Noi_Dung || "-";
+        
+        tH += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+            <td class="p-4 text-[10px] text-slate-400 font-mono">${b.Thoi_Gian}</td>
+            <td class="p-4 font-bold uppercase text-slate-700">${b.Khach_Hang}</td>
+            
+            <td class="p-4 text-slate-500 text-xs italic max-w-[300px] break-words">
+                ${noiDungHienThi}
+            </td>
+            
+            <td class="p-4 font-black text-blue-600">${(b.Tong_Tien || 0).toLocaleString()}Ä</td>
+            <td class="p-4">
+                <span class="px-2 py-1 rounded-full bg-slate-100 text-[10px] font-bold">${b.PTTT}</span>
+            </td>
+            <td class="p-4 text-right">
+                <button onclick="app.deleteItem('bills/${id}')" class="text-red-300 hover:text-red-500 transition-colors">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+        </tr>`;
+    });
+    document.getElementById('list-bills-table').innerHTML = tH;
+});
        onValue(ref(db, 'courts'), (s) => {
     dataCache.courts = s.val() || {}; let gH = ''; let tH = ''; let bOpts = '';
     for (let id in dataCache.courts) {
         const c = dataCache.courts[id]; 
-        const isBusy = c.Trang_Thai === "Đang chơi"; 
-        const isMaint = c.Trang_Thai === "Bảo trì";
+        const isBusy = c.Trang_Thai === "Äang chÆ¡i"; 
+        const isMaint = c.Trang_Thai === "Báº£o trÃ¬";
         
         bOpts += `<option value="${id}">${c.Ten_San}</option>`;
         
         gH += `<div onclick="${isBusy ? `app.showDetail('${id}')` : isMaint ? '' : `(function(){ document.getElementById('checkin-court-id').value='${id}'; ui.openModal('checkin')})()`}" class="bg-white rounded-[2.5rem] p-6 border-2 card-shadow cursor-pointer ${isBusy ? 'border-blue-500 bg-blue-50/20' : isMaint ? 'status-maintenance border-slate-200' : 'border-white'}">
             <div class="flex justify-between items-center mb-1">
                 <h3 class="font-black text-lg uppercase italic">${c.Ten_San}</h3>
-                ${isBusy && c.Gio_Vao ? `<span class="text-[10px] font-black text-blue-600 bg-blue-100 px-2 py-1 rounded-lg">Vào: ${c.Gio_Vao}</span>` : ''}
+                ${isBusy && c.Gio_Vao ? `<span class="text-[10px] font-black text-blue-600 bg-blue-100 px-2 py-1 rounded-lg">VÃ o: ${c.Gio_Vao}</span>` : ''}
             </div>
 
             <p class="text-[10px] font-black ${isBusy ? 'text-blue-600' : isMaint ? 'text-red-400' : 'text-slate-300'}">
-                ${isBusy ? '● '+c.Ten_Khach : isMaint ? '⚠ BẢO TRÌ' : '○ SẴN SÀNG'}
+                ${isBusy ? 'â '+c.Ten_Khach : isMaint ? 'â  Báº¢O TRÃ' : 'â Sáº´N SÃNG'}
             </p>
 
             <p class="text-[10px] font-bold text-indigo-500 mb-10">
-                ${isBusy && c.SDT ? '<i class="fa-solid fa-phone text-[8px]"></i> ' + c.SDT : '&nbsp;'}
+                ${isBusy && c.Sdt_Khach ? '<i class="fa-solid fa-phone text-[8px]"></i> ' + c.Sdt_Khach : '&nbsp;'}
             </p>
 
-            <div class="w-full ${isBusy ? 'bg-slate-900' : isMaint ? 'bg-slate-300' : 'bg-blue-600'} text-white py-4 rounded-2xl font-black text-[10px] uppercase text-center">${isBusy ? 'Đang sử dụng' : isMaint ? 'Bảo trì' : 'Nhận sân'}</div>
+            <div class="w-full ${isBusy ? 'bg-slate-900' : isMaint ? 'bg-slate-300' : 'bg-blue-600'} text-white py-4 rounded-2xl font-black text-[10px] uppercase text-center">${isBusy ? 'Äang sá»­ dá»¥ng' : isMaint ? 'Báº£o trÃ¬' : 'Nháº­n sÃ¢n'}</div>
         </div>`;
 
         tH += `<tr><td class="p-4">${c.Ten_San}</td><td class="p-4 text-slate-400">${c.Loai_San}</td><td class="p-4"><span class="px-2 py-1 rounded text-[9px] uppercase ${isMaint ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'}">${c.Trang_Thai}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick="app.toggleMaintenance('${id}', '${c.Trang_Thai}')" class="p-2 text-slate-400"><i class="fa-solid fa-wrench"></i></button><button onclick='ui.openModal("court", "${id}", ${JSON.stringify(c)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('courts/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
@@ -1178,15 +1626,41 @@ onSearchMemberBooking: (el) => {
     app.reloadTimeline();
 });
         onValue(ref(db, 'services'), (s) => {
-            dataCache.services = s.val() || {}; let tH = ''; let opts = '<option value="">Chọn món...</option>';
-            for (let id in dataCache.services) { const v = dataCache.services[id]; opts += `<option value="${id}">${v.Ten_Dich_Vu} (Tồn: ${v.Ton_Kho})</option>`; tH += `<tr><td class="p-4"><img src="${v.Hinh_Anh || 'https://placehold.co/50x50'}" class="w-10 h-10 rounded-lg"></td><td class="p-4 uppercase">${v.Ten_Dich_Vu}</td><td class="p-4 text-emerald-600">${(v.Gia_Ban || 0).toLocaleString()}đ</td><td class="p-4">${v.Ton_Kho}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("service", "${id}", ${JSON.stringify(v)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('services/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
+            dataCache.services = s.val() || {}; let tH = ''; let opts = '<option value="">Chá»n mÃ³n...</option>';
+            for (let id in dataCache.services) { const v = dataCache.services[id]; opts += `<option value="${id}">${v.Ten_Dich_Vu} (Tá»n: ${v.Ton_Kho})</option>`; tH += `<tr><td class="p-4"><img src="${v.Hinh_Anh || 'https://placehold.co/50x50'}" class="w-10 h-10 rounded-lg"></td><td class="p-4 uppercase">${v.Ten_Dich_Vu}</td><td class="p-4 text-emerald-600">${(v.Gia_Ban || 0).toLocaleString()}Ä</td><td class="p-4">${v.Ton_Kho}</td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("service", "${id}", ${JSON.stringify(v)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('services/${id}')" class="p-2 text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
             document.getElementById('list-services-table').innerHTML = tH; document.getElementById('stock-product-select').innerHTML = opts; document.getElementById('add-service-id').innerHTML = opts;
         });
-        onValue(ref(db, 'members'), (s) => {
-            dataCache.members = s.val() || {}; let tH = ''; let opts = '';
-            for (let id in dataCache.members) { const m = dataCache.members[id]; opts += `<option value="${id}">${m.Ten_HV}</option>`; tH += `<tr><td class="p-4 uppercase">${m.Ten_HV}</td><td class="p-4 text-slate-400">${m.SDT}</td><td class="p-4 text-emerald-600 font-black">${(m.Vi_Du || 0).toLocaleString()}đ</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] font-bold ${m.Hang === 'Vàng' ? 'bg-yellow-100 text-yellow-700' : m.Hang === 'Bạc' ? 'bg-slate-100 text-slate-700' : 'bg-orange-50 text-orange-700'}">${m.Hang}</span></td><td class="p-4 text-right whitespace-nowrap"><button onclick='ui.openModal("recharge", "${id}", ${JSON.stringify(m)})' class="p-2 text-emerald-500"><i class="fa-solid fa-wallet"></i></button><button onclick='ui.openModal("member", "${id}", ${JSON.stringify(m)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button><button onclick="app.deleteItem('members/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
-            document.getElementById('list-members-table').innerHTML = tH; document.getElementById('checkin-member-id').innerHTML = opts;
-        });
+       onValue(ref(db, 'members'), (s) => {
+    dataCache.members = s.val() || {}; 
+    let tH = ''; 
+    let opts = '<option value="">-- Chá»n há»i viÃªn --</option>'; 
+
+    for (let id in dataCache.members) { 
+        const m = dataCache.members[id]; 
+        opts += `<option value="${m.SDT}">${m.Ten_HV} (${m.SDT})</option>`; 
+        
+        tH += `<tr>
+            <td class="p-4 uppercase font-bold text-slate-700">${m.Ten_HV}</td>
+            <td class="p-4 text-slate-500">${m.SDT}</td>
+            <td class="p-4 text-emerald-600 font-black">${(m.Vi_Du || 0).toLocaleString()}Ä</td>
+            <td class="p-4">
+                <span class="px-2 py-1 rounded text-[10px] font-bold text-white ${
+                    m.Hang === 'VÃ ng' ? 'bg-yellow-500' : 
+                    m.Hang === 'Báº¡c' ? 'bg-slate-400' : 'bg-orange-700'
+                }">${m.Hang || 'Äá»ng'}</span>
+            </td>
+            <td class="p-4 text-right text-blue-600 font-bold">
+                ${(m.Tong_Chi_Tieu || 0).toLocaleString()}Ä
+            </td>
+            <td class="p-4 text-right">
+                <button onclick='ui.openModal("recharge", "${id}", ${JSON.stringify(m)})' class="p-2 text-emerald-500"><i class="fa-solid fa-wallet"></i></button>
+                <button onclick="app.deleteItem('members/${id}')" class="p-2 text-red-300"><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>`; 
+    }
+    document.getElementById('list-members-table').innerHTML = tH; 
+    document.getElementById('checkin-member-id').innerHTML = opts;
+});
         onValue(ref(db, 'staff'), (s) => {
             dataCache.staff = s.val() || {}; let tH = '';
             for (let id in dataCache.staff) { const v = dataCache.staff[id]; tH += `<tr><td class="p-4">${v.User}</td><td class="p-4">${v.Pass}</td><td class="p-4"><span class="px-2 py-1 rounded text-[10px] ${v.Role === 'Admin' ? 'bg-purple-100 text-purple-600':'bg-blue-100 text-blue-600'}">${v.Role}</span></td><td class="p-4 text-right"><button onclick="app.deleteItem('staff/${id}')" class="text-red-400"><i class="fa-solid fa-trash"></i></button></td></tr>`; }
@@ -1194,13 +1668,37 @@ onSearchMemberBooking: (el) => {
         });
         onValue(ref(db, 'stocks'), (s) => {
             const data = s.val() || {}; let tH = '';
-            for (let id in data) { const st = data[id]; tH += `<tr><td class="p-4 text-[10px] text-slate-400">${st.Ngay_Nhap}</td><td class="p-4 uppercase">${st.Product_Name}</td><td class="p-4 text-center">${st.So_Luong}</td><td class="p-4 text-blue-600">${(st.Thanh_Tien || 0).toLocaleString()}đ</td><td class="p-4 text-xs font-bold">${st.Tinh_Trang}</td><td class="p-4 text-right"><button onclick='ui.openModal("stock", "${id}", ${JSON.stringify(st)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button></td></tr>`; }
+            for (let id in data) { const st = data[id]; tH += `<tr><td class="p-4 text-[10px] text-slate-400">${st.Ngay_Nhap}</td><td class="p-4 uppercase">${st.Product_Name}</td><td class="p-4 text-center">${st.So_Luong}</td><td class="p-4 text-blue-600">${(st.Thanh_Tien || 0).toLocaleString()}Ä</td><td class="p-4 text-xs font-bold">${st.Tinh_Trang}</td><td class="p-4 text-right"><button onclick='ui.openModal("stock", "${id}", ${JSON.stringify(st)})' class="p-2 text-blue-500"><i class="fa-solid fa-pen"></i></button></td></tr>`; }
             document.getElementById('list-stocks-table').innerHTML = tH;
         });
         onValue(ref(db, 'bookings'), (s) => { dataCache.bookings = s.val() || {}; app.reloadTimeline(); });
 
         const renderHoursHeader = () => { let hH = ''; for(let i=6; i<=22; i++) hH += `<div class="flex-1 text-[10px] font-black text-slate-300 border-l pl-1">${i}:00</div>`; document.getElementById('timeline-hours-header').innerHTML = hH; };
         renderHoursHeader();
+        
     </script>
+    <script>
+    // 1. Tá»± Äá»ng Äiá»n quyá»n Admin vÃ o bá» nhá» táº¡m
+    sessionStorage.setItem('pms_user', JSON.stringify({Role: 'Admin', User: 'DevMode'}));
+    
+    // 2. Ãp biáº¿n currentUser nháº­n giÃ¡ trá» Admin (Äá»i vá»i code Äang cháº¡y)
+    if (typeof currentUser !== 'undefined') {
+        currentUser = { Role: 'Admin', User: 'DevMode' };
+    }
+
+    // 3. áº¨n mÃ n hÃ¬nh ÄÄng nháº­p vÃ  hiá»n cÃ¡c pháº§n bá» khÃ³a
+    const loginScr = document.getElementById('login-screen');
+    if (loginScr) {
+        loginScr.style.setProperty('display', 'none', 'important');
+    }
+    
+    // 4. Hiá»n thá» táº¥t cáº£ cÃ¡c tÃ­nh nÄng dÃ nh cho Admin
+    document.querySelectorAll('.admin-only').forEach(el => {
+        el.classList.remove('hidden');
+    });
+
+    console.log("ð  ÄÃ£ kÃ­ch hoáº¡t cháº¿ Äá» sá»­a chá»¯a: ÄÃ£ bá» qua Login.");
+    
+</script>
 </body>
 </html>
