@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +59,7 @@
                     <button onclick="ui.switchTab('member')" id="btn-member" class="nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hội viên</button>
                     <button onclick="ui.switchTab('staff')" id="btn-staff" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Nhân viên</button>
                     <button onclick="ui.switchTab('system')" id="btn-system" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Hệ thống</button>
+                    <button onclick="ui.switchTab('reports')" id="btn-system" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400">Báo cáo</button>
                     <button onclick="ui.switchTab('config')" id="btn-config" class="admin-only hidden nav-btn px-3 py-5 text-[10px] font-bold uppercase text-slate-400"><i class="fa-solid fa-gear"></i></button>
                     <button onclick="location.reload()" class="px-3 py-5 text-[10px] font-bold uppercase text-rose-500"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
@@ -597,12 +597,24 @@
             </div>
             <div id="detail-services-list" class="space-y-2 max-h-40 overflow-y-auto pr-2 mb-4"></div>
             <div id="add-service-box" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200 mb-4">
-                <div class="grid grid-cols-3 gap-2">
-                    <select id="add-service-id" class="col-span-2 bg-white rounded-xl p-2 text-xs font-bold outline-none border"></select>
-                    <input id="add-service-qty" type="number" value="1" class="bg-white rounded-xl p-2 text-xs font-bold outline-none border" placeholder="SL">
-                </div>
-                <button onclick="app.addServiceToCourt()" class="w-full bg-blue-600 text-white text-[10px] font-black uppercase py-2 rounded-xl mt-2">Thêm ngay</button>
-            </div>
+    <div class="grid grid-cols-3 gap-2">
+        <div class="col-span-2 relative">
+            <input type="text" 
+                   id="service-search-input" 
+                   placeholder="Tìm món (vd: Sting)..." 
+                   autocomplete="off"
+                   onfocus="app.filterServiceDropdown(this.value)"
+                   oninput="app.filterServiceDropdown(this.value)"
+                   class="w-full bg-white rounded-xl p-2 text-xs font-bold outline-none border border-slate-200 focus:border-blue-500">
+            
+            <div id="service-dropdown-list" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 shadow-xl z-[9999] max-h-52 overflow-y-auto rounded-xl"></div>
+
+            <input type="hidden" id="add-service-id">
+        </div>
+        <input id="add-service-qty" type="number" value="1" class="bg-white rounded-xl p-2 text-xs font-bold outline-none border text-center">
+    </div>
+    <button onclick="app.addServiceToCourt()" class="w-full bg-blue-600 text-white text-[10px] font-black uppercase py-2 rounded-xl mt-2 hover:bg-blue-700">Thêm ngay</button>
+</div>
         </div>
 
         <div class="mb-6 p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
@@ -656,6 +668,41 @@
 
         <button onclick="app.confirmPayment()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase shadow-xl hover:bg-emerald-700 transition-colors">Xác nhận thanh toán</button>
         <button onclick="ui.closeModal('checkout')" class="w-full mt-4 text-[10px] font-bold uppercase text-slate-300">Quay lại</button>
+    </div>
+</div>
+
+<div id="modal-pos-checkout" class="fixed inset-0 bg-black/80 z-[9999] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-[2rem] w-full max-w-md shadow-2xl overflow-hidden">
+        <div class="p-6 bg-blue-600 text-white text-center">
+            <h3 class="font-black uppercase italic">Thanh toán đơn hàng</h3>
+            <p id="pos-display-name" class="text-xs opacity-80 mt-1"></p>
+        </div>
+        <div class="p-6">
+            <div id="pos-display-items" class="mb-4 text-[11px] space-y-1 border-b pb-4 max-h-40 overflow-y-auto"></div>
+            <div class="flex justify-between mb-4">
+                <span class="font-bold text-slate-400 uppercase text-[10px]">Tổng cộng</span>
+                <span id="pos-display-total" class="text-2xl font-black text-blue-600">0đ</span>
+            </div>
+            <div class="space-y-4">
+                <select id="pos-method-select" onchange="app.handlePosMethodChange()" class="w-full bg-slate-100 rounded-xl p-4 font-bold outline-none border-2 border-transparent focus:border-blue-500">
+                    <option value="Tiền mặt">💵 Tiền mặt</option>
+                    <option value="Chuyển khoản">🏦 Chuyển khoản</option>
+                    <option value="Ví hội viên">💳 Ví hội viên</option>
+                </select>
+
+                <div id="pos-wallet-view" class="hidden p-3 bg-blue-50 rounded-xl border border-blue-100">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-blue-600 font-bold uppercase text-[9px]">Số dư hiện tại:</span>
+                        <span id="pos-wallet-balance" class="font-black text-blue-800 text-sm">0đ</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="document.getElementById('modal-pos-checkout').style.display='none';" class="py-4 bg-slate-100 text-slate-500 rounded-xl font-bold uppercase text-xs">Đóng</button>
+                    <button type="button" id="btn-pos-final" class="py-4 bg-blue-600 text-white rounded-xl font-bold uppercase text-xs shadow-lg">Xác nhận</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -932,6 +979,66 @@
             </div>
     </div>
 </div>
+
+<div id="tab-reports" class="tab-content hidden animate-fade-in p-4 lg:p-6 bg-[#f4f7fa]">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+        <div>
+            <h2 class="text-xl font-[900] text-slate-800 tracking-tight uppercase italic">Analytics</h2>
+            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic leading-none">Hệ thống báo cáo tinh gọn</p>
+        </div>
+        
+        <div class="flex items-center bg-white border border-slate-200 p-1 rounded-xl shadow-sm">
+            <div class="flex items-center px-3 gap-2 border-r border-slate-100 text-[10px] font-bold text-slate-600">
+                <input type="date" id="report-date-from" class="bg-transparent border-none p-1 focus:ring-0 w-24 uppercase">
+                <span class="text-slate-300">→</span>
+                <input type="date" id="report-date-to" class="bg-transparent border-none p-1 focus:ring-0 w-24 uppercase">
+            </div>
+            <button onclick="app.loadReports()" class="bg-slate-800 text-white px-4 py-1.5 rounded-lg font-black text-[9px] hover:bg-blue-600 transition-all active:scale-95">
+                ÁP DỤNG
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-12 gap-4">
+        <div class="col-span-12 grid grid-cols-2 md:grid-cols-4 gap-4" id="report-stats-overview"></div>
+
+        <div class="col-span-12 lg:col-span-8 space-y-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Lưu lượng đơn hàng / Giờ</h3>
+                    <i class="fa-solid fa-chart-bar text-slate-300 text-xs"></i>
+                </div>
+                <div id="peak-hour-chart" class="flex items-end gap-1.5 h-32 border-b border-slate-50 pb-1"></div>
+            </div>
+
+            <div class="bg-white p-5 rounded-[1.5rem] border border-slate-100 shadow-sm">
+    <div class="flex items-center justify-between mb-5">
+        <h3 class="text-[10px] font-[900] text-slate-800 uppercase tracking-[0.2em] italic">Nhật ký giao dịch</h3>
+        <span class="text-[8px] font-black bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full uppercase">10 mới nhất</span>
+    </div>
+    <div class="overflow-hidden">
+        <table class="w-full">
+            <tbody id="recent-bills-list" class="divide-y divide-slate-50">
+                </tbody>
+        </table>
+    </div>
+</div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-4">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-4">
+                    <i class="fa-solid fa-fire-flame-curved text-orange-500 text-xs"></i>
+                    <h3 class="font-black uppercase text-[11px] text-slate-700 tracking-tighter leading-none">Top sản phẩm</h3>
+                </div>
+                <div id="top-products-list" class="space-y-2"></div>
+                
+                <div id="stock-summary-widget" class="mt-8 pt-4 border-t border-slate-50 space-y-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div id="modal-stock" class="modal">
     <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-md shadow-2xl">
         <h2 class="font-black text-xl uppercase italic mb-6">Phiếu nhập kho</h2>
@@ -1054,31 +1161,40 @@ window.currentUser = null;
 
       window.ui = {
     switchTab: (id) => {
-        // 1. Ẩn hiện tab và xử lý class hidden của Tailwind
-        document.querySelectorAll('.tab-content').forEach(t => {
-            t.classList.remove('active');
-            t.classList.add('hidden');
-        });
-        const targetTab = document.getElementById('tab-' + id);
-        if (targetTab) {
-            targetTab.classList.add('active');
-            targetTab.classList.remove('hidden');
-        }
+    // 1. Ẩn hiện tab và xử lý class hidden của Tailwind
+    document.querySelectorAll('.tab-content').forEach(t => {
+        t.classList.remove('active');
+        t.classList.add('hidden');
+    });
+    
+    const targetTab = document.getElementById('tab-' + id);
+    if (targetTab) {
+        targetTab.classList.add('active');
+        targetTab.classList.remove('hidden');
+    }
 
-        // 2. Đổi màu nút bấm Menu
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        const targetBtn = document.getElementById('btn-' + id);
-        if (targetBtn) targetBtn.classList.add('active');
+    // 2. Đổi màu nút bấm Menu
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const targetBtn = document.getElementById('btn-' + id);
+    if (targetBtn) targetBtn.classList.add('active');
 
-        // 3. LỆNH CỨU CÁNH: Nếu vào tab POS, ép buộc vẽ lại sản phẩm
-        if (id === 'pos') {
-            console.log("Kích hoạt POS...");
-            // Kiểm tra nếu app và hàm render tồn tại thì mới gọi
-            if (window.app && typeof window.app.renderPosProducts === 'function') {
-                window.app.renderPosProducts();
-            }
+    // 3. LỆNH CỨU CÁNH: Nếu vào tab POS, ép buộc vẽ lại sản phẩm
+    if (id === 'pos') {
+        console.log("Kích hoạt POS...");
+        if (window.app && typeof window.app.renderPosProducts === 'function') {
+            window.app.renderPosProducts();
         }
-    },
+    }
+
+    // 4. BỔ SUNG: Nếu vào tab Báo cáo, kích hoạt tính toán dữ liệu
+    if (id === 'reports') {
+        console.log("Kích hoạt Báo cáo tổng hợp...");
+        // Gọi hàm load báo cáo (đảm bảo hàm app.loadReports đã được định nghĩa)
+        if (window.app && typeof window.app.loadReports === 'function') {
+            window.app.loadReports();
+        }
+    }
+},
                   openModal: (type, id = null, data = null) => {
     // --- PHẦN BỔ SUNG: Chặn chọn ngày cũ ---
     if (type === 'booking') {
@@ -1759,138 +1875,137 @@ onSearchMemberBooking: (el) => {
     }
 },
 
+reprintBill: (billId) => {
+    try {
+        const bills = window.dataCache?.bills || {};
+        const b = bills[billId];
+
+        if (!b) return alert("❌ Không tìm thấy dữ liệu hóa đơn!");
+
+        // Chuẩn bị dữ liệu in (Đồng bộ cấu trúc với hàm in của bạn)
+        const printData = {
+            Id: billId.toString().slice(-8),
+            Customer: b.Khach_Hang || b.Ten_Khach || "Khách lẻ",
+            Total: Number(b.Tong_Tien || 0),
+            // Chuyển đổi mảng Items hoặc chuỗi Noi_Dung sang định dạng (name, qty, price)
+            Items: []
+        };
+
+        if (b.Items && Array.isArray(b.Items)) {
+            printData.Items = b.Items.map(i => ({
+                name: i.Ten || i.name,
+                qty: i.SL || i.qty,
+                price: i.Gia || i.price
+            }));
+        } else if (b.Noi_Dung) {
+            // Nếu là dữ liệu cũ chỉ có chuỗi, gom thành 1 dòng nội dung
+            printData.Items.push({
+                name: b.Noi_Dung,
+                qty: 1,
+                price: b.Tong_Tien
+            });
+        }
+
+        if (confirm(`Bạn có muốn in lại hóa đơn #${printData.Id} không?`)) {
+            if (typeof window.handlePrintOrder === 'function') {
+                window.handlePrintOrder(printData);
+            } else {
+                alert("❌ Lỗi: Hệ thống in chưa sẵn sàng!");
+            }
+        }
+    } catch (e) {
+        console.error("Lỗi In lại:", e);
+    }
+},
 
  confirmPayment: async () => {
     try {
-        // 1. Lấy dữ liệu từ giao diện (Chống lỗi null bằng Optional Chaining)
-        const totalEl = document.getElementById('temp-bill-total');
-        const methodEl = document.getElementById('payment-method-select');
-        const courtIdEl = document.getElementById('current-checkout-id');
+        const inputId = window.currentCourtId || document.getElementById('current-checkout-id')?.value;
+        if (!inputId) return alert("❌ Lỗi: Không lấy được ID thanh toán!");
 
-        const total = parseInt(totalEl?.value || 0);
-        const method = methodEl?.value?.trim() || 'Tiền mặt';
-        const courtId = window.currentCourtId || courtIdEl?.value;
+        const snapshot = await get(ref(db, 'courts/' + inputId));
+        const court = snapshot.val();
+        if (!court) return alert("❌ Lỗi: Không tìm thấy dữ liệu sân!");
 
-        if (!courtId) return alert("❌ Không xác định được ID sân!");
-
-        // 2. Lấy thông tin sân từ dataCache
-        const court = (window.dataCache && window.dataCache.courts) ? window.dataCache.courts[courtId] : null;
-        if (!court) return alert("❌ Không tìm thấy dữ liệu sân trên hệ thống!");
-
-        const mId = court.Member_ID;
-
-        // --- BƯỚC XỬ LÝ HỘI VIÊN (NẾU CÓ) ---
-        if (mId) {
-            const memRef = ref(db, `members/${mId}`);
-            const memSnap = await get(memRef);
-            
-            if (memSnap.exists()) {
-                const memData = memSnap.val();
-                let memberUpdates = {};
-                
-                const oldSpend = parseInt(memData.Tong_Chi_Tieu || 0);
-                const newTotalSpend = oldSpend + total;
-                memberUpdates["Tong_Chi_Tieu"] = newTotalSpend;
-
-                // Lấy cấu hình rank từ dataCache.systemConfig (như trong file của bạn)
-                const sys = window.dataCache?.systemConfig || {};
-                const mSilver = parseInt(sys.rankSilver || 2000000);
-                const mGold = parseInt(sys.rankGold || 5000000);
-                
-                let updatedRank = "Đồng";
-                if (newTotalSpend >= mGold) updatedRank = "Vàng";
-                else if (newTotalSpend >= mSilver) updatedRank = "Bạc";
-                
-                memberUpdates["Hang"] = updatedRank;
-                memberUpdates["Hang_HV"] = updatedRank; 
-
-                if (method === 'Ví hội viên') {
-                    const oldVi = parseInt(memData.Vi_Du || 0);
-                    if (oldVi < total) {
-                        alert(`❌ Số dư ví không đủ! (Còn: ${oldVi.toLocaleString()}đ)`);
-                        return; 
-                    }
-                    memberUpdates["Vi_Du"] = oldVi - total;
-                }
-                await update(memRef, memberUpdates);
-            }
-        }
-
-        // --- CHUẨN BỊ DỮ LIỆU ĐỂ IN ---
-        let printItems = [];
-        if (court.Dich_Vu) {
-            // Chuyển đổi object Dich_Vu thành mảng để in
-            Object.values(court.Dich_Vu).forEach(item => {
-                printItems.push({
-                    name: item.Ten_DV || item.Ten_Dich_Vu || "Dịch vụ",
-                    qty: item.Sl || item.So_Luong || 1,
-                    price: item.Gia || item.Gia_Ban || 0
-                });
-            });
-        }
-        
-        // Nếu không có dịch vụ lẻ, lấy tổng tiền làm 1 dòng "Tiền sân"
-        if (printItems.length === 0 && total > 0) {
-            printItems.push({ name: "Tiền sân / Dịch vụ", qty: 1, price: total });
-        }
-
-        // --- LƯU HÓA ĐƠN & RESET SÂN ---
-        const billId = Date.now();
-        const billDate = new Date().toISOString().split('T')[0];
+        const total = parseInt(document.getElementById('temp-bill-total')?.value || 0);
+        const method = document.getElementById('payment-method-select')?.value.trim() || 'Tiền mặt';
         const khachHang = court.Ten_Khach || "Khách lẻ";
 
+        let billItems = [];
+        let totalDichVu = 0;
+        let dsTenDV = [];
+
+        // Lấy dịch vụ
+        const services = (court.Playing && court.Playing.Services) ? court.Playing.Services : {};
+        Object.values(services).forEach(item => {
+            const gia = parseInt(item.Price || item.Gia || 0);
+            const sl = parseInt(item.Qty || item.SL || 1);
+            const ten = item.Name || item.Ten || "Dịch vụ";
+            totalDichVu += gia * sl;
+            dsTenDV.push(`${ten} x${sl}`);
+            billItems.push({ Ten: ten, SL: sl, Gia: gia, name: ten, qty: sl, price: gia });
+        });
+
+        // XỬ LÝ TIỀN SÂN KÈM THỜI GIAN
+        const gioVao = court.Gio_Vao || "??:??";
+        const gioRa = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+        const tienSan = total - totalDichVu;
+        const tenSanHienThi = `Tiền giờ ${court.Ten_San || inputId} (${gioVao} - ${gioRa})`;
+        
+        if (tienSan > 0) {
+            billItems.unshift({
+                Ten: tenSanHienThi,
+                SL: 1,
+                Gia: tienSan,
+                name: tenSanHienThi,
+                qty: 1,
+                price: tienSan
+            });
+        }
+
+        let noiDungFull = tenSanHienThi + (dsTenDV.length > 0 ? ", " + dsTenDV.join(", ") : "");
+
+        // LƯU HÓA ĐƠN
+        const billId = Date.now();
         await set(ref(db, 'bills/' + billId), {
             Thoi_Gian: new Date().toLocaleString('vi-VN'),
-            Ngay_Thang: billDate, 
+            Ngay_Thang: new Date().toISOString().split('T')[0],
             Khach_Hang: khachHang,
-            Member_ID: mId || null,
             Tong_Tien: total,
             PTTT: method,
-            Noi_Dung: `Thanh toán ${court.Ten_San || courtId}`
+            Items: billItems,
+            Noi_Dung: noiDungFull,
+            Ten_San: court.Ten_San || "",
+            Gio_Vao: gioVao,
+            Gio_Ra: gioRa
         });
 
-        // Reset trạng thái sân về Sẵn sàng
-        await update(ref(db, `courts/${courtId}`), {
-            Trang_Thai: "Sẵn sàng",
-            Ten_Khach: "",
-            Sdt_Khach: "",
-            Member_ID: null,
-            Gio_Vao: "",
-            Dich_Vu: null,
-            Playing: null
+        // RESET SÂN
+        await update(ref(db, `courts/${inputId}`), {
+            Trang_Thai: "Sẵn sàng", Ten_Khach: "", Sdt_Khach: "", Member_ID: null, Gio_Vao: "", Playing: null 
         });
+        await set(ref(db, `courts/${inputId}/Playing`), null);
 
-        // 1. Đóng modal trước để tránh đơ giao diện
-        if (typeof ui !== 'undefined' && ui.closeModal) {
-            ui.closeModal('checkout');
-        }
-        
-        // 2. Thông báo và gọi in
+        if (typeof ui !== 'undefined' && ui.closeModal) ui.closeModal('checkout');
+
         setTimeout(() => {
-            // Kiểm tra hàm in toàn cục
-            const printFunc = window.handlePrintOrder;
-            
-            if (typeof printFunc === 'function') {
-                if (confirm(`✅ Thanh toán [${method}] thành công!\nBạn có muốn in hóa đơn không?`)) {
-                    printFunc({
+            if (confirm("✅ Thanh toán thành công! Bạn có muốn in hóa đơn không?")) {
+                if (typeof window.handlePrintOrder === 'function') {
+                    window.handlePrintOrder({
                         Id: billId.toString().slice(-8),
-                        Items: printItems,
+                        Items: billItems.map(i => ({ name: i.Ten, qty: i.SL, price: i.Gia })), 
                         Total: total,
                         Customer: khachHang
                     });
                 }
-            } else {
-                alert(`✅ Thanh toán thành công!\n(Lưu ý: Không tìm thấy máy in hệ thống)`);
-                console.error("Hàm window.handlePrintOrder chưa được nạp!");
             }
         }, 400);
 
     } catch (error) {
-        console.error("Lỗi confirmPayment:", error);
-        alert("Lỗi hệ thống: " + error.message);
+        console.error("Lỗi:", error);
+        alert("Lỗi: " + error.message);
     }
 },
-
 
 renderBills: () => {
     try {
@@ -1898,7 +2013,6 @@ renderBills: () => {
         const totalRev = document.getElementById('total-revenue');
         if (!tableBody) return;
 
-        // 1. Lấy giá trị lọc
         const from = document.getElementById('filter-bill-from')?.value || ""; 
         const to = document.getElementById('filter-bill-to')?.value || "";     
         const search = document.getElementById('filter-bill-search')?.value?.toLowerCase().trim() || "";
@@ -1906,43 +2020,28 @@ renderBills: () => {
         let tH = ''; 
         let total = 0;
 
-        // 2. Kiểm tra Cache
         const billsData = window.dataCache?.bills;
         if (!billsData) {
-            tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center italic">Đang tải...</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center italic text-slate-400">Đang tải dữ liệu...</td></tr>';
             return;
         }
 
-        // 3. SẮP XẾP THEO THỜI GIAN THỰC (Dùng ID hoặc Timestamp)
-        // 3. SẮP XẾP THEO THỜI GIAN THỰC TẾ (Bóc tách từ chuỗi Thoi_Gian)
         const entries = Object.entries(billsData).sort((a, b) => {
             const parseDate = (str) => {
                 if (!str) return 0;
-                // Chuỗi của bạn đang là: "13:39:55 02/03/2026"
                 const parts = str.split(' '); 
                 if (parts.length < 2) return 0;
-
                 const [h, min, s] = parts[0].split(':').map(Number);
                 const [d, m, y] = parts[1].split('/').map(Number);
-
-                // Tạo đối tượng Date để so sánh (Tháng trong JS bắt đầu từ 0 nên phải -1)
                 return new Date(y, m - 1, d, h, min, s).getTime();
             };
-
-            const timeA = parseDate(a[1].Thoi_Gian);
-            const timeB = parseDate(b[1].Thoi_Gian);
-
-            return timeB - timeA; // Mới nhất (timestamp lớn hơn) sẽ lên đầu
+            return parseDate(b[1].Thoi_Gian) - parseDate(a[1].Thoi_Gian);
         });
 
-        // 4. Duyệt và lọc
         entries.forEach(([id, b]) => {
             if (!b) return;
 
-            // --- CHUẨN HÓA NGÀY ĐỂ LỌC (CỰC KỲ QUAN TRỌNG) ---
             let billDate = b.Ngay_Thang || ""; 
-            
-            // Nếu không có Ngay_Thang, cố gắng bóc tách từ Thoi_Gian
             if (!billDate && b.Thoi_Gian) {
                 const datePart = b.Thoi_Gian.match(/\d{1,2}\/\d{1,2}\/\d{4}/);
                 if (datePart) {
@@ -1951,29 +2050,48 @@ renderBills: () => {
                 }
             }
 
-            // --- LOGIC HIỂN THỊ ÉP BUỘC ---
-            // Nếu không chọn ngày lọc, thì luôn luôn hiển thị (matchDate = true)
             const matchDate = (!from || billDate >= from) && (!to || billDate <= to);
-            
             const name = String(b.Ten_Khach || b.Khach_Hang || "Khách lẻ");
-            const desc = String(b.NoiDung || b.Noi_Dung || "-");
-            const matchSearch = !search || name.toLowerCase().includes(search) || desc.toLowerCase().includes(search);
+            
+            let detailHtml = "";
+            if (b.Items && Array.isArray(b.Items) && b.Items.length > 0) {
+                detailHtml = b.Items.map(item => {
+                    const t = item.Ten || item.name || "Dịch vụ";
+                    const q = item.SL || item.qty || 1;
+                    const isS = t.toLowerCase().includes("sân") || t.toLowerCase().includes("giờ");
+                    return `<div class="text-[11px] py-0.5 ${isS ? 'font-bold text-blue-700' : 'text-slate-600'}">• ${t} (x${q})</div>`;
+                }).join('');
+            } else if (b.Noi_Dung) {
+                const items = b.Noi_Dung.split(',');
+                detailHtml = items.map(text => {
+                    const t = text.trim();
+                    const isS = t.toLowerCase().includes("sân") || t.toLowerCase().includes("giờ");
+                    return `<div class="text-[11px] py-0.5 ${isS ? 'font-bold text-blue-700' : 'text-slate-600'}">• ${t}</div>`;
+                }).join('');
+            }
+
+            const matchSearch = !search || name.toLowerCase().includes(search) || (b.Noi_Dung || "").toLowerCase().includes(search);
 
             if (matchDate && matchSearch) {
                 const money = Number(b.Tong_Tien || 0);
                 total += money;
                 
                 tH += `
-                <tr class="border-b border-slate-50 hover:bg-blue-50/50 transition-all">
-                    <td class="p-4 text-blue-600 font-bold text-[11px]">${b.Thoi_Gian || '-'}</td>
-                    <td class="p-4 font-black text-slate-700 uppercase text-xs">${name}</td>
-                    <td class="p-4 text-xs italic text-slate-500 max-w-[200px] break-words">${desc}</td>
-                    <td class="p-4 text-center">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-bold">${b.PTTT || 'TM'}</span>
+                <tr class="border-b border-slate-50 hover:bg-blue-50/40 transition-all">
+                    <td class="p-3 text-blue-600 font-bold text-[10px] align-top whitespace-nowrap">${b.Thoi_Gian || '-'}</td>
+                    <td class="p-3 font-bold text-slate-700 uppercase text-[11px] align-top whitespace-nowrap">${name}</td>
+                    <td class="p-3 max-w-[300px] align-top">
+                        <div class="space-y-0.5">${detailHtml}</div>
                     </td>
-                    <td class="p-4 text-right font-black text-slate-900">${money.toLocaleString()}đ</td>
-                    <td class="p-4 text-right">
-                        <button onclick="app.deleteItem('bills/${id}')" class="text-slate-300 hover:text-red-500">
+                    <td class="p-3 text-center align-top">
+                        <span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 text-[9px] font-black">${b.PTTT || 'TM'}</span>
+                    </td>
+                    <td class="p-3 text-right font-black text-slate-900 text-sm align-top">${money.toLocaleString()}đ</td>
+                    <td class="p-3 text-right align-top whitespace-nowrap">
+                        <button onclick="app.reprintBill('${id}')" class="text-blue-400 hover:text-blue-600 p-1.5 transition-colors mr-1" title="In lại hóa đơn">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                        <button onclick="if(confirm('Xóa hóa đơn này?')) app.deleteItem('bills/${id}')" class="text-slate-200 hover:text-red-500 p-1.5 transition-colors">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </td>
@@ -1981,11 +2099,11 @@ renderBills: () => {
             }
         });
 
-        tableBody.innerHTML = tH || '<tr><td colspan="6" class="p-10 text-center text-slate-300 italic">Không tìm thấy hóa đơn nào. Thử xóa bộ lọc ngày xem sao?</td></tr>';
+        tableBody.innerHTML = tH || '<tr><td colspan="6" class="p-10 text-center text-slate-300 italic text-sm">Không tìm thấy hóa đơn nào.</td></tr>';
         if (totalRev) totalRev.innerText = total.toLocaleString() + 'đ';
 
     } catch (error) {
-        console.error("Lỗi:", error);
+        console.error("Lỗi renderBills:", error);
     }
 },
 // dữ liệu excel
@@ -2371,18 +2489,70 @@ selectMemberForCheckin: (id, name, phone) => {
     console.log("✅ Đã chọn hội viên ID:", id);
 },
 
+filterServiceDropdown: function(keyword) {
+    const listContainer = document.getElementById('service-dropdown-list');
+    const services = window.dataCache?.services || {};
+    const key = keyword.toLowerCase().trim();
+    let html = '';
+    
+    Object.keys(services).forEach(sid => {
+        const s = services[sid];
+        if (s.Ten_Dich_Vu.toLowerCase().indexOf(key) !== -1) {
+            // Xác định hiển thị tồn kho
+            const isDichVu = s.Loai_DV === "DỊCH VỤ";
+            const tonKho = s.Ton_Kho || 0;
+            
+            // Nếu là "DỊCH VỤ" hiện ký hiệu vô cực, ngược lại hiện số lượng
+            const textTonKho = isDichVu ? "∞" : tonKho;
+            
+            // Màu sắc cảnh báo: Nếu hết hàng và không phải loại "DỊCH VỤ" thì hiện màu đỏ
+            const mauTonKho = (!isDichVu && tonKho <= 0) ? "text-rose-500" : "text-slate-400";
+
+            html += `
+                <div onclick="app.selectServiceItem('${sid}', '${s.Ten_Dich_Vu}')" 
+                     class="p-3 hover:bg-blue-50 cursor-pointer border-b border-slate-50 flex justify-between items-center transition-all">
+                    <div class="flex flex-col">
+                        <span class="text-[11px] font-bold text-slate-700 uppercase">${s.Ten_Dich_Vu}</span>
+                        <span class="text-[9px] ${mauTonKho} font-medium">Tồn kho: ${textTonKho}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-blue-600 font-black text-[11px]">${Number(s.Gia_Ban).toLocaleString()}đ</span>
+                    </div>
+                </div>`;
+        }
+    });
+    
+    listContainer.innerHTML = html || '<div class="p-3 text-[10px] text-slate-400 text-center">Không thấy món này</div>';
+    listContainer.classList.remove('hidden');
+},
+
+    selectServiceItem: function(id, name) {
+        document.getElementById('service-search-input').value = name;
+        document.getElementById('add-service-id').value = id;
+        document.getElementById('service-dropdown-list').classList.add('hidden');
+    },
         addServiceToCourt: () => {
+    // Lấy ID từ ô ẩn (ô này được hàm selectServiceItem điền vào)
     const sid = document.getElementById('add-service-id').value; 
-    const qty = parseInt(document.getElementById('add-service-qty').value);
+    const qtyInput = document.getElementById('add-service-qty');
+    const qty = parseInt(qtyInput.value);
     const courtId = window.selectedCourtId; 
 
     if(!courtId) return alert("Lỗi: Không xác định được sân đang chọn!");
-    if(!sid || qty <= 0) return alert("Vui lòng chọn món và số lượng!");
+    if(!sid || qty <= 0) return alert("Vui lòng gõ và chọn món từ danh sách gợi ý!");
     
+    // Sử dụng window.dataCache để đảm bảo lấy đúng dữ liệu toàn cục
     const item = window.dataCache.services[sid];
     if(!item) return alert("Lỗi: Không tìm thấy dữ liệu dịch vụ!");
     
-    if((item.Ton_Kho || 0) < qty) return alert("❌ Không đủ kho!");
+    // --- PHẦN SỬA: KIỂM TRA LOẠI DỊCH VỤ ---
+    // Nếu Loại DV KHÔNG PHẢI là "DỊCH VỤ" (ví dụ là Sản phẩm, Nước uống) thì mới check kho
+    if (item.Loai_DV !== "DỊCH VỤ") {
+        if ((item.Ton_Kho || 0) < qty) {
+            return alert("❌ Không đủ kho!");
+        }
+    }
+    // Nếu item.Loai_DV === "DỊCH VỤ", chương trình sẽ tự động bỏ qua check kho và chạy xuống dưới
 
     const courtServiceRef = ref(db, `courts/${courtId}/Playing/Services/${sid}`);
     
@@ -2391,32 +2561,34 @@ selectMemberForCheckin: (id, name, phone) => {
             cur.Qty = (cur.Qty || 0) + qty; 
             return cur; 
         }
-        // Lưu đúng Name, Price, Qty (viết hoa chữ đầu)
         return { 
             Name: item.Ten_Dich_Vu, 
             Price: Number(item.Gia_Ban), 
             Qty: qty 
         };
     }).then(() => {
-        runTransaction(ref(db, `services/${sid}/Ton_Kho`), (t) => (t || 0) - qty);
+        // Chỉ trừ tồn kho trong Database nếu không phải là DỊCH VỤ
+        if (item.Loai_DV !== "DỊCH VỤ") {
+            runTransaction(ref(db, `services/${sid}/Ton_Kho`), (t) => (t || 0) - qty);
+        }
         
-        // Ẩn bảng chọn món
+        // --- PHẦN DỌN DẸP GIAO DIỆN ---
+        document.getElementById('service-search-input').value = '';
+        document.getElementById('add-service-id').value = '';
+        qtyInput.value = '1';
+
         const box = document.getElementById('add-service-box');
         if(box) box.classList.add('hidden');
         
         alert("✅ Đã thêm dịch vụ thành công!");
         
-        // Gọi lại hàm showDetail để cập nhật giao diện
         if(typeof app.showDetail === 'function') {
             app.showDetail(courtId);
-        } else {
-            console.error("Không tìm thấy hàm app.showDetail");
         }
     }).catch(err => {
         alert("Lỗi hệ thống: " + err.message);
     });
 },
-
             confirmRecharge: () => {
     const mId = document.getElementById('recharge-member-id').value;
     const amount = parseInt(document.getElementById('recharge-amount').value);
@@ -2735,6 +2907,7 @@ cancelCourtRequest: async () => {
         alert("Lỗi hệ thống: " + error.message);
     }
 },
+
 
 // Thêm vào trong app hoặc ui
 showActivityLog: () => {
@@ -3388,11 +3561,14 @@ app.addToCart = (id) => {
         return;
     }
 
-    // 3. LẤY TỒN KHO THỰC TẾ (Ép kiểu về số để so sánh chính xác)
+    // --- BỔ SUNG: KIỂM TRA LOẠI DỊCH VỤ ---
+    const isDichVu = product.Loai_DV === "DỊCH VỤ";
+
+    // 3. LẤY TỒN KHO THỰC TẾ
     const maxStock = Number(product.Ton_Kho || 0);
 
-    // 4. CHẶN NGAY NẾU KHO ĐÃ HẾT (TỒN KHO <= 0)
-    if (maxStock <= 0) {
+    // 4. CHẶN NẾU KHO HẾT (Chỉ chặn nếu KHÔNG PHẢI là DỊCH VỤ)
+    if (!isDichVu && maxStock <= 0) {
         alert(`Sản phẩm "${product.Ten_Dich_Vu}" đã hết hàng!`);
         return;
     }
@@ -3401,14 +3577,14 @@ app.addToCart = (id) => {
     const existing = window.app.posCart.find(i => i.id === id);
 
     if (existing) {
-        // Kiểm tra nếu tăng thêm 1 thì có vượt quá kho không
-        if (existing.qty >= maxStock) {
+        // Kiểm tra vượt kho (Chỉ kiểm tra nếu KHÔNG PHẢI là DỊCH VỤ)
+        if (!isDichVu && existing.qty >= maxStock) {
             alert("Số lượng trong kho không đủ để bán thêm!");
             return;
         }
         existing.qty++;
     } else {
-        // Thêm mới vào giỏ hàng với số lượng bắt đầu là 1
+        // Thêm mới vào giỏ hàng
         window.app.posCart.push({
             id: id,
             name: product.Ten_Dich_Vu,
@@ -3508,154 +3684,202 @@ app.renderCart = () => {
         <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl mb-2 border border-white/10">
             <div class="flex-1">
                 <div class="font-bold text-[11px] text-white uppercase">${item.name}</div>
-                <div class="text-[10px] text-slate-400">${item.price.toLocaleString()}đ x ${item.qty}</div>
+                <div class="text-[10px] text-slate-400 font-medium">${item.price.toLocaleString()}đ</div>
             </div>
-            <div class="flex items-center gap-2">
-                <butapp.saveSystemConfigton onclick="app.updatePosQty(${index}, -1)" class="w-5 h-5 flex items-center justify-center bg-white/10 rounded text-white">-</button>
-                <span class="text-xs font-bold text-white w-4 text-center">${item.qty}</span>
-                <button onclick="app.updatePosQty(${index}, 1)" class="w-5 h-5 flex items-center justify-center bg-white/10 rounded text-white">+</button>
+            
+            <div class="flex items-center gap-3"> <div class="flex items-center bg-white/10 rounded-lg p-0.5 border border-white/5">
+                    <button onclick="app.updatePosQty(${index}, -1)" 
+                            class="w-7 h-7 flex items-center justify-center hover:bg-white/10 rounded text-white font-bold transition-all text-sm">-</button>
+                    
+                    <span class="text-xs font-black text-blue-400 w-8 text-center">${item.qty}</span>
+                    
+                    <button onclick="app.updatePosQty(${index}, 1)" 
+                            class="w-7 h-7 flex items-center justify-center hover:bg-white/10 rounded text-white font-bold transition-all text-sm">+</button>
+                </div>
+                
+                <button onclick="app.updatePosQty(${index}, -${item.qty})" class="text-slate-500 hover:text-rose-400 ml-1">
+                    <i class="fa-solid fa-xmark text-[10px]"></i>
+                </button>
             </div>
         </div>`;
     });
 
-    container.innerHTML = html || '<div class="text-center py-20 text-slate-500 text-xs italic">Trống</div>';
+    container.innerHTML = html || '<div class="text-center py-20 text-slate-500 text-xs italic">Giỏ hàng đang trống</div>';
     
     const totalElem = document.getElementById('pos-total');
     if (totalElem) totalElem.innerText = total.toLocaleString() + 'đ';
 };
 
 // 5. Cập nhật số lượng trong giỏ
-app.updatePosQty = (i, d) => {
-    // 1. Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
-    if (!app.posCart[i]) return;
+app.updatePosQty = (index, change) => {
+    const cart = window.app.posCart || [];
+    const item = cart[index];
+    if (!item) return;
 
-    // 2. Lấy thông tin gốc từ window.dataCache.services (Kho chung của bạn)
-    const productId = app.posCart[i].id;
-    const p = window.dataCache.services[productId];
+    // Lấy thông tin gốc từ kho để kiểm tra loại và tồn kho thực tế
+    const product = window.dataCache.services[item.id];
+    const isDichVu = product && product.Loai_DV === "DỊCH VỤ";
 
-    // 3. Nếu tăng số lượng (d > 0), phải kiểm tra với Ton_Kho
-    if (d > 0) {
-        if (!p) {
-            alert("Không tìm thấy dữ liệu sản phẩm!");
-            return;
-        }
-        
-        // Dùng đúng biến Ton_Kho từ kết quả console bạn đã check
-        const tonKhoHienTai = Number(p.Ton_Kho || 0);
-        
-        if (app.posCart[i].qty >= tonKhoHienTai) {
-            alert("Đã đạt giới hạn số lượng trong kho!");
-            return;
+    if (change > 0) {
+        // Chỉ chặn kho nếu KHÔNG PHẢI là DỊCH VỤ
+        if (!isDichVu) {
+            const maxStock = Number(product.Ton_Kho || 0);
+            if (item.qty >= maxStock) {
+                alert("Số lượng trong kho không đủ!");
+                return;
+            }
         }
     }
 
-    // 4. Cập nhật số lượng trong giỏ
-    app.posCart[i].qty += d;
+    item.qty += change;
 
-    // 5. Nếu số lượng về 0 thì xóa khỏi giỏ
-    if (app.posCart[i].qty <= 0) {
-        app.posCart.splice(i, 1);
+    // Nếu số lượng về 0 hoặc nhỏ hơn thì xóa khỏi giỏ
+    if (item.qty <= 0) {
+        cart.splice(index, 1);
     }
 
-    // 6. Vẽ lại giỏ hàng để cập nhật giao diện
     app.renderCart();
 };
-// 6. Thanh toán & Trừ kho
+// HÀM 1: KHI BẤM NÚT "THANH TOÁN" Ở GIỎ HÀNG POS
+// 1. Hàm mở Modal
 app.checkoutPos = async () => {
-    if (!window.app.posCart.length) return;
-    
-    // 1. Lấy dữ liệu từ các ô nhập liệu
-    const customerName = document.getElementById('pos-customer-search').value || "Khách lẻ";
-    const memberId = document.getElementById('pos-member-id').value; 
-    const total = window.app.posCart.reduce((s, i) => s + (i.price * i.qty), 0);
-    
-    if (!confirm(`Xác nhận thanh toán: ${total.toLocaleString()}đ cho ${customerName}?`)) return;
-
-    try {
-        const bId = 'BILL' + Date.now();
-        const content = window.app.posCart.map(i => `${i.name} x${i.qty}`).join(', ');
-
-        // --- PHẦN SỬA ĐỔI ĐỂ PHÙ HỢP VỚI TAB HÓA ĐƠN ---
-        const bayGio = new Date();
-
-        // 1. Lấy chuỗi Giờ (hh:mm:ss)
-        const gioVn = bayGio.toLocaleTimeString('vi-VN', { 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit' 
-        });
-
-        // 2. Lấy chuỗi Ngày (dd/mm/yyyy)
-        const ngayVn = bayGio.toLocaleDateString('vi-VN');
-
-        // 3. Ghép lại theo thứ tự: GIỜ trước - NGÀY sau
-        const thoiGianHienThi = `${gioVn} ${ngayVn}`; 
-
-        // 4. Tạo Ngay_Thang chuẩn YYYY-MM-DD để bộ lọc hoạt động (Giữ nguyên để không lỗi lọc)
-        const ngayThangChuan = bayGio.getFullYear() + '-' + 
-                               String(bayGio.getMonth() + 1).padStart(2, '0') + '-' + 
-                               String(bayGio.getDate()).padStart(2, '0');
-        
-        // 2. LƯU HÓA ĐƠN VÀO FIREBASE
-        await set(ref(db, 'bills/' + bId), {
-            Id: bId,
-            Khach_Hang: customerName,
-            Noi_Dung: content,
-            PTTT: 'Tiền mặt',
-            Tong_Tien: total,
-            Thoi_Gian: thoiGianHienThi, // Đã đổi sang định dạng người đọc
-            Ngay_Thang: ngayThangChuan, // Thêm trường này để Tab Hóa Đơn lọc được ngày
-            Member_ID: memberId || null,
-            Type: 'POS_RETAIL'
-        });
-        // --- KẾT THÚC PHẦN SỬA ĐỔI ---
-
-        // 3. TRỪ KHO (Giữ nguyên logic của bạn)
-        for (let item of window.app.posCart) {
-            const productRef = window.dataCache.services[item.id];
-            if (productRef) {
-                const newStock = Number(productRef.Ton_Kho || 0) - item.qty;
-                await update(ref(db, 'services/' + item.id), { 
-                    Ton_Kho: Math.max(0, newStock) 
-                });
-            }
-        }
-
-        // 4. LOGIC TÍCH LŨY DOANH SỐ & THĂNG HẠNG (Giữ nguyên logic của bạn)
-        if (memberId) {
-            const mData = window.dataCache.members[memberId];
-            if (mData) {
-                const currentSpend = Number(mData.Tong_Chi_Tieu || 0);
-                const newTotalSpend = currentSpend + total;
-                
-                let newRank = mData.Hang_HV || "Đồng";
-                if (newTotalSpend >= 10000000) newRank = "Vàng";
-                else if (newTotalSpend >= 2000000) newRank = "Bạc";
-
-                await update(ref(db, `members/${memberId}`), {
-                    Tong_Chi_Tieu: newTotalSpend,
-                    Hang_HV: newRank
-                });
-                console.log(`Đã tích lũy cho ${customerName}. Tổng chi tiêu mới: ${newTotalSpend}`);
-            }
-        }
-
-        alert("Thanh toán thành công!");
-        
-        // 5. RESET GIỎ HÀNG VÀ Ô TÌM KIẾM
-        window.app.posCart = [];
-        app.renderCart();
-        
-        if (typeof app.resetPOSCustomer === 'function') {
-            app.resetPOSCustomer();
-        }
-
-    } catch (error) {
-        console.error(error);
-        alert("Lỗi: " + error.message);
+    // 1. Kiểm tra giỏ hàng
+    if (!window.app.posCart || window.app.posCart.length === 0) {
+        return alert("🛒 Giỏ hàng trống!");
     }
+
+    // 2. Lấy thông tin
+    const name = document.getElementById('pos-customer-search')?.value || "Khách lẻ";
+    const memberId = document.getElementById('pos-member-id')?.value;
+    const total = window.app.posCart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+    // 3. Hiển thị Modal
+    const modal = document.getElementById('modal-pos-checkout');
+    modal.style.display = 'flex';
+    modal.classList.remove('hidden');
+
+    // 4. Đổ dữ liệu vào giao diện Modal
+    document.getElementById('pos-display-name').innerText = "Khách hàng: " + name;
+    document.getElementById('pos-display-total').innerText = total.toLocaleString() + "đ";
+    document.getElementById('pos-display-items').innerHTML = window.app.posCart.map(i => 
+        `<div class="flex justify-between"><span>${i.name} x${i.qty}</span><b>${(i.price * i.qty).toLocaleString()}</b></div>`
+    ).join('');
+
+    // 5. XỬ LÝ NÚT XÁC NHẬN CUỐI CÙNG (Sửa lỗi không bấm được)
+    const finalBtn = document.getElementById('btn-pos-final');
+    finalBtn.onclick = async () => {
+        const method = document.getElementById('pos-method-select').value;
+        
+        // Chống bấm liên tục
+        finalBtn.disabled = true;
+        finalBtn.innerText = "ĐANG LƯU...";
+
+        try {
+            // --- THỰC HIỆN LƯU DATABASE ---
+            await app.processFinalPos(method, total, name, memberId);
+            
+            // Đóng modal khi thành công
+            modal.style.display = 'none';
+        } catch (err) {
+            alert("Lỗi: " + err.message);
+        } finally {
+            finalBtn.disabled = false;
+            finalBtn.innerText = "XÁC NHẬN";
+        }
+    };
 };
 
+// HÀM PHỤ TRÁCH LƯU DATABASE (Để code sạch sẽ)
+app.processFinalPos = async (method, total, customerName, memberId) => {
+    // 1. XỬ LÝ VÍ HỘI VIÊN (Giữ nguyên logic của bạn)
+    if (method === "Ví hội viên") {
+        if (!memberId) throw new Error("Phải chọn hội viên để dùng ví!");
+        const memberRef = ref(db, `members/${memberId}`);
+        const snapshot = await get(memberRef);
+        if (!snapshot.exists()) throw new Error("Không tìm thấy thông tin hội viên!");
+        const mData = snapshot.val();
+        const balance = Number(mData.Vi_Du || 0); 
+        if (balance < total) throw new Error(`Ví không đủ tiền!`);
+        await update(memberRef, { Vi_Du: balance - total });
+    }
+
+    // 2. LƯU HÓA ĐƠN
+    const bId = 'BILL' + Date.now();
+    const items = window.app.posCart.map(i => ({ Ten: i.name, SL: i.qty, Gia: i.price }));
+    
+    await set(ref(db, 'bills/' + bId), {
+        Id: bId,
+        Khach_Hang: customerName,
+        Noi_Dung: "Bán lẻ: " + window.app.posCart.map(i => i.name).join(', '),
+        Items: items,
+        PTTT: method,
+        Tong_Tien: total,
+        Thoi_Gian: new Date().toLocaleString('vi-VN'),
+        Ngay_Thang: new Date().toISOString().split('T')[0],
+        Member_ID: memberId || null,
+        Type: 'POS_RETAIL'
+    });
+
+    // 3. TRỪ KHO (PHẦN QUAN TRỌNG NHẤT - ĐÃ SỬA)
+    for (let item of window.app.posCart) {
+        // Lấy thông tin gốc từ cache để check loại dịch vụ
+        const productInfo = window.dataCache.services[item.id];
+        
+        // CHỈ TRỪ KHO NẾU: Không phải là "DỊCH VỤ"
+        if (productInfo && productInfo.Loai_DV !== "DỊCH VỤ") {
+            // SỬA: Đổi 'products/' thành 'services/' cho đúng cấu trúc của bạn
+            const stockRef = ref(db, 'services/' + item.id + '/Ton_Kho');
+            
+            // Dùng runTransaction để trừ kho an toàn (tránh sai lệch khi nhiều máy bán cùng lúc)
+            await runTransaction(stockRef, (current) => {
+                const stock = Number(current || 0);
+                return stock - item.qty;
+            });
+        }
+    }
+
+    // 4. CẬP NHẬT CHI TIÊU HỘI VIÊN (Giữ nguyên logic của bạn)
+    if (memberId) {
+        const mDataRef = ref(db, `members/${memberId}`);
+        const mSnap = await get(mDataRef);
+        if (mSnap.exists()) {
+            const mData = mSnap.val();
+            const newSpend = Number(mData.Tong_Chi_Tieu || 0) + total;
+            let newRank = (newSpend >= 10000000) ? "Vàng" : (newSpend >= 2000000 ? "Bạc" : "Đồng");
+            await update(mDataRef, { Tong_Chi_Tieu: newSpend, Hang_HV: newRank });
+        }
+    }
+
+    alert("✅ Thanh toán và cập nhật kho thành công!");
+    
+    // 5. Reset giao diện
+    window.app.posCart = [];
+    if (typeof app.renderCart === 'function') app.renderCart();
+    if (app.resetPOSCustomer) app.resetPOSCustomer();
+};
+
+// Hàm xử lý hiện số dư khi thay đổi phương thức thanh toán trong POS
+app.handlePosMethodChange = () => {
+    const method = document.getElementById('pos-method-select').value;
+    const walletView = document.getElementById('pos-wallet-view');
+    const memberId = document.getElementById('pos-member-id')?.value;
+    const balanceSpan = document.getElementById('pos-wallet-balance');
+
+    if (method === "Ví hội viên" && memberId) {
+        const mData = window.dataCache.members[memberId];
+        // Kiểm tra linh hoạt cả Balance hoặc Vi_Du
+        const balance = Number(mData?.Balance || mData?.Vi_Du || 0);
+        
+        balanceSpan.innerText = balance.toLocaleString() + 'đ';
+        walletView.classList.remove('hidden');
+
+        // Báo đỏ nếu không đủ tiền
+        const total = window.app.posCart.reduce((s, i) => s + (i.price * i.qty), 0);
+        balanceSpan.style.color = (balance < total) ? "red" : "#1e40af";
+    } else {
+        walletView.classList.add('hidden');
+    }
+};
 app.searchMemberForPOS = (val) => {
     const resDiv = document.getElementById('pos-member-results');
     const resetBtn = document.getElementById('btn-reset-pos-cust');
@@ -3694,6 +3918,174 @@ app.searchMemberForPOS = (val) => {
     }
 };
 
+app.loadReports = () => {
+    const fDate = document.getElementById('report-date-from').value;
+    const tDate = document.getElementById('report-date-to').value;
+
+    onValue(ref(db, 'bills'), (snap) => {
+        const bills = snap.val() || {};
+        let arr = Object.values(bills);
+
+        const dFrom = fDate ? new Date(fDate + "T00:00:00").getTime() : -Infinity;
+        const dTo = tDate ? new Date(tDate + "T23:59:59").getTime() : Infinity;
+
+        arr = arr.filter(b => {
+            const bTime = app.parseVN(b.Thoi_Gian || b.Ngay_Tao).getTime();
+            return bTime >= dFrom && bTime <= dTo;
+        });
+
+        arr.sort((a, b) => app.parseVN(b.Thoi_Gian) - app.parseVN(a.Thoi_Gian));
+
+        let totalRev = 0;
+        const hrStats = Array(24).fill(0);
+        const prodStats = {};
+
+        arr.forEach(b => {
+            totalRev += (Number(b.Tong_Tien) || 0);
+            if (b.Thoi_Gian && b.Thoi_Gian.includes(':')) {
+                const hour = parseInt(b.Thoi_Gian.split(':')[0]);
+                if (!isNaN(hour) && hour >= 0 && hour < 24) hrStats[hour]++;
+            }
+            if (b.Items) b.Items.forEach(i => {
+                prodStats[i.Ten] = (prodStats[i.Ten] || 0) + (Number(i.SL) || 0);
+            });
+        });
+
+        // 1. BIỂU ĐỒ LƯU LƯỢNG (Giữ nguyên)
+        const maxOrders = Math.max(...hrStats) || 1;
+        const chartHtml = hrStats.map((count, hour) => {
+            const height = (count / maxOrders) * 100;
+            const barColor = count > 0 ? 'bg-blue-500' : 'bg-slate-100';
+            return `
+                <div class="flex-1 flex flex-col items-center group h-full justify-end relative">
+                    <div class="absolute -top-6 scale-0 group-hover:scale-100 transition-all bg-slate-800 text-white text-[7px] px-1 rounded z-10 whitespace-nowrap">
+                        ${count} đơn
+                    </div>
+                    <div class="${barColor} w-1.5 rounded-full transition-all group-hover:bg-blue-600" 
+                         style="height: ${Math.max(height, 5)}%"></div>
+                    <span class="text-[6px] font-black text-slate-400 mt-1">${hour}h</span>
+                </div>`;
+        }).join('');
+        const chartContainer = document.getElementById('peak-hour-chart');
+        if (chartContainer) chartContainer.innerHTML = chartHtml;
+
+        // 2. TOP SẢN PHẨM BÁN CHẠY (Phần bổ sung mới)
+        const topProductsHtml = Object.entries(prodStats)
+            .sort((a, b) => b[1] - a[1]) // Sắp xếp theo số lượng giảm dần
+            .slice(0, 5) // Lấy Top 5
+            .map(([name, sl], idx) => {
+                const maxSl = Math.max(...Object.values(prodStats)) || 1;
+                const percent = (sl / maxSl) * 100;
+                return `
+                <div class="flex items-center justify-between p-2 hover:bg-slate-50 rounded-xl transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            ${idx + 1}
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-black text-slate-700 uppercase leading-none">${name}</span>
+                            <div class="w-20 h-1 bg-slate-100 rounded-full mt-1.5 overflow-hidden">
+                                <div class="h-full bg-blue-400 rounded-full" style="width: ${percent}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-[11px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-lg">${sl}</span>
+                </div>`;
+            }).join('');
+        const topProdContainer = document.getElementById('top-products-list');
+        if (topProdContainer) topProdContainer.innerHTML = topProductsHtml || '<div class="text-center py-4 text-[9px] text-slate-400 italic">Chưa có dữ liệu</div>';
+
+        // 3. DANH SÁCH GIAO DỊCH (Giữ nguyên)
+        const recentHtml = arr.slice(0, 10).map(b => {
+            const amount = Number(b.Tong_Tien) || 0;
+            const itemSummary = b.Items ? b.Items.map(i => `${i.SL}x ${i.Ten}`).join(', ') : 'Đơn lẻ';
+            const method = b.Phuong_Thuc || 'Tiền mặt';
+            const methodIcon = method.includes('Chuyển') ? 'fa-building-columns text-blue-400' : 'fa-money-bill-1 text-emerald-400';
+            const parts = (b.Thoi_Gian || "").split(' ');
+            const time = parts[0];
+            const date = parts[1] || "";
+            return `
+            <tr class="hover:bg-slate-50 border-b border-slate-50 last:border-0 transition-all">
+                <td class="py-3 pr-2">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-black text-slate-700 uppercase leading-none truncate max-w-[150px]">${b.Khach_Hang || 'Khách vãng lai'}</span>
+                        <p class="text-[8px] font-bold text-slate-400 mt-1 truncate max-w-[200px] italic underline decoration-slate-200">${itemSummary}</p>
+                    </div>
+                </td>
+                <td class="py-3 text-right">
+                    <div class="flex flex-col items-end">
+                        <span class="text-[10px] font-black text-blue-600 font-mono italic tracking-tighter">+${amount.toLocaleString()}đ</span>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i class="fa-solid ${methodIcon} text-[7px]"></i>
+                            <span class="text-[7px] font-black text-slate-300 uppercase">${method}</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="py-3 text-right pl-3">
+                    <div class="flex flex-col items-end leading-none">
+                        <span class="text-[9px] font-black text-slate-500">${time}</span>
+                        <span class="text-[7px] font-bold text-slate-300 mt-1 uppercase">${date}</span>
+                    </div>
+                </td>
+            </tr>`;
+        }).join('');
+        document.getElementById('recent-bills-list').innerHTML = recentHtml || '<tr><td colspan="3" class="text-center py-8 text-[9px] text-slate-400 font-black italic uppercase">Không có dữ liệu phù hợp</td></tr>';
+
+        // 4. STAT CARDS (Giữ nguyên)
+        document.getElementById('report-stats-overview').innerHTML = `
+            ${app.createStatCard("Doanh thu", totalRev.toLocaleString() + "đ", "fa-wallet", "text-blue-500")}
+            ${app.createStatCard("Hóa đơn", arr.length, "fa-file-invoice", "text-purple-500")}
+            ${app.createStatCard("Sản phẩm", Object.keys(prodStats).length, "fa-box-open", "text-emerald-500")}
+            ${app.createStatCard("Giờ bận", hrStats.indexOf(Math.max(...hrStats)) + "h", "fa-clock", "text-orange-500")}
+        `;
+    });
+};
+
+// Hàm tạo Card thống kê (Kích thước icon nhỏ lại)
+app.createStatCard = (title, value, icon, color) => `
+    <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-lg bg-slate-50 flex items-center justify-center ${color} text-[9px]">
+                <i class="fa-solid ${icon}"></i>
+            </div>
+            <div class="min-w-0">
+                <p class="text-[8px] font-bold text-slate-400 uppercase">${title}</p>
+                <p class="text-sm font-[900] text-slate-800 tracking-tighter leading-none mt-0.5">${value}</p>
+            </div>
+        </div>
+    </div>
+`;
+// Hàm chuyển từ "HH:mm:ss dd/mm/yyyy" sang đối tượng Date để so sánh
+app.parseVN = (str) => {
+    if (!str || typeof str !== 'string') return new Date(0);
+    try {
+        // Tách "14:30:00 25/03/2024" -> ["14:30:00", "25/03/2024"]
+        const parts = str.split(' ');
+        const time = parts[0];
+        const date = parts.length > 1 ? parts[1] : parts[0];
+        
+        const [h, m, s] = time.split(':');
+        const [d, mon, y] = date.split('/');
+        
+        // Trả về đối tượng Date để so sánh
+        return new Date(y, mon - 1, d, h || 0, m || 0, s || 0);
+    } catch (e) { return new Date(0); }
+};
+// Sau đó dán thêm hàm này:
+
+app.createStatCard = (title, value, icon, iconColor) => `
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-all">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center ${iconColor} text-[10px]">
+                <i class="fa-solid ${icon}"></i>
+            </div>
+            <div class="min-w-0">
+                <p class="text-[9px] font-bold text-slate-400 uppercase truncate">${title}</p>
+                <p class="text-base font-black text-slate-800 tracking-tight leading-none mt-0.5">${value}</p>
+            </div>
+        </div>
+    </div>
+`;
 app.selectMemberForPOS = (id, name) => {
     document.getElementById('pos-customer-search').value = name;
     document.getElementById('pos-member-id').value = id;
@@ -3724,10 +4116,30 @@ onValue(ref(db, 'services'), (s) => {
   
 // Kích hoạt lắng nghe Phân loại dịch vụ ngay khi trang web tải xong
     app.initServiceCategoryListener();
-
     
     </script>
 
+<script>
+   window.handlePrintOrder = function(billData) {
+    if (!billData) return;
+    
+    var pWin = window.open('print.html', '_blank', 'width=450,height=600');
+    if (!pWin) return alert("Vui lòng cho phép Pop-up để in!");
+
+    // LẤY ĐÚNG NHÁNH system_config (theo hình database của bạn)
+    var sysData = window.dataCache?.system_config || window.dataCache?.systemConfig || {};
+    
+    var timer = setInterval(function() {
+        pWin.postMessage({
+            bill: billData,
+            sys: sysData
+        }, '*');
+        if (pWin.closed) clearInterval(timer);
+    }, 500);
+    
+    setTimeout(() => clearInterval(timer), 5000);
+};
+</script>
     <script>
     // 1. Tự động điền quyền Admin vào bộ nhớ tạm
     sessionStorage.setItem('pms_user', JSON.stringify({Role: 'Admin', User: 'DevMode'}));
